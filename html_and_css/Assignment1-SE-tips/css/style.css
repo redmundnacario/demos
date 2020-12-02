@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+    /* font-family: 'Noto Sans JP', sans-serif; */
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+:root {
+    --animate-duration: 2s;
+    --animate-delay: 1s;
+}
+
+.navbar {
+    background-color: #ECB22E;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width:100%;
+    z-index:1;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+
+}
+
+.nav-img {
+    height: 60px;
+    /* border: solid 2px gray; */
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.nav-title {
+    margin-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+
+.main-title {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 50px; 
+    font-size: 40px;
+    /* color:; */
+}
+
+.App {
+    display: flex;
+    flex-flow:column;
+    align-items: center;
+    padding:120px 0 100px;
+    background-color: #FAFAFC;
+}
+
+.card {
+    width: 50%;
+    height: 300px;
+    /* border: solid 1px; */
+    display:flex;
+    margin-bottom: 100px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4)
+}
+
+.card-image {
+    width:40%;
+    height:100%;
+    background-color: gray;
+    background-position: center;
+    background-size: cover;
+    
+}
+.card-content {
+    width:60%;
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+}
+
+.card-title {
+    margin: 20px 0 0 0;
+    font-size: 30px;
+    font-weight: bold;
+    /* margin: 0; */
+    font-family: 'Roboto', sans-serif; 
+    /* margin-bottom: 30px; */
+}
+.card-phrase {
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: gray;
+    /* margin-bottom: 30px; */
+}
+
+.card-button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    /* color: initial; */
+
+    width:30%;
+    height: 40px;
+    background-color: #36C5F0;
+    border: solid 2px #36C5F0;
+    border-radius: 7.5px;
+    align-self: flex-end;
+    font-family: 'Noto Sans JP', sans-serif;
+    color:#ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-button:hover {
+    background-color: #ffffff;
+    color:#36C5F0;
+}
+
+.card-button span {
+    font-size: 15px;
+    font-weight: bold;
+    color: inherit;
+    /* display: block; */
+}
