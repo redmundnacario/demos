@@ -10,6 +10,6 @@
 
 ## Author
 
-**Redmund Nacario**
-Future Software Engineer
-redmund.nacario@gmail.com
+**Redmund Nacario**<br>
+Future Software Engineer<br>
+redmund.nacario@gmail.com<br>
