@@ -1,5 +1,6 @@
 
 # AvionSchool
+[Github Page](https://redmundnacario.github.io/main-course/)
 
 # Assignments
 1. [SE or Web Development Tips](https://redmundnacario.github.io/main-course/html_and_css/Assignment-1-SE-tips/) 
@@ -10,6 +11,9 @@
 
 ## Author
 
-**Redmund Nacario**<br>
-Future Software Engineer<br>
-redmund.nacario@gmail.com<br>
+**Redmund Nacario**
+
+Future Software Engineer
+
+redmund.nacario@gmail.com
+
