@@ -53,11 +53,13 @@ div#main{
 }
 #title{
     font-size: 60px;
+    text-align: center;
 }
 .tribute-page-head{
     display: flex;
     flex-flow: column;
     align-items: center;
+    margin-bottom:20px;
 }
 .tribute-page-head #img-div {
     display: flex;
@@ -76,6 +78,19 @@ div#main{
 #image:hover {
     width: 72%;
     height: auto;
+}
+#img-caption {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+.javascript-img {
+    width:50px;
+    padding-right: 10px
+}
+
+.tribute-text {
+    padding:0 20px 20px 20px;
 }
 
 /* Tribut info */
