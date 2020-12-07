@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Redmund Nacario">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chessboard</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css"/>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-content">
+            <img class='nav-img' src="../../assets/Redmundnacario.png"/>
+            <h3 class='nav-title'>Redmund Nacario</h3>
+        </div>
+    </div>
+    <div id="app" >
+   
+    </div>
+
+    <script>
+        var rowNumbers = 8;
+        
+        const app = document.getElementById("app");
+        
+        for (let i=1; i < rowNumbers + 1; i++){
+
+            if (i%2 == 0){
+                var colorInd = false;
+            } else {
+                var colorInd = true;
+            };
+
+            // Create row
+            const row = document.createElement("div");
+            row.setAttribute("class", "chess-row row-"+i);
+            // row.innerHtml="row-"+i
+            
+            // Create box
+            for (let j=1; j < rowNumbers + 1; j++){
+                if (colorInd == true){
+                    var colorBox = "white";
+                    colorInd = false;
+                } else {
+                    var colorBox = "black";
+                    colorInd = true;
+                };
+
+
+                const box = document.createElement("div");
+                box.setAttribute("class", "chess-box "+colorBox+" box-"+j);
+                row.appendChild(box);
+            };
+
+            app.appendChild(row);
+        };
+    </script>
+</body>
+</html>
