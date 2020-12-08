@@ -8,8 +8,9 @@ body {
 }
 
 #app {
-    /* width: 40vw; */
-    width:40rem;
+    width: 40vw;
+    /* width:40rem; */
+    /* height: 50vh; */
     border:solid 3px black;
     display:flex;
     flex-flow: column;
