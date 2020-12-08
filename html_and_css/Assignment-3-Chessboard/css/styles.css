@@ -9,7 +9,7 @@ body {
 
 #app {
     /* width: 40vw; */
-    width:60rem;
+    width:40rem;
     border:solid 3px black;
     display:flex;
     flex-flow: column;
