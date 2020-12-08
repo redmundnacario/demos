@@ -8,9 +8,9 @@ body {
 }
 
 #app {
-    width: 50rem;
+    /* width: 40vw; */
+    width:60rem;
     border:solid 3px black;
-    /* height: 1em; */
     display:flex;
     flex-flow: column;
 }
@@ -18,18 +18,15 @@ body {
 .chess-row {
     width: 100%;
     /* height: 12.5%; */
-    background-color: gray;
+    /* background-color: gray; */
     display:flex;
-    position: relative;
-    /* flex-flow: column; */
-    
+    position: relative;  
 }
 
 .chess-row:before {
     content: "";
     display: block;
     padding-top:12.5%;
-    /* initial ratio of 1:1*/
   }
 
 .chess-box {
@@ -41,15 +38,23 @@ body {
     content: "";
     display: block;
     padding-top:100%;
-    /* initial ratio of 1:1*/
   }
 
 .white{
     background-color:white;
+    background-position: center;
+    background-size: cover;
+    background-image: url('../../../assets/white-marble.jpg');
+    filter:brightness(1.1);
 }
 
 .black{
-    background-color:black;
+    /* background-color:black; */
+    background-position: center;
+    background-size: cover;
+    /* background-image: url('../../../assets/green-marble.jpg') */
+    background-image: url('../../../assets/dark-wood.jpg');
+    filter:brightness(1.2);
 }
 
 /* Navbar */
