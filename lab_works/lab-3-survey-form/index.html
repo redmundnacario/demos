@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Redmund Nacario">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adapt-a-Doggo Application form</title>
+    <!-- CSS -->
+    <link href="./css/styles.css" type="text/css" rel="stylesheet" />
+    <link href="./css/grid.css" type="text/css" rel="stylesheet" />
+    <!-- Fonts google com -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-content">
+            <img class='nav-img' src="../../assets/Redmundnacario.png"/>
+            <h3 class='nav-title'>Redmund Nacario</h3>
+        </div>
+    </div>
+
+    <div class="form-page-first-slide 
+                col-xxl-8
+                col-xl-9 col-xl-ls-9 
+                col-lg-10 col-lg-ls-10 
+                col-md-12 
+                col-sm-12">
+
+        <div class="jumbotron
+                    
+                    col-md-12 
+                    col-sm-12">
+
+            <h1 class="jumbotron-title">
+                "Ruff" life?
+            </h1>
+            <p class="jumbotron-paragraph">
+                Adopt a friend that will love you unconditionally as long as
+                you give it snacks and belly rubs.
+            </p>
+
+            <div class="jumbotron-img">
+                <img alt="image of a doggo." src="./assets/dog-cover.png">
+            </div>
+            
+
+
+        </div>
+        <div class="app
+                    
+                    col-md-12 
+                    col-sm-12" >
+
+            <div class="title-box">
+                <h1 id="title">Adopt a Doggo!</h1>
+                <p id="description" class="subheader">Application Form</p>
+            </div>
+            <div class="application-form-box">
+
+                <form id="application-form" action="" method="get"  >
+                    <!-- Name -->
+                    <div class="input-wrapper">
+                        <label
+                            class="subheader"
+                            id="name-label"
+                            for="name">Full Name</label>
+                        <input 
+                            class="input-form"
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            placeholder="Your name" 
+                            required
+                        >
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="input-wrapper">
+                        <label
+                            class="subheader"
+                            id="email-label"
+                            for="email">Email</label>
+                        <input 
+                            class="input-form"
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            placeholder="email@email.com" 
+                            required
+                        >
+                    </div>
+                    
+                    <!-- Age and Country -->
+                    <div class="input-wrapper-2">
+                        <div class="input-wrapper">
+                            <label
+                                class="subheader"
+                                id="number-label"
+                                for="age">Age</label>
+                            <input 
+                                class="input-form"
+                                type="number" 
+                                id="age" 
+                                name="age"
+                                min="1"
+                                max="100"
+                                required
+                                placeholder="Enter your age"
+                            >
+                        </div>
+                        <div class="input-wrapper">
+                            <label 
+                                class="subheader" 
+                                id="country-label" 
+                                for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option class="select-placeholder" value="" disabled selected>Select Country</option>
+                                <option value="australia">Australia</option>
+                                <option value="canada">Canada</option>
+                                <option value="usa">USA</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dog Preferences  -->
+                    <div class="dog-preferences">
+                        <h6>Options</h6>
+                        <!--Dof Breed abn  -->
+                        <div class="input-wrapper-2">
+                            <div class="input-wrapper">
+                                <h6 class="subheader">Dog Breed</h6>
+                                <div class='radio'>
+                                    <input 
+                                        id="radio-1" 
+                                        type="radio" 
+                                        name="dog-breed"
+                                        value="bulldog" >
+                                    <label for="radio-1">Bulldog</label>
+                                </div>
+                                <div class='radio'>
+                                    <input 
+                                        id="radio-2" 
+                                        type="radio" 
+                                        name="dog-breed"
+                                        value="corgi" >
+                                    <label for="radio-2">Corgi</label>
+                                </div>
+                                <div class='radio'>
+                                    <input 
+                                        id="radio-3" 
+                                        type="radio" 
+                                        name="dog-breed"
+                                        value="pug" >
+                                    <label for="radio-3">Pug</label>
+                                </div>
+                                <div class='radio'>
+                                    <input 
+                                        id="radio-4" 
+                                        type="radio" 
+                                        name="dog-breed"
+                                        value="retriever" >
+                                    <label for="radio-4">Retriever</label>
+                                </div>
+                                <div class='radio'>
+                                    <input 
+                                        id="radio-5" 
+                                        type="radio" 
+                                        name="dog-breed"
+                                        value="shihtzu" >
+                                    <label for="radio-5">Shih Tzu</label>
+                                </div>
+                            </div>
+
+                            <div class="input-wrapper">
+                                <h6 class="subheader">Dog Type</h6>
+                                <div class="checkbox">
+                                    <input 
+                                        id="checkbox-1"
+                                        type="checkbox"
+                                        value="puppy"
+                                        >
+                                    <label for="checkbox-1">Puppy<span class="box"></span></label>
+                                </div>
+                                <div class="checkbox">
+                                    <input 
+                                        id="checkbox-2"
+                                        type="checkbox"
+                                        value="young"
+                                        >
+                                    <label for="checkbox-2">Young<span class="box"></span></label>
+                                </div>
+                                <div class="checkbox">
+                                    <input 
+                                        id="checkbox-3"
+                                        type="checkbox"
+                                        value="adult"
+                                        >
+                                    <label for="checkbox-3">Adult<span class="box"></span></label>
+                                </div>
+                                <div class="checkbox">
+                                    <input 
+                                        id="checkbox-4"
+                                        type="checkbox"
+                                        value="senior"
+                                        >
+                                    <label for="checkbox-4">Senior<span class="box"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notes : Textarea -->
+                        <div class="input-wrapper">
+                            <label class="subheader" for="comment">Notes</label>
+                            <textarea
+                                class="input-form"
+                                id="textarea" 
+                                name="comment" 
+                                placeholder="Enter your notes here"
+                                ></textarea>
+                        </div>
+
+                    </div>
+                    
+                    
+                    <!-- Submut button -->
+                    <input
+                        id="submit"
+                        class="col-xl-5 col-lg-5 col-md-5 col-sm-12"
+                        type="submit"
+                        value="Submit">
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
