@@ -10,8 +10,8 @@ Go to [Github Page](https://redmundnacario.github.io/batch5-activities/).
 
 ## Lab Works
 1. [Tribute](https://redmundnacario.github.io/batch5-activities/lab_works/lab-1-tribute/) - 12/05/2020
-2. [Landing Page]((https://redmundnacario.github.io/batch5-activities/lab_works/lab-2-landing-page/) )
-3. [Survey Form]((https://redmundnacario.github.io/batch5-activities/lab_works/lab-3-survey-form/) )
+2. [Landing Page](https://redmundnacario.github.io/batch5-activities/lab_works/lab-2-landing-page/ )
+3. [Survey Form](https://redmundnacario.github.io/batch5-activities/lab_works/lab-3-survey-form/ )
 ## Author
 
 **Redmund Nacario**
