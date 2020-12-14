@@ -1,6 +1,9 @@
 /* X-small */
 @media screen and (max-width: 576px){
-
+    nav{
+        width:100%;
+    }
+    
     .jumbotron{
         padding: 30px;
     }
@@ -37,6 +40,10 @@
 
 /* small */
 @media screen and (min-width: 577px){
+    nav{
+        width:100%;
+    }
+
     .jumbotron{
         padding: 30px;
     }
@@ -75,9 +82,9 @@
 
 /* medium */
 @media screen and (min-width: 768px){
-    /* .navbar-group{
-        width:80%;
-    } */
+    nav{
+        width:100%;
+    }
     .jumbotron-title {
         font-size: 60px ;
         /* margin: 0 0 20px ; */

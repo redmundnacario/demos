@@ -36,20 +36,34 @@ a {
   padding: 9px 5px;
 }
 
+.dropbtn {
+  border: none;
+  outline: none;
+  font-size: inherit;
+  background-color: inherit;
+  font-family: inherit;
+  text-align: inherit;
+  width:inherit;
+}
+
 .item a,
 .subitem a,
-.toggle a{
+.toggle a,
+.dropbtn{
   color:var(--backgroundColor);
 }
 .item a,
-.logo a {
+.logo a,
+.dropbtn {
   text-transform: uppercase;
   letter-spacing: 2px;
   color:var(--backgroundColor);
 }
 
 .item:not(.button) a:hover,
-.item a:hover::after {
+.item a:hover::after,
+.dropbtn:hover,
+.dropbtn:hover::after {
   background-color: var(--accent2Shade3);
   color: var(--foregroundColor);
 }
@@ -64,29 +78,37 @@ a {
   margin:0;
   padding: 0;
 }
+
 .menu li{
   padding:0;
 }
-.menu li a {
+
+.menu li a,
+.dropbtn{
   display: block;
   padding: 15px 20px;
 }
+
 .menu li.subitem a {
   padding: 15px;
 }
+
 .toggle {
   order: 1;
   font-size: 20px;
 }
+
 .item.button {
   order: 2;
 }
+
 .item {
   order: 3;
   width: 100%;
   text-align: center;
   display: none;
 }
+
 .active .item {
   display: block;
 }
@@ -130,6 +152,7 @@ a {
   .menu {
     justify-content: center;
   }
+
   .logo {
     flex: 1;
   }
