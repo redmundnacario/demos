@@ -21,6 +21,7 @@ body {
     --lightGrayColor2: #808080;
 
     --borderRadius: 6px;
+    --borderRadius1: 50px;
     --borderRadius2: 25px;
     --boxShadow: 0 2px 5px rgba(#333, 0.2);
     
