@@ -19,7 +19,7 @@
     </div>
     <div class="app">
         <div class="calculator col-lg-3 col-md-10 col-sm-12 col-xs-12">
-            <div class="screen-container"></div>
+            <div class="screen-container"><bdi class="screen-value"></bdi></div>
             <div class="keys">
 
                 <button class="button numKey" >
@@ -121,7 +121,7 @@
         // initial value
         const initialValue = 0;
 
-        var screenValue = document.querySelector(".screen-container");
+        var screenValue = document.querySelector(".screen-value");
         screenValue.innerText = initialValue;
 
         // if number  and operations was pressed
