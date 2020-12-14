@@ -5,17 +5,185 @@
     <meta name="author" content="Redmund Nacario">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Landing Page</title>
+   
     <!-- CSS -->
+    <link href="./css/navbar.css" type="text/css" rel="stylesheet" />
     <link href="./css/styles.css" type="text/css" rel="stylesheet" />
     <link href="./css/grid.css" type="text/css" rel="stylesheet" />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="navbar">
-        <div class="nav-content">
-            <img class='nav-img' src="../../assets/Redmundnacario.png"/>
-            <h3 class='nav-title'>Redmund Nacario</h3>
-        </div>
+
+    <!-- header -->
+    <header id="header">
+        <nav id="nav-bar">
+            <ul class="menu">
+                <li class="logo">
+                    <span id="header-img"></span>
+                    <a href="#">doggo</a></li>
+                <li class="item"><a href="#about">About</a></li>
+                <li class="item has-submenu">
+                    <a tabindex="0">Dog Breeds <i class="fa fa-caret-down"></i></a>
+                    <ul class="submenu">
+                    <li class="subitem"><a href="#bulldog">Bulldog</a></li>
+                    <li class="subitem"><a href="#corgi">Corgi</a></li>
+                    <li class="subitem"><a href="#pug">Pug</a></li>
+                    <li class="subitem"><a href="#retriever">Retriever</a></li>
+                    <li class="subitem"><a href="#shih-tzu">Shih Tzu</a></li>
+                    </ul>
+                </li>
+                <li class="item"><a href="#video">Video</a></li>
+                <li class="item"><a href="#form">Contact</a>
+                </li>
+                <!-- <li class="item button"><a href="#">Log In</a></li>
+                <li class="item button secondary"><a href="#">Sign Up</a></li> -->
+                <li class="toggle"><a href="#"><i class="fa fa-bars"></i></a></li>
+            </ul>
+        </nav>
+
+    </header>
+ 
+
+    <div class="app col-lg-6 col-md-10 col-sm-12 row">
+
+        <!-- Jumbotron -->
+        <section class="jumbotron" id='about'>
+
+            <h1 class="jumbotron-title">
+                "Ruff" life?
+            </h1>
+            <p class="jumbotron-paragraph">
+                Get a new friend that will love you unconditionally as long as
+                you give it snacks and belly rubs.
+            </p>
+
+            <div class="jumbotron-img">
+                <img alt="image of a doggo." src="./assets/dog-cover.png">
+            </div>
+
+        </section>
+
+        <!-- Doggos -->
+        <section id="doggos" class="doggos">
+            <h2 class="section-title center">Doggos</h2>
+            <div class="doggos-container">
+
+                <div class= "doggo-card" id="bulldog" >
+                    <div class="card-img" alt="pug" 
+                        style="background-image: url('./assets/french-bulldog.jpg')"></div>
+                    <div class="doggo-card-content">
+                        <h3 class="doggo-card-title">Bulldog</h3>
+                        <p>
+                            A very good boi that loves playing fetch and ice-cream!
+                            Gentle with everyone. Scared of the rain.
+                        </p>
+                    </div>
+                </div>
+
+                <div class= "doggo-card" id="corgi">
+                    <div class="card-img" alt="pug"
+                        style="background-image: url('./assets/welsh-corgi.jpg')"></div>
+                    <div class="doggo-card-content">
+                        <h3 class="doggo-card-title">Corgi</h3>
+                        <p>
+                            A very good boi that loves playing fetch and ice-cream!
+                            Gentle with everyone. Scared of the rain.
+                        </p>
+                    </div>
+                </div>
+
+                <div class= "doggo-card" id="pug">
+                    <div class="card-img" alt="pug" 
+                        style="background-image: url('./assets/pug.jpg')"></div>
+                    <div class="doggo-card-content">
+                        <h3 class="doggo-card-title">Pug</h3>
+                        <p>
+                            A very good boi that loves playing fetch and ice-cream!
+                            Gentle with everyone. Scared of the rain.
+                        </p>
+                    </div>
+                </div>
+
+                <div class= "doggo-card" id="retriever">
+                    <div class="card-img" alt="pug" 
+                        style="background-image: url('./assets/labrador-retriever.jpg')"></div>
+                    <div class="doggo-card-content">
+                        <h3 class="doggo-card-title">Retriever</h3>
+                        <p>
+                            A very good boi that loves playing fetch and ice-cream!
+                            Gentle with everyone. Scared of the rain.
+                        </p>
+                    </div>
+                </div>
+
+                <div class= "doggo-card" id="shih-tzu">
+                    <div class="card-img" alt="pug" 
+                        style="background-image: url('./assets/shih-tzu.jpg')"></div>
+                    <div class="doggo-card-content">
+                        <h3 class="doggo-card-title">Shih Tzu</h3>
+                        <p>
+                            A very good boi that loves playing fetch and ice-cream!
+                            Gentle with everyone. Scared of the rain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--  -->
+        <section id="video">
+            <h2 class="section-title center">Guide on selecting your bestfriend.</h2>
+            <div class="video-container center">
+              <div class="video-link responsive-iframe">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/ASxkyQKZE4k" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+              </div>
+            </div>
+          </section>
+
     </div>
+
+
+
+    <footer>
+        <div id="footer-img"></div>
+        <h3 class="section-title center">Subscribe to our Newsletter...</h3>
+        <div class="form-container center">
+        
+            <form id="form" action="" method="get">
+                <div class="input-wrapper-2 center col-lg-5 col-md-6 col-sm-12 col-xs-12">
+                    <div class="input-wrapper">
+                        <!-- <label for="email">
+                            Sample label
+                        </label> -->
+                        <input
+                            class="input-form"
+                            id="email"
+                            name="email" 
+                            type="email" 
+                            placeholder="email@email.com" 
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                            required>
+                    </div>
+                    <input 
+                        id="submit"
+                        class="button" 
+                        value="Submit" 
+                        type="submit">
+                    </div>
+            </form>
+        </div>
+        <p class="center">... and get updates on our Dogs.</p>
+    </footer>
     
-</body>
+
+    <!-- JavaScript -->
+    <script src="./js/navbar.js"></script>
 </html>

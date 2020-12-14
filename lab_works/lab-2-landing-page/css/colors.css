@@ -1,0 +1,113 @@
+:root {
+    --canvasColor: #f9f9f9;
+}
+body {
+    background: var(--canvasColor);
+    /* display:flex;
+    align-items: center;
+    justify-content: center; */
+    --neutralShade0: #f8f8f8;
+	--neutralShade1: #f2f2f2;
+	--neutralShade2: #e8e9e9;
+	--neutralShade3: #d1d3d4;
+	--neutralShade4: #babdbf;
+	--neutralShade5: #808488;
+	--neutralShade6: #666a6d;
+	--neutralShade7: #4d5052;
+	--neutralShade8: #212122;
+
+	--grayColor: #999;
+    --lightGrayColor: #ddd;
+    --lightGrayColor2: #808080;
+
+    --borderRadius: 6px;
+    --borderRadius2: 25px;
+    --boxShadow: 0 2px 5px rgba(#333, 0.2);
+    
+    /* main-colors */
+    --primaryColor: #03a9f4;
+    --primaryShade1: #e1f5fe;
+    --primaryShade2: #b3e5fc;
+    --primaryShade3: #4fc3f7;
+    --primaryShade4: #0288d1;
+    --primaryShade5: #0277bd;
+    
+    /* neutral colors */
+    --backgroundColor: #fff;
+    --foregroundColor: #111;
+
+    /* Secondary colors */
+    --secondaryColor: #673ab7;
+    --secondaryShade1: #ede7f6;
+    --secondaryShade2: #d1c4e9;
+    --secondaryShade3: #9575cd;
+    --secondaryShade4: #512da8;
+    --secondaryShade5: #311b92;
+
+    /* accent-colors */
+        /* footer */
+    --accentColor: #009688;
+    --accentShade1: #e0f2f1;
+    --accentShade2: #b2dfdb;
+    --accentShade3: #4db6ac;
+    --accentShade4: #00796b;
+    --accentShade5: #004d40;
+        /* Success  */
+    --accent2Color: #8bc34a;
+    --accent2Shade1: #e7f6d5;
+    --accent2Shade2: #c5e1a5;
+    --accent2Shade3: #aed581;
+    --accent2Shade4: #689f38;
+    --accent2Shade5: #558b2f;
+        /* error */
+    --accent3Color: #f44336;
+    --accent3Shade1: #ffdde0;
+    --accent3Shade2: #ffcdd2;
+    --accent3Shade3: #ef9a9a;
+    --accent3Shade4: #d32f2f;
+    --accent3Shade5: #b71c1c;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+h1{
+    font: 700 48px/1.2 "Poppins", sans-serif;
+    
+}
+
+h2 {
+    font: 700 32px/1.2 "Poppins", sans-serif;
+}
+
+h3 {
+    font: 700 24px/1.2 "Poppins", sans-serif;
+}
+
+h4 {
+    font: 700 20px/1.2 "Poppins", sans-serif;;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom:10px
+}
+h5 {
+    font: 500 18px/1.2 "Poppins", sans-serif;
+    margin-bottom: 10px;
+}
+h6 {
+    font: 500 16px/1.2 "Poppins", sans-serif;
+    text-transform: uppercase;
+}
+p, .bold-paragraph, .italicized-paragraph {
+    font: 400 18px "Poppins", sans-serif;
+    margin-bottom: 0;
+}
+
+.bold-paragraph {
+    font: 500 18px "Poppins", sans-serif;
+}
+
+.italicized-paragraph {
+    font: 400 18px "Poppins", sans-serif;
+    font-style: italic;
+}
