@@ -54,7 +54,7 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    padding-bottom:60px;
+    padding:60px 20px;
 }
 .calculator {
     padding: 25px;
@@ -93,8 +93,8 @@ body {
 
 .keys {
     display: grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4 ,1fr);
+    grid-template-rows: repeat(5 ,1fr);
     gap:25px;
 
     justify-items: center;
