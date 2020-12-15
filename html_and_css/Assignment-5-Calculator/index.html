@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/grid.css">
     <link rel="stylesheet" type="text/css" href="./css/button.css">
+    <link rel="stylesheet" type="text/css" href="./css/cursor.css">
 </head>
 <body>
     <div class="navbar">
@@ -19,22 +20,25 @@
     </div>
     <div class="app">
         <div class="calculator col-lg-3 col-md-10 col-sm-12 col-xs-12">
-            <div class="screen-container"><bdi class="screen-value"></bdi></div>
+            <div class="screen-container">
+                <span class="screen-value"></span>
+                <span class="blinking-cursor">|</span>
+            </div>
             <div class="keys">
 
-                <button class="button numKey" >
+                <button class="button clear">
                     <div class="button-content">
-                        <div class="button-text">+</div>
+                        <div class="button-text">C</div>
+                    </div>
+                </button>
+                <button class="button del">
+                    <div class="button-content">
+                        <div class="button-text">del</div>
                     </div>
                 </button>
                 <button class="button numKey">
                     <div class="button-content">
-                        <div class="button-text">-</div>
-                    </div>
-                </button>
-                <button class="button numKey">
-                    <div class="button-content">
-                        <div class="button-text">&times;</div>
+                        <div class="button-text">%</div>
                     </div>
                 </button>
                 <button class="button numKey">
@@ -58,12 +62,12 @@
                         <div class="button-text">9</div>
                     </div>
                 </button>
-
-                <button class="button equal" >
+                <button class="button numKey">
                     <div class="button-content">
-                        <div class="button-text">=</div>
+                        <div class="button-text">&times;</div>
                     </div>
                 </button>
+                
 
                 <button class="button numKey">
                     <div class="button-content">
@@ -80,6 +84,12 @@
                         <div class="button-text">6</div>
                     </div>
                 </button>
+                <button class="button numKey">
+                    <div class="button-content">
+                        <div class="button-text">-</div>
+                    </div>
+                </button>
+                
 
                 <button class="button numKey" >
                     <div class="button-content">
@@ -96,23 +106,30 @@
                         <div class="button-text">3</div>
                     </div>
                 </button>
+                <button class="button numKey" >
+                    <div class="button-content">
+                        <div class="button-text">+</div>
+                    </div>
+                </button>
                 
                 <button class="button numKey">
                     <div class="button-content">
                         <div class="button-text">0</div>
                     </div>
                 </button>
-                <button class="button numKey">
+                <button class="button dot">
                     <div class="button-content">
                         <div class="button-text">.</div>
                     </div>
                 </button>
-                <button class="button del">
+                <button class="button equal" >
                     <div class="button-content">
-                        <div class="button-text">del</div>
+                        <div class="button-text">=</div>
                     </div>
                 </button>
 
+    
+                
             </div>
         </div>
     </div>

@@ -6,6 +6,16 @@
     font-family: 'SF-pro';
     src: url('./fonts/SF-Pro.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'SF-pro';
+    font-weight: thin;
+    src: url("./fonts/SF-Pro-Text-Thin.otf") format("opentype");
+}
+@font-face {
+    font-family: 'SF-pro';
+    font-weight: ultralight;
+    src: url("./fonts/SF-Pro-Text-Ultralight.otf") format("opentype");
+}
 
 body {
     background-color: var(--canvasColor);
@@ -54,10 +64,11 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    padding:60px 20px;
+    padding:60px 20px 120px 20px;
 }
 .calculator {
-    padding: 25px;
+    padding: 3vh;
+    /* height:50vh; */
 
     display: flex;
     flex-direction:column;
@@ -71,16 +82,21 @@ body {
 }
 
 .screen-container {
-    height: 10vh;
+    height: 15vh;
+    /* height:10%; */
 
     padding:10px;
-    margin-bottom:25px;
+    margin-bottom:3vh;
     overflow: hidden;
-    direction: rtl;
+    /* direction: rtl; */
 
     font-size: 7vh;
-    text-align: right;
+    /* text-align: right; */
     letter-spacing: 1.2px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
 
     cursor: pointer;
 
@@ -90,12 +106,17 @@ body {
     box-shadow: inset 5px 5px 10px #d9d9d9, 
             inset -5px -5px 10px #ffffff;
 }
+.screen-value{
+    padding-right:1%;
+    font-weight: 'thin';
+}
 
 .keys {
     display: grid;
     grid-template-columns: repeat(4 ,1fr);
     grid-template-rows: repeat(5 ,1fr);
-    gap:25px;
+    /* gap:25px; */
+    gap:2.2vh;
 
     justify-items: center;
 }
@@ -117,10 +138,10 @@ body {
 
 
 .equal{
-    grid-row-start: 2;
+    grid-row-start: 5;
     grid-row-end: 6;
-    grid-column-start:-2;
-    grid-column-end:-1;
+    grid-column-start:3;
+    grid-column-end:5;
 
 }
 
