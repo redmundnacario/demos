@@ -13,7 +13,11 @@ Go to [Github Page](https://redmundnacario.github.io/batch5-activities/).
 1. [Tribute](https://redmundnacario.github.io/batch5-activities/lab_works/lab-1-tribute/) - 12/05/2020
 2. [Landing Page](https://redmundnacario.github.io/batch5-activities/lab_works/lab-2-landing-page/ ) - 12/12/2020
 3. [Survey Form](https://redmundnacario.github.io/batch5-activities/lab_works/lab-3-survey-form/ ) - 12/12/2020
-   
+
+
+## JS Activities:
+1. [BMI computation](https://jsfiddle.net/redmund/c7o3gu6q/27/) - 12/16/2020
+
 ## Author
 
 **Redmund Nacario**
