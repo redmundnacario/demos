@@ -16,7 +16,7 @@ Go to [Github Page](https://redmundnacario.github.io/batch5-activities/).
 
 
 ## JS Activities:
-1. [BMI computation](https://jsfiddle.net/redmund/c7o3gu6q/27/) - 12/16/2020
+1. [BMI computation](https://jsfiddle.net/redmund/c7o3gu6q/40/) - 12/16/2020
 
 ## Author
 
