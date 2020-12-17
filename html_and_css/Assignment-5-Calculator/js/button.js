@@ -26,7 +26,19 @@ const numKeyPressed = function () {
         if (screenValueTxt[screenValueTxt.length - 1] === "-" && this.innerText === "×" ){
             return
         }
-        
+        if (screenValueTxt[screenValueTxt.length - 1] === "÷" && this.innerText === "×" ){
+            return
+        }
+        if (screenValueTxt[screenValueTxt.length - 1] === "×" && this.innerText === "÷" ){
+            return
+        }
+        if (screenValueTxt[screenValueTxt.length - 1] === "÷" && this.innerText === "÷" ){
+            return
+        }
+        if (screenValueTxt[screenValueTxt.length - 1] === "×" && this.innerText === "×" ){
+            return
+        }
+
         screenValue.innerText = screenValue.innerText  + this.innerText;
         // console.log("here 2");
     }
