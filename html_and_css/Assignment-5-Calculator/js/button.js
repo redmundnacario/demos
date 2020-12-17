@@ -1,6 +1,6 @@
 // initial value of screen
 
-const initialValue = 0;
+const initialValue = "0";
 
 let screenValue = document.querySelector(".screen-value");
 screenValue.innerText = initialValue;
@@ -10,13 +10,25 @@ screenValue.innerText = initialValue;
 const numKeyPressed = function () {
     // check if new value input is equal to zero
     // let lastChar = screenValue.innerText.substr(screenValue.innerText.length - 1);
-
+    var screenValueTxt = screenValue.innerText 
     if (screenValue.innerText == initialValue ){
         screenValue.innerText  = this.innerText;
-        // console.log(screenValue.innerText)
     } else {
+        if (screenValueTxt[screenValueTxt.length - 1] === "+" && this.innerText === "÷" ){
+            return
+        }
+        if (screenValueTxt[screenValueTxt.length - 1] === "-" && this.innerText === "÷" ){
+            return
+        }
+        if (screenValueTxt[screenValueTxt.length - 1] === "+" && this.innerText === "×" ){
+            return
+        }
+        if (screenValueTxt[screenValueTxt.length - 1] === "-" && this.innerText === "×" ){
+            return
+        }
+        
         screenValue.innerText = screenValue.innerText  + this.innerText;
-        // console.log(screenValue.innerText)
+        // console.log("here 2");
     }
 }
 
