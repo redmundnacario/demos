@@ -10,7 +10,7 @@ const PawnMoves = function(chessObjBox) {
             for (let i = rowNumber + 1; i < rowNumber + 2; i++) { rowNumbers.push(i); };
         }
     } else {
-        console.log(piece, rowNumber)
+        // console.log(piece, rowNumber)
         if(rowNumber == 7){
             for (let i = rowNumber - 1; i > rowNumber - 3; i--) { rowNumbers.push(i); };
         } else {

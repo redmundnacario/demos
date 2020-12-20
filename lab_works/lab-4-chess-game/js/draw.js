@@ -95,6 +95,7 @@ export const DrawChessPieces = (chessObj) => {
     };
 }
 
+// redraw chess pieces
 export const RedrawChessPieces = (chessObj) => {
     let keys = Object.keys(chessObj);
     for (let chessBox in keys){

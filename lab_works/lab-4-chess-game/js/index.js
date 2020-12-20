@@ -3,39 +3,25 @@ import {
          SetChessPieces, 
          DrawChessPieces, 
          RedrawChessPieces 
-        } from './draw-tiles.js';
+        } from './draw.js';
 import { CHESS_DATA } from "./chess-pieces.js";
 import GetPossibleMoves from "./moves.js";
+import { SetActivePlayer, ToggleActivePlayer} from './active-player.js';
 
-// set the active player
-const SetActivePlayer = function () {
-    document.getElementById("activePlayer").innerHTML = ACTIVE_CHESS_PLAYER.toUpperCase(); 
-}
-
-// Update active player
-const ToggleActivePlayer = function () {
-    if (ACTIVE_CHESS_PLAYER == 'white'){
-        ACTIVE_CHESS_PLAYER = 'black'
-    } else (
-        ACTIVE_CHESS_PLAYER = 'white'
-    )
-    SetActivePlayer();
-}
 
 
 // Undo the moves in chess
 const UndoMove = function(){
-    if (CHESS_OBJ.length <=1) {return}
+    if (state.chess_obj.length <=1) {return}
 
-    ACTIVE_CHESS_OBJ = JSON.parse(JSON.stringify(CHESS_OBJ[CHESS_OBJ.length - 2]));
-    CHESS_OBJ.pop();
-    console.log(CHESS_OBJ);
-    RedrawChessPieces(ACTIVE_CHESS_OBJ);
-    ToggleActivePlayer();
+    state.active_chess_obj = JSON.parse(JSON.stringify(state.chess_obj[state.chess_obj.length - 2]));
+    state.chess_obj.pop();
+    RedrawChessPieces(state.active_chess_obj);
+    state.active_chess_player = ToggleActivePlayer(state.active_chess_player);
 }
 
 const PossibleMoveSelected = function() {
-    let previousBox = ACTIVE_CHESS_BOX_ID;
+    let previousBox = state.active_chess_box_id;
     let nextBox = this.id;
 
     // Check selected box id if it contains possible-move class;
@@ -43,23 +29,19 @@ const PossibleMoveSelected = function() {
 
     console.log(previousBox + " to "+ nextBox);
 
-    // update CHESS_OBJ
+    // update state.chess_obj
     
-    ACTIVE_CHESS_OBJ[nextBox].piece = ACTIVE_CHESS_OBJ[previousBox].piece;
-    console.log(ACTIVE_CHESS_OBJ[nextBox].piece);
-    ACTIVE_CHESS_OBJ[previousBox].piece = null;
+    state.active_chess_obj[nextBox].piece = state.active_chess_obj[previousBox].piece;
 
-    console.log(ACTIVE_CHESS_OBJ[previousBox].piece);
-    console.log(ACTIVE_CHESS_OBJ);
+    state.active_chess_obj[previousBox].piece = null;
 
     // Redraw  chess pieces in the map
-    console.log(document.getElementById(previousBox).children[0].innerHTML)
     document.getElementById(previousBox).children[0].innerHTML = "";
-    document.getElementById(nextBox).children[0].innerHTML = ACTIVE_CHESS_OBJ[nextBox].piece.htmlcode;
+    document.getElementById(nextBox).children[0].innerHTML = state.active_chess_obj[nextBox].piece.htmlcode;
 
     // history
-    CHESS_OBJ.push(JSON.parse(JSON.stringify(ACTIVE_CHESS_OBJ)))
-    console.log(CHESS_OBJ);
+    state.chess_obj.push(JSON.parse(JSON.stringify(state.active_chess_obj)))
+
 
     if (document.getElementsByClassName("selected").length > 0) {
             
@@ -75,26 +57,24 @@ const PossibleMoveSelected = function() {
                 possibleMove[0].classList.remove("possible-move")
                 
             })
-        ToggleActivePlayer(); 
+        state.active_chess_player = ToggleActivePlayer(state.active_chess_player); 
     }
 }
 
 const ToggleActivePiece = function() {
 
     // function is only applicable to chess box with chess piece
-    if (ACTIVE_CHESS_OBJ[this.id]["piece"] == null) { 
+    if (state.active_chess_obj[this.id]["piece"] == null) { 
         console.log(this.id + " null");
         return };
 
-    // function is only applicable to current ACTIVE_CHESS_PLAYER
-    if ( ACTIVE_CHESS_OBJ[this.id].piece.kingdom != ACTIVE_CHESS_PLAYER) { 
-        console.log(this.id + " " + ACTIVE_CHESS_OBJ[this.id].piece.kingdom)
+    // function is only applicable to current state.active_chess_player
+    if ( state.active_chess_obj[this.id].piece.kingdom != state.active_chess_player) { 
+        console.log(this.id + " " + state.active_chess_obj[this.id].piece.kingdom)
         return };
 
-    console.log("proceed")
-
-    ACTIVE_CHESS_BOX_ID = this.id;
-    console.log("Active box/piece: " , ACTIVE_CHESS_BOX_ID)
+    state.active_chess_box_id = this.id;
+    console.log("Active box/piece: " , state.active_chess_box_id)
     let classes =this.classList;
 
     // Toggle selected chess piece
@@ -127,55 +107,39 @@ const ToggleActivePiece = function() {
         this.classList.add("selected");
 
         // Determine chess piece and possible moves
-        // let pieceSelected = DetermineChessPiece(ACTIVE_CHESS_OBJ, ACTIVE_CHESS_BOX_ID)
-        POSSIBLE_MOVES  = GetPossibleMoves(ACTIVE_CHESS_OBJ[ACTIVE_CHESS_BOX_ID]);
+        // let pieceSelected = DetermineChessPiece(state.active_chess_obj, state.active_chess_box_id)
+        state.possible_moves  = GetPossibleMoves(state.active_chess_obj[state.active_chess_box_id]);
 
-        POSSIBLE_MOVES.forEach((move) => {document.getElementById(move).classList.add("possible-move")})
-        console.log( "Possible Moves :", POSSIBLE_MOVES)
-
-        //add event listener to possible move squares
-        // console.log()
-        // if (movesId){
-        //     let possibleBox = document.getElementsByClassName("possible-move")
-        //     Object.keys(possibleBox).forEach(value =>{
-        //         possibleBox[value].addEventListener("click", () => {
-        //             PossibleMoveSelected(ACTIVE_CHESS_BOX_ID , possibleBox[value].id)
-        //         } );
-        //     })
-        // }
-
+        state.possible_moves.forEach((move) => {document.getElementById(move).classList.add("possible-move")})
+        console.log( "Possible Moves :", state.possible_moves)
     };
 };
 
-
+// state
 // Initializations
-let ACTIVE_CHESS_PLAYER = "white";
-let ACTIVE_CHESS_OBJ; // Current chess pieces positions in the map is based on this
-let POSSIBLE_MOVES = [];
-let ACTIVE_CHESS_BOX_ID;
+let state = {
+    active_chess_player : "white",
+    possible_moves : [],
+    active_chess_box_id : null,
+    chess_obj : [], // Serves as history in the game
+    active_chess_obj: null // Current chess pieces positions in the map is based on this
+}
 
-SetActivePlayer();
-let CHESS_OBJ = [] // Serves as history in the game
-let CHESS_OBJ_INITIAL = DrawChessTiles();
+SetActivePlayer(state.active_chess_player);
+let chess_obj_initial = DrawChessTiles();
 
-CHESS_OBJ.push(SetChessPieces(CHESS_OBJ_INITIAL , CHESS_DATA));
-ACTIVE_CHESS_OBJ = JSON.parse(JSON.stringify(CHESS_OBJ[CHESS_OBJ.length - 1]))
+state.chess_obj.push(SetChessPieces(chess_obj_initial , CHESS_DATA));
+state.active_chess_obj = JSON.parse(JSON.stringify(state.chess_obj[state.chess_obj.length - 1]))
 
 // Draw initial chess pieces in the map
-DrawChessPieces(CHESS_OBJ[0]);
-// console.log(CHESS_OBJ[CHESS_OBJ.length - 1])
+DrawChessPieces(state.chess_obj[0]);
 
 // add event listener to each chess box
-let keys = Object.keys(CHESS_OBJ[0]);
+let keys = Object.keys(state.chess_obj[0]);
 for (let key in keys){
-    // if chessbox  piece is missing in the CHESS_OBJ... skip
-    // if (CHESS_OBJ[keys[key]]["piece"] != null) {
-    // console.log(keys[key])
     const chessBoxSelected = document.getElementById(keys[key]);
     chessBoxSelected.addEventListener("click", ToggleActivePiece);
     chessBoxSelected.addEventListener("click", PossibleMoveSelected );
-        // console.log(keys[key]
-    // }
 };
 
 
