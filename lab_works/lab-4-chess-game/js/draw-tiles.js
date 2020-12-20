@@ -60,7 +60,7 @@ export const DrawChessTiles = function () {
 };
 
 // insert the initial chess piece
-export const setChessPieces = (chessObj, piecesInitialPlace) => {
+export const SetChessPieces = (chessObj, piecesInitialPlace) => {
     let keys = Object.keys(piecesInitialPlace);
     for (let key in keys){
         // Destructuring object
@@ -84,7 +84,7 @@ export const setChessPieces = (chessObj, piecesInitialPlace) => {
 };
 
 // draw pieces
-export const drawChessPieces = (chessObj) => {
+export const DrawChessPieces = (chessObj) => {
     let keys = Object.keys(chessObj);
     for (let chessBox in keys){
         const chessBoxSelected = document.getElementById(keys[chessBox]);
@@ -95,12 +95,14 @@ export const drawChessPieces = (chessObj) => {
     };
 }
 
-// export const RedrawChessPieces = (chessObj) => {
-//     let keys = Object.keys(chessObj);
-//     for (let chessBox in keys){
-//         const chessBoxSelected = document.getElementById(keys[chessBox]).children;
-//         // console.log(chessBoxSelected)
-//         chessBoxSelected.innerHTML = (chessObj[keys[chessBox]].piece != null) ? (chessObj[keys[chessBox]].piece.htmlcode) : "" ;
-//         // chessBoxSelected.setAttribute("class","chess-piece");
-//     };
-// }
+export const RedrawChessPieces = (chessObj) => {
+    let keys = Object.keys(chessObj);
+    for (let chessBox in keys){
+        const chessBoxSelected = document.getElementById(keys[chessBox]);
+        // console.log(chessBoxSelected)
+        const chessPieceBox = document.createElement("div");
+        chessPieceBox.setAttribute("class","chess-piece");
+        chessPieceBox.innerHTML = (chessObj[keys[chessBox]].piece != null) ? (chessObj[keys[chessBox]].piece.htmlcode) : "" ;
+        chessBoxSelected.replaceChild(chessPieceBox,chessBoxSelected.children[0]);
+    };
+}
