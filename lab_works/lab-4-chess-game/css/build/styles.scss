@@ -1,0 +1,76 @@
+
+@import 'body';//  body initializations
+@import 'navbar';//  Navbar
+
+// App
+
+#app {
+    // width: 70vh;
+    margin-left: 15px;
+    margin-right: 15px;
+    /* width:40rem */
+    /* height: 50vh */
+    border: solid 3px black;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    // gap:0.2vw;
+    width: 70vw;
+    height:70vh;
+
+}
+
+// Creates boxes
+@mixin beforeStyles($percent){
+    content: "";
+    display: block;
+    padding-top: $percent;
+}
+
+@mixin chessBoxStyles($color, $brightness) {
+    background-color: $color;
+    background-position: center;
+    background-size: cover;
+    /* background-image: url('../../../assets/white-marble.jpg') */
+    filter: brightness($brightness);
+}
+
+
+
+.chess-box {
+    // width: 12.5%;
+    // height: calc(12.5);
+    // background-color: pink;
+    // position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    .chess-piece {
+        font-size: 7vh;
+        transition: 1s;
+    }
+
+    &.selected {
+        box-shadow: inset 0 0 20px #311B0B;
+    }
+}
+
+.white {
+    @include chessBoxStyles(#fff,1.1);
+}
+
+.black {
+    @include chessBoxStyles(pink, 1.1);
+    // background-color:black;
+    /* background-image: url('../../../assets/green-marble.jpg') */
+    /* background-image: url('../../../assets/dark-wood.jpg') */
+    // filter: brightness(1.2);
+}
+    
+ 
+   
+
+ @import 'mediaQuery';

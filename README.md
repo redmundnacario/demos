@@ -13,6 +13,7 @@ Go to [Github Page](https://redmundnacario.github.io/batch5-activities/).
 1. [Tribute](https://redmundnacario.github.io/batch5-activities/lab_works/lab-1-tribute/) - 12/05/2020
 2. [Landing Page](https://redmundnacario.github.io/batch5-activities/lab_works/lab-2-landing-page/ ) - 12/12/2020
 3. [Survey Form](https://redmundnacario.github.io/batch5-activities/lab_works/lab-3-survey-form/ ) - 12/12/2020
+4. [Playable Chess](https://redmundnacario.github.io/batch5-activities/lab_works/lab-4-chess-game) - 12/19/2020
 
 
 ## JS Activities:
