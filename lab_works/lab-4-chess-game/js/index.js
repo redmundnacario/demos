@@ -31,6 +31,7 @@ const UndoMove = function(){
     CHESS_OBJ.pop();
     console.log(CHESS_OBJ);
     RedrawChessPieces(ACTIVE_CHESS_OBJ);
+    ToggleActivePlayer();
 }
 
 const PossibleMoveSelected = function() {
