@@ -8,10 +8,11 @@ const KnightMoves= (chessObjBox, chessObj, letters) => {
     // Convert to chess alpha numeric coordinates
     let scanPointsAlphaNum = scanPoints.map(value => {
         // Y to abc, X to 123
-        value = letters[(value[1]  + colNumber) - 1] + (value[0] + rowNumber);
+        let finalRowNo = value[0] + rowNumber;
+        let value1 = letters[(value[1]  + colNumber) - 1] + finalRowNo;
         // filter out of bounds
-        if (value[1] < 8 & value[1] > 0){
-            return value;
+        if (finalRowNo < 8 & finalRowNo > 0){
+            return value1;
         }
         return null;
     }).filter(Boolean);
