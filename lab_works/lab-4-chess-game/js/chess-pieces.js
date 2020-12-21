@@ -43,13 +43,13 @@ export const CHESS_DATA = {
     },
     whiteKing : {
         location: 'e1',
-        htmlcode: '&#9813;',
+        htmlcode: '&#9812;',
         kingdom: 'white',
         position: 'king'
     },
     whiteQueen : {
         location: 'd1',
-        htmlcode: '&#9812;',
+        htmlcode: '&#9813;',
         kingdom: 'white',
         position: 'queen'
     },

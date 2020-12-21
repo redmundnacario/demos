@@ -118,7 +118,8 @@ const ToggleActivePiece = function() {
              possibleTargets } 
                 = GetPossibleMoves(state.active_chess_obj[state.active_chess_box_id], 
                                    state.active_chess_obj,
-                                   state.pawn_double_step_status);
+                                   state.pawn_double_step_status,
+                                   state.letters);
 
         state.possible_moves = possibleMoves; 
         
@@ -135,11 +136,12 @@ let state = {
     active_chess_box_id : null,
     chess_obj : [], // Serves as history in the game
     active_chess_obj: null, // Current chess pieces positions in the map is based on this
-    pawn_double_step_status: null
+    pawn_double_step_status: null,
+    letters : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 }
 
 SetActivePlayer(state.active_chess_player);
-let chess_obj_initial = DrawChessTiles();
+let chess_obj_initial = DrawChessTiles(state.letters);
 // console.log(chess_obj_initial)
 state.chess_obj.push(SetChessPieces(chess_obj_initial , CHESS_DATA));
 state.active_chess_obj = JSON.parse(JSON.stringify(state.chess_obj[state.chess_obj.length - 1]))

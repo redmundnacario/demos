@@ -1,12 +1,11 @@
 // alert("draw-tiles.js connected")
 
-export const DrawChessTiles = function () {
+export const DrawChessTiles = function (letters) {
     // Our main state/data for mapping chess pieces for every state change
     let chessObj = {};
 
     // Initializations of chess map
     let rowNumbers = 8;
-    let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     
     // Get the main parent element which is a grid
     const app = document.getElementById("app");
@@ -33,7 +32,7 @@ export const DrawChessTiles = function () {
                 colorInd = true;
             };
 
-            let chessBox =letters[j - 1]+i;
+            let chessBox = letters[j - 1]+i;
             //  Create element for chess box
             const box = document.createElement("div");
 
