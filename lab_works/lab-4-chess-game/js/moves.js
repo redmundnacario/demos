@@ -19,17 +19,21 @@ const PawnMoves = function(chessObjBox, chessObj, pawnDoubleStepStatus) {
         }
     }
 
-    // Check squares in front if occupied by a chess piece, meaning the move is blocked
-
+    // check square if within row boundaries
     rowNumbersPMoves = rowNumbersPMoves.filter((value) => {return value <= 8 } )
+    // convert to alpha numeric chess coordinates
     rowNumbersPMoves = rowNumbersPMoves.map((value) => colLetter + value)
     
+    // Check squares in front if occupied by a chess piece, meaning the move is blocked
+    let passable = true;
     rowNumbersPMoves = rowNumbersPMoves .map(value => {
           
-        if(chessObj[value].piece == null){
+        if(chessObj[value].piece == null & passable == true){
             return value;
+        }else{
+            passable = false;
+            return null;
         }; 
-        return null;
     }).filter(Boolean);
 
     // scan for possible targets, used y = mx + b
@@ -69,25 +73,38 @@ const PawnMoves = function(chessObjBox, chessObj, pawnDoubleStepStatus) {
         };
     }).filter(Boolean);
 
-    // check if there are chess piece in possible targets
+    // check if there are chess piece in possible target squares
     rawPossibleTargets = rawPossibleTargets.map(value => {
         if (chessObj[value].piece != null){
-            return value
-        } else {
-            if (pawnDoubleStepStatus) {
-                if(pawnDoubleStepStatus.colNumber - (LETTERS.indexOf(value[0]) + 1) == 0) {
-                    if(pawnDoubleStepStatus.rowNumber - rowNumber == 0){
-                        return value
-                    } else {
-                        return null
-                    }
-                } else {
-                    return null
-                }
+            // Check if the target chess piece is ally , else return null
+            if (chessObj[value].piece.kingdom == piece.kingdom){
+                return null;
             } else {
-                return null
-            }
-        }
+                return value;
+            };
+        } else {
+            // if enpassant rule 1 passed
+            if (pawnDoubleStepStatus) {
+                // En passant rule 2: if possible target has same column with target squares
+                if(pawnDoubleStepStatus.colNumber - (LETTERS.indexOf(value[0]) + 1) == 0) {
+                    // En passant rule 3: if possible target has same row with the selected/active pawn
+                    if(pawnDoubleStepStatus.rowNumber - rowNumber == 0){
+                        // Check if the target chess piece is ally , else return null
+                        if (pawnDoubleStepStatus.piece.kingdom == piece.kingdom){
+                            return null;
+                        } else {
+                            return value;
+                        };
+                    } else {
+                        return null;
+                    };
+                } else {
+                    return null;
+                };
+            } else {
+                return null;
+            };
+        };
     }).filter(Boolean);
 
     // en passsant
