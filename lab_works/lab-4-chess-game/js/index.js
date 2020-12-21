@@ -49,8 +49,10 @@ const PossibleMoveSelected = function() {
     // fore en passant
     if (Boolean(state.pawn_double_step_status) & chessPieceMoved.piece.position == "pawn" ){
         if (chessPieceMoved.colNumber - state.pawn_double_step_status.colNumber == 0){
-            document.getElementById(state.pawn_double_step_status.colLetter +
-                 state.pawn_double_step_status.rowNumber ).children[0].innerHTML = "";
+            if(state.pawn_double_step_status.rowNumber - chessPieceOriginalBox.rowNumber == 0) {
+                document.getElementById(state.pawn_double_step_status.colLetter +
+                    state.pawn_double_step_status.rowNumber ).children[0].innerHTML = "";
+                };
             };
     } 
 
