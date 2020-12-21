@@ -7,7 +7,8 @@ import {
    } 
    from './utils.js'; 
 
-const RookMoves= (chessObjBox, chessObj, letters) => {
+const RookMoves= (chessObjBox, chessObj, letters,
+                  rangeStart = -8, rangeStop = 9, rangeInterval = 1) => {
 
     let {rowNumber, colNumber, colLetter, piece} = chessObjBox;
 
@@ -15,11 +16,11 @@ const RookMoves= (chessObjBox, chessObj, letters) => {
     
     // scan possible moves
     // horizontal: y = 0
-    let scanXpoints = range(-8, 9, 1);
+    let scanXpoints = range( rangeStart, rangeStop, rangeInterval );
     let scanPointsHorizontal = scanXpoints.map(value => [value, 0])
 
     // vertical : x = 0
-    let scanYpoints = range(-8, 9, 1);
+    let scanYpoints = range( rangeStart, rangeStop, rangeInterval );
     let scanPointsVertical = scanYpoints.map(value => [0, value])
 
 

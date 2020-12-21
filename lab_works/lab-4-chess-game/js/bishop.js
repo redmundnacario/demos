@@ -6,12 +6,13 @@ import {
    } 
    from './utils.js'; 
 
-const BishopMoves= (chessObjBox, chessObj, letters) => {
+const BishopMoves= (chessObjBox, chessObj, letters,
+                    rangeStart = -8, rangeStop = 9, rangeInterval = 1) => {
     let {rowNumber, colNumber, colLetter, piece} = chessObjBox;
     // console.log("bishop", chessObjBox);
     
     // scan moves
-    let scanXpoints = range(-8, 9, 1);
+    let scanXpoints = range(rangeStart, rangeStop, rangeInterval);
     let slopeM = [1, -1]
     // y = mx .. get y values
     let scanPositiveDiagonal = scanXpoints.map(value => [value, slopeM[0] * value ])
