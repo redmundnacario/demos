@@ -2,7 +2,9 @@ import {
          DrawChessTiles, 
          SetChessPieces, 
          DrawChessPieces, 
-         RedrawChessPieces 
+         RedrawChessPieces,
+         AddClassesOfMovesOrTargetsSquares,
+         RemoveClassesOfMovesOrTargetsSquares 
         } from './draw.js';
 import { CHESS_DATA } from "./chess-pieces.js";
 import GetPossibleMoves from "./moves.js";
@@ -16,10 +18,12 @@ const UndoMove = function(){
 
     state.active_chess_obj = JSON.parse(JSON.stringify(state.chess_obj[state.chess_obj.length - 2]));
     state.chess_obj.pop();
+    // remove classes: selected, possible moves, possible target
+    RemoveClassesOfMovesOrTargetsSquares()
     RedrawChessPieces(state.active_chess_obj);
+
     state.active_chess_player = ToggleActivePlayer(state.active_chess_player);
 
-    // remove classes: selected, possible moves, possible target
 }
 
 const PossibleMoveSelected = function() {
@@ -56,37 +60,17 @@ const PossibleMoveSelected = function() {
             };
     } 
 
-    // history
+    // Save in History
     state.chess_obj.push(JSON.parse(JSON.stringify(state.active_chess_obj)))
+    // Change Player
+    state.active_chess_player = ToggleActivePlayer(state.active_chess_player);
 
 
     if (document.getElementsByClassName("selected").length > 0) {
-            
-        let selected = document.getElementsByClassName("selected");
-        let possibleMove = document.getElementsByClassName("possible-move");
-        let possibleTarget = document.getElementsByClassName("possible-target");
-
-        Object.keys(selected).forEach(value => 
-            {
-                selected[0].classList.remove("selected")
-            })
-        Object.keys(possibleMove).forEach(value => 
-            {
-                possibleMove[0].classList.remove("possible-move")
-                
-            })
-
-        Object.keys(possibleTarget).forEach(value => 
-            {
-                possibleTarget[0].classList.remove("possible-target")
-                
-            })
-        state.active_chess_player = ToggleActivePlayer(state.active_chess_player); 
+        RemoveClassesOfMovesOrTargetsSquares()    
     }
-    // console.log(chessPieceMoved.piece.position)
     // for enpassat
     if (chessPieceMoved.piece.position == "pawn" ){
-        console.log(chessPieceMoved.piece.position)
         if (Math.abs(chessPieceMoved.rowNumber - chessPieceOriginalBox.rowNumber) == 2){
             state.pawn_double_step_status = {
                 ...chessPieceMoved
@@ -97,68 +81,49 @@ const PossibleMoveSelected = function() {
     } else {
         state.pawn_double_step_status = null
     }
-    console.log("En passant rule 1 status ",state.pawn_double_step_status)
+    console.log("En Passant passed the Rule 1 - status: ",state.pawn_double_step_status)
 }
 
 const ToggleActivePiece = function() {
 
-    // function is only applicable to chess box with chess piece
+    // this function is only applicable to chess box with chess piece
     if (state.active_chess_obj[this.id]["piece"] == null) { 
-        console.log(this.id + " null");
         return };
 
-    // function is only applicable to current state.active_chess_player
-    if ( state.active_chess_obj[this.id].piece.kingdom != state.active_chess_player) { 
-        console.log(this.id + " " + state.active_chess_obj[this.id].piece.kingdom)
+    // this function is only applicable to current state.active_chess_player
+    if (state.active_chess_obj[this.id].piece.kingdom != state.active_chess_player) {
         return };
 
     state.active_chess_box_id = this.id;
+
     console.log("Active box/piece: " , state.active_chess_box_id)
-    let classes =this.classList;
 
-    // Toggle selected chess piece
-    if( classes.value.includes("selected")) {
-        this.classList.remove("selected");
+    // list all classes to target element
+    let classes = this.classList;
 
-        let possibleMove = document.getElementsByClassName("possible-move");
-
-        Object.keys(possibleMove).forEach(value => 
-            {
-                possibleMove[0].classList.remove("possible-move")
-            })
+    // Toggle On/off current selected chess piece
+    if(classes.value.includes("selected")) {
+        // remove other previous styles with class selected, possible moves/targets
+        RemoveClassesOfMovesOrTargetsSquares()
     } else {
-        // remove other previous chess piece with class 'selected' and remove its possible moves
+        // remove other previous styles with class selected, possible moves/targets
         if (document.getElementsByClassName("selected").length > 0) {
-
-            let selected = document.getElementsByClassName("selected");
-            let possibleMove = document.getElementsByClassName("possible-move");
-
-            Object.keys(selected).forEach(value => 
-                {
-                    selected[0].classList.remove("selected")
-                })
-            Object.keys(possibleMove).forEach(value => 
-                {
-                    possibleMove[0].classList.remove("possible-move")
-                })
+            RemoveClassesOfMovesOrTargetsSquares()
         }
         // add 'selected' in class
         this.classList.add("selected");
 
         // Determine chess piece and possible moves
-        // let pieceSelected = DetermineChessPiece(state.active_chess_obj, state.active_chess_box_id)
-        
-        let {possibleMoves, possibleTargets } = GetPossibleMoves(state.active_chess_obj[state.active_chess_box_id], 
-                                                 state.active_chess_obj,
-                                                 state.pawn_double_step_status);
+        let {possibleMoves,
+             possibleTargets } 
+                = GetPossibleMoves(state.active_chess_obj[state.active_chess_box_id], 
+                                   state.active_chess_obj,
+                                   state.pawn_double_step_status);
+
         state.possible_moves = possibleMoves; 
-        state.possible_moves.forEach((move) => {document.getElementById(move).classList.add("possible-move")})
-        console.log( "Possible Moves :", state.possible_moves)
         
-        possibleTargets.forEach((move) => {document.getElementById(move).classList.add("possible-target")})
-        // if rawPossbileTarget is positive, attach some class in the target div
-
-
+         // Attach some class in the possible moves squares
+        AddClassesOfMovesOrTargetsSquares(possibleMoves, possibleTargets);
     };
 };
 

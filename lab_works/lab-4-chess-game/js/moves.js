@@ -25,7 +25,7 @@ const PawnMoves = function(chessObjBox, chessObj, pawnDoubleStepStatus) {
     rowNumbersPMoves = rowNumbersPMoves.map((value) => colLetter + value)
     
     rowNumbersPMoves = rowNumbersPMoves .map(value => {
-        console.log(chessObj[value].piece)    
+          
         if(chessObj[value].piece == null){
             return value;
         }; 
@@ -94,10 +94,6 @@ const PawnMoves = function(chessObjBox, chessObj, pawnDoubleStepStatus) {
 
 
     // filter out of bounds in map
-
-    console.log(colNumber, rowNumber)
-    console.log(rawPossibleTargets)
-    console.log(rowNumbersPMoves)
 
     return {possibleMoves : rowNumbersPMoves, possibleTargets: rawPossibleTargets}
 }

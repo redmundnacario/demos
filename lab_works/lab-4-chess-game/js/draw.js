@@ -107,3 +107,31 @@ export const RedrawChessPieces = (chessObj) => {
         chessBoxSelected.replaceChild(chessPieceBox,chessBoxSelected.children[0]);
     };
 }
+
+// attach classes to possible targets or moves (chess boxes) of a chess pieces
+export const AddClassesOfMovesOrTargetsSquares = (possibleMoves, possibleTargets) => {
+    possibleMoves.forEach((move) => {document.getElementById(move).classList.add("possible-move")})
+    console.log( "Possible Moves :", possibleMoves);
+    
+    // Attach some class in the target squares
+    possibleTargets.forEach((move) => {document.getElementById(move).classList.add("possible-target")})
+    console.log( "Possible Targets:", possibleTargets);
+}
+
+export const RemoveClassesOfMovesOrTargetsSquares = () => {
+    let selected = document.getElementsByClassName("selected");
+    let possibleMoves = document.getElementsByClassName("possible-move");
+    let possibleTargets = document.getElementsByClassName("possible-target");
+
+    Object.keys(selected).forEach(value => {
+        selected[0].classList.remove("selected");
+    });
+
+    Object.keys(possibleMoves).forEach(value => {
+        possibleMoves[0].classList.remove("possible-move"); 
+    });
+
+    Object.keys(possibleTargets).forEach(value => {
+        possibleTargets[0].classList.remove("possible-target");
+    });
+};
