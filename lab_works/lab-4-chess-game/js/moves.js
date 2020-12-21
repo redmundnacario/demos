@@ -10,10 +10,10 @@ const KnightMoves= (chessObjBox, chessObj, letters) => {
         // Y to abc, X to 123
         value = letters[(value[1]  + colNumber) - 1] + (value[0] + rowNumber);
         // filter out of bounds
-        if (value[1] > 8 & value[1] > 0){
-            return null;
+        if (value[1] < 8 & value[1] > 0){
+            return value;
         }
-        return value;
+        return null;
     }).filter(Boolean);
     console.log(scanPointsAlphaNum)
 
