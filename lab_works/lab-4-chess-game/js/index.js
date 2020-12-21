@@ -40,7 +40,6 @@ const PossibleMoveSelected = function() {
     // update state.chess_obj
     
     state.active_chess_obj[nextBox].piece = state.active_chess_obj[previousBox].piece;
-
     state.active_chess_obj[previousBox].piece = null;
 
     // Redraw  chess pieces in the map
@@ -54,8 +53,12 @@ const PossibleMoveSelected = function() {
     if (Boolean(state.pawn_double_step_status) & chessPieceMoved.piece.position == "pawn" ){
         if (chessPieceMoved.colNumber - state.pawn_double_step_status.colNumber == 0){
             if(state.pawn_double_step_status.rowNumber - chessPieceOriginalBox.rowNumber == 0) {
-                document.getElementById(state.pawn_double_step_status.colLetter +
-                    state.pawn_double_step_status.rowNumber ).children[0].innerHTML = "";
+                let pawnEnPassant = state.pawn_double_step_status.colLetter +
+                                    state.pawn_double_step_status.rowNumber;
+                // update chessObject
+                state.active_chess_obj[pawnEnPassant].piece = null;
+                // update dom
+                document.getElementById(pawnEnPassant).children[0].innerHTML = "";
                 };
             };
     } 
