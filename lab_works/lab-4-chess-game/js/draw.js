@@ -22,7 +22,7 @@ export const DrawChessTiles = function () {
         };
         
         // For loop chess box per row
-        for (let j=0; j < rowNumbers; j++){
+        for (let j = 1; j < rowNumbers + 1; j++){
             
             // Dictates the color per box in a row
             if (colorInd == true){
@@ -33,7 +33,7 @@ export const DrawChessTiles = function () {
                 colorInd = true;
             };
 
-            let chessBox =letters[j]+i;
+            let chessBox =letters[j - 1]+i;
             //  Create element for chess box
             const box = document.createElement("div");
 
@@ -49,7 +49,7 @@ export const DrawChessTiles = function () {
             // set the state of our chess object
             chessObj[chessBox] = {
                 rowNumber : i,
-                colLetter : letters[j],
+                colLetter : letters[j-1],
                 colNumber : j,
                 piece: null,
             };

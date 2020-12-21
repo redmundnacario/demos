@@ -18,14 +18,18 @@ const UndoMove = function(){
     state.chess_obj.pop();
     RedrawChessPieces(state.active_chess_obj);
     state.active_chess_player = ToggleActivePlayer(state.active_chess_player);
+
+    // remove classes: selected, possible moves, possible target
 }
 
 const PossibleMoveSelected = function() {
     let previousBox = state.active_chess_box_id;
     let nextBox = this.id;
 
+    let hasClassPossibleMove = document.getElementById(nextBox).classList.value.includes("possible-move");
+    let hasClassPossibleTarget = document.getElementById(nextBox).classList.value.includes("possible-target");
     // Check selected box id if it contains possible-move class;
-    if (document.getElementById(nextBox).classList.value.includes("possible-move") == false){ return }
+    if (!(hasClassPossibleMove | hasClassPossibleTarget )){ return }
 
     console.log(previousBox + " to "+ nextBox);
 
@@ -39,6 +43,17 @@ const PossibleMoveSelected = function() {
     document.getElementById(previousBox).children[0].innerHTML = "";
     document.getElementById(nextBox).children[0].innerHTML = state.active_chess_obj[nextBox].piece.htmlcode;
 
+    let chessPieceMoved = state.active_chess_obj[nextBox];
+    let chessPieceOriginalBox = state.active_chess_obj[previousBox];
+
+    // fore en passant
+    if (Boolean(state.pawn_double_step_status) & chessPieceMoved.piece.position == "pawn" ){
+        if (chessPieceMoved.colNumber - state.pawn_double_step_status.colNumber == 0){
+            document.getElementById(state.pawn_double_step_status.colLetter +
+                 state.pawn_double_step_status.rowNumber ).children[0].innerHTML = "";
+            };
+    } 
+
     // history
     state.chess_obj.push(JSON.parse(JSON.stringify(state.active_chess_obj)))
 
@@ -47,6 +62,7 @@ const PossibleMoveSelected = function() {
             
         let selected = document.getElementsByClassName("selected");
         let possibleMove = document.getElementsByClassName("possible-move");
+        let possibleTarget = document.getElementsByClassName("possible-target");
 
         Object.keys(selected).forEach(value => 
             {
@@ -57,8 +73,29 @@ const PossibleMoveSelected = function() {
                 possibleMove[0].classList.remove("possible-move")
                 
             })
+
+        Object.keys(possibleTarget).forEach(value => 
+            {
+                possibleTarget[0].classList.remove("possible-target")
+                
+            })
         state.active_chess_player = ToggleActivePlayer(state.active_chess_player); 
     }
+    // console.log(chessPieceMoved.piece.position)
+    // for enpassat
+    if (chessPieceMoved.piece.position == "pawn" ){
+        console.log(chessPieceMoved.piece.position)
+        if (Math.abs(chessPieceMoved.rowNumber - chessPieceOriginalBox.rowNumber) == 2){
+            state.pawn_double_step_status = {
+                ...chessPieceMoved
+            }
+        } else {
+            state.pawn_double_step_status = null
+        }
+    } else {
+        state.pawn_double_step_status = null
+    }
+    console.log("En passant rule 1 status ",state.pawn_double_step_status)
 }
 
 const ToggleActivePiece = function() {
@@ -108,10 +145,18 @@ const ToggleActivePiece = function() {
 
         // Determine chess piece and possible moves
         // let pieceSelected = DetermineChessPiece(state.active_chess_obj, state.active_chess_box_id)
-        state.possible_moves  = GetPossibleMoves(state.active_chess_obj[state.active_chess_box_id]);
-
+        
+        let {possibleMoves, possibleTargets } = GetPossibleMoves(state.active_chess_obj[state.active_chess_box_id], 
+                                                 state.active_chess_obj,
+                                                 state.pawn_double_step_status);
+        state.possible_moves = possibleMoves; 
         state.possible_moves.forEach((move) => {document.getElementById(move).classList.add("possible-move")})
         console.log( "Possible Moves :", state.possible_moves)
+        
+        possibleTargets.forEach((move) => {document.getElementById(move).classList.add("possible-target")})
+        // if rawPossbileTarget is positive, attach some class in the target div
+
+
     };
 };
 
@@ -122,12 +167,13 @@ let state = {
     possible_moves : [],
     active_chess_box_id : null,
     chess_obj : [], // Serves as history in the game
-    active_chess_obj: null // Current chess pieces positions in the map is based on this
+    active_chess_obj: null, // Current chess pieces positions in the map is based on this
+    pawn_double_step_status: null
 }
 
 SetActivePlayer(state.active_chess_player);
 let chess_obj_initial = DrawChessTiles();
-
+// console.log(chess_obj_initial)
 state.chess_obj.push(SetChessPieces(chess_obj_initial , CHESS_DATA));
 state.active_chess_obj = JSON.parse(JSON.stringify(state.chess_obj[state.chess_obj.length - 1]))
 
