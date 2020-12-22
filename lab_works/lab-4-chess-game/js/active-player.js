@@ -1,15 +1,15 @@
-// set the active player
+// set the active player in dom
 export const SetActivePlayer = function (ACTIVE_CHESS_PLAYER) {
     document.getElementById("activePlayer").innerHTML = ACTIVE_CHESS_PLAYER.toUpperCase(); 
 }
 
 // Update active player
-export const ToggleActivePlayer = function (ACTIVE_CHESS_PLAYER) {
-    if (ACTIVE_CHESS_PLAYER == 'white'){
-        ACTIVE_CHESS_PLAYER = 'black';
+export const ToggleActivePlayer = function (state) {
+    //update active player in states
+    if (state.active_chess_player == 'white'){
+        state.active_chess_player = 'black';
     } else {
-        ACTIVE_CHESS_PLAYER = 'white';
+        state.active_chess_player = 'white';
     }
-    SetActivePlayer(ACTIVE_CHESS_PLAYER);
-    return ACTIVE_CHESS_PLAYER;
+    SetActivePlayer(state.active_chess_player);
 }

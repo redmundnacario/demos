@@ -1,5 +1,6 @@
 // alert("draw-tiles.js connected")
 
+// Paints our chess board with black and white tiles
 export const DrawChessTiles = function (letters) {
     // Our main state/data for mapping chess pieces for every state change
     let chessObj = {};
@@ -117,6 +118,7 @@ export const AddClassesOfMovesOrTargetsSquares = (possibleMoves, possibleTargets
     console.log( "Possible Targets:", possibleTargets);
 }
 
+// remove the attached classes to possible targets or moves (chess boxes)
 export const RemoveClassesOfMovesOrTargetsSquares = () => {
     let selected = document.getElementsByClassName("selected");
     let possibleMoves = document.getElementsByClassName("possible-move");
