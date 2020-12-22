@@ -111,11 +111,11 @@ export const RedrawChessPieces = (chessObj) => {
 // attach classes to possible targets or moves (chess boxes) of a chess pieces
 export const AddClassesOfMovesOrTargetsSquares = (possibleMoves, possibleTargets) => {
     possibleMoves.forEach((move) => {document.getElementById(move).classList.add("possible-move")})
-    console.log( "Possible Moves :", possibleMoves);
+    // console.log( "Possible Moves :", possibleMoves);
     
     // Attach some class in the target squares
     possibleTargets.forEach((move) => {document.getElementById(move).classList.add("possible-target")})
-    console.log( "Possible Targets:", possibleTargets);
+    // console.log( "Possible Targets:", possibleTargets);
 }
 
 // remove the attached classes to possible targets or moves (chess boxes)

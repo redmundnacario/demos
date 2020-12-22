@@ -48,7 +48,9 @@ export const PossibleMoveSelected = function(thisId, state) {
     // Check selected box id if it contains possible-move class;
     if (!(hasClassPossibleMove | hasClassPossibleTarget )){ return };
 
-    console.log(previousBox + " to "+ nextBox);
+    console.log(active_chess_obj[previousBox].piece.kingdom 
+                + " " + active_chess_obj[previousBox].piece.position
+                + " " + previousBox + " to "+ nextBox);
 
     // update state.chess_obj
     
@@ -97,8 +99,8 @@ export const PossibleMoveSelected = function(thisId, state) {
     } else {
         pawn_double_step_status = null;
     }
-    console.log("En Passant passed the Rule 1 - status: ",
-                pawn_double_step_status);
+    // console.log("En Passant passed the Rule 1 - status: ",
+    //             pawn_double_step_status);
     
     // update states
     state.active_chess_obj = active_chess_obj;
@@ -125,7 +127,7 @@ export const ToggleActivePiece = function(thisId, state) {
 
     active_chess_box_id  = thisId;
 
-    console.log("Active box/piece: " , active_chess_box_id );
+    // console.log("Active box/piece: " , active_chess_box_id );
 
     // list all classes to target element
     let classes = document.getElementById(thisId).classList;
