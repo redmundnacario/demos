@@ -1,7 +1,7 @@
 import { 
         RedrawChessPieces,
         AddClassesOfMovesOrTargetsSquares,
-        RemoveClassesOfMovesOrTargetsSquares 
+        RemoveClassesOfMovesOrTargetsSquares
         } from './draw.js';
 import GetPossibleMoves from "./moves.js";
 import { ToggleActivePlayer } from './active-player.js';
@@ -31,6 +31,8 @@ export const UndoMove = function(state){
     // update states
     state.active_chess_obj = active_chess_obj;
     state.chess_obj = chess_obj;
+    
+    CheckIfChecked(state);
 }
 
 // returns bool
@@ -55,27 +57,34 @@ export const PossibleMoveSelected = function(thisId, state) {
     let previousBox = active_chess_box_id;
     let nextBox = thisId;
 
+    let chessPieceMoved = active_chess_obj[nextBox];
+    let chessPieceOriginalBox = active_chess_obj[previousBox];
+
     let hasPossibleMove = getClassListIncludes(nextBox, "possible-move");
     let hasPossibleTarget = getClassListIncludes(nextBox, "possible-target");
     
     // Check selected box id if it contains possible-move class;
     if (!(hasPossibleMove | hasPossibleTarget )){ return };
 
-    console.log(active_chess_obj[previousBox].piece.kingdom 
-                + " " + active_chess_obj[previousBox].piece.position
+    console.log(chessPieceOriginalBox.piece.kingdom 
+                + " " + chessPieceOriginalBox.piece.position
                 + " " + previousBox + " to "+ nextBox);
 
-    // update state.chess_obj
-    active_chess_obj[nextBox].piece = active_chess_obj[previousBox].piece;
-    active_chess_obj[previousBox].piece = null;
+    // Pre-checking if next move is checked of king
+    if (chessPieceMoved.piece.position == "king" ){
+    
+        
+    }
+
+    // update state.chess_obj -Swapping pieces to null and vice versa
+    chessPieceMoved.piece = chessPieceOriginalBox.piece;
+    chessPieceOriginalBox.piece = null;
 
     // Redraw the chess pieces in the DOM
     setInnerHtml(previousBox, "")
-    setInnerHtml(nextBox, active_chess_obj[nextBox].piece.htmlcode)
+    setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode)
 
-    // Below
-    let chessPieceMoved = active_chess_obj[nextBox];
-    let chessPieceOriginalBox = active_chess_obj[previousBox];
+    //
 
     // for En Passant : Check all rules, if all positive, pawn can do en passant
     EnPassant(state, chessPieceMoved, chessPieceOriginalBox);
@@ -93,13 +102,10 @@ export const PossibleMoveSelected = function(thisId, state) {
     state.chess_obj = chess_obj;
 
     // For Castling, if king was moved. Set state of castling of kingdom to null
-    // Checker also if next move of a king is being attacked
     if (chessPieceMoved.piece.position == "king" ){
         castling[chessPieceMoved.piece.kingdom] = null;
         console.log("King moved...");
-        console.log(castling);
-
-        // check if next move is checked, of yes fire undo, then return to avoid updating other states
+        // console.log(castling);  
 
         // update king's location
         king_location[chessPieceMoved.piece.kingdom] = nextBox;
