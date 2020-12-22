@@ -26,15 +26,17 @@ const RookMoves= (chessObjBox, chessObj, letters,
 
     // Convert to alpha numeric chess coordinates
     // filter out of bounds
-    let scanPointsAlphaNumX = removeOutOfBoundsPossibleMoves(scanPointsHorizontal,
-                                                            rowNumber,
-                                                            colNumber,
-                                                            letters);
+    let scanPointsAlphaNumX = removeOutOfBoundsPossibleMoves(
+                                    scanPointsHorizontal,
+                                    rowNumber,
+                                    colNumber,
+                                    letters);
 
-    let scanPointsAlphaNumY = removeOutOfBoundsPossibleMoves(scanPointsVertical,
-                                                            rowNumber,
-                                                            colNumber,
-                                                            letters);
+    let scanPointsAlphaNumY = removeOutOfBoundsPossibleMoves(
+                                    scanPointsVertical,
+                                    rowNumber,
+                                    colNumber,
+                                    letters);
 
     // console.log(scanPointsAlphaNumX)
     // console.log(scanPointsAlphaNumY)

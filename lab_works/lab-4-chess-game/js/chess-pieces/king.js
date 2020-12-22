@@ -27,5 +27,4 @@ Conditions for Castling
 4.The king is not currently in check.
 5.The king does not pass through a square that is attacked by an enemy piece.
 6.The king does not end up in check. (True of any legal move.)
-
 */

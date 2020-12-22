@@ -15,8 +15,10 @@ const BishopMoves= (chessObjBox, chessObj, letters,
     let scanXpoints = range(rangeStart, rangeStop, rangeInterval);
     let slopeM = [1, -1]
     // y = mx .. get y values
-    let scanPositiveDiagonal = scanXpoints.map(value => [value, slopeM[0] * value ])
-    let scanNegativeDiagonal = scanXpoints.map(value => [value, slopeM[1] * value])
+    let scanPositiveDiagonal = scanXpoints.map(value => 
+                                    [value, slopeM[0] * value ])
+    let scanNegativeDiagonal = scanXpoints.map(value => 
+                                    [value, slopeM[1] * value])
     
     // convert to alpha-numeric and filter moves
     scanPositiveDiagonal= removeOutOfBoundsPossibleMoves(scanPositiveDiagonal,

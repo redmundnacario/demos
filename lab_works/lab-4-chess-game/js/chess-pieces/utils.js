@@ -42,20 +42,21 @@ export const removeOutOfBoundsPossibleMoves = function( scanPoints,
     }).filter(Boolean);
 
     return scanPointsAlphaNum;
-}
+};
 
 // Split possible moves by current selecte piece (left or right direction)
 // or (up and down direction)
 export const splitPossibleMoves = function(scanPointsAlphaNum, chessObjBox) {
     // split and rearrange array  starting from the piece                                                       
-    let indexX = scanPointsAlphaNum.indexOf(chessObjBox.colLetter + chessObjBox.rowNumber)                                          
+    let indexX = scanPointsAlphaNum.indexOf(
+                    chessObjBox.colLetter + chessObjBox.rowNumber);                                          
     let firstArray = scanPointsAlphaNum.slice(0,
-                        indexX) //s sort reversely
+                        indexX) ;//s sort reversely
     firstArray = firstArray.reverse();
     let secondArray = scanPointsAlphaNum.slice(
-                        indexX + 1) // dont sort  
-    return  [firstArray, secondArray]
-}
+                        indexX + 1); // dont sort  
+    return  [firstArray, secondArray];
+};
 
 // filter chess targets which are allies, passable and targets
 export const filterPossibleMoves = function(dataArray ,chessObj, chessObjBox){
@@ -67,14 +68,17 @@ export const filterPossibleMoves = function(dataArray ,chessObj, chessObjBox){
             if (chessObj[value].piece == null){
                 possibleMoves.push(value);
             } else {
-                if (chessObj[value].piece.kingdom != chessObjBox.piece.kingdom ){
+                if (chessObj[value].piece.kingdom != 
+                        chessObjBox.piece.kingdom ){
+
                     possibleTargets.push(value);
                     passable = false;
+
                 } else {
                     passable = false;
                 };
             };
         };
     });
-    return { possibleMoves, possibleTargets  }
+    return { possibleMoves, possibleTargets  };
 };

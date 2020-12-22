@@ -15,7 +15,8 @@ export const UndoMove = function(state){
     // Disables undo button if game history length is 1 or less
     if (state.chess_obj.length <=1) {return}
     // Deep copy
-    active_chess_obj = JSON.parse(JSON.stringify(chess_obj[chess_obj.length - 2]));
+    active_chess_obj = JSON.parse(JSON.stringify(
+                            chess_obj[chess_obj.length - 2]));
     // remove last element of chess_obj array
     chess_obj.pop();
     // remove classes: selected, possible moves, possible target
@@ -43,8 +44,10 @@ export const PossibleMoveSelected = function(thisId, state) {
     let previousBox = active_chess_box_id;
     let nextBox = thisId;
 
-    let hasClassPossibleMove = document.getElementById(nextBox).classList.value.includes("possible-move");
-    let hasClassPossibleTarget = document.getElementById(nextBox).classList.value.includes("possible-target");
+    let hasClassPossibleMove = document.getElementById(nextBox).
+                                    classList.value.includes("possible-move");
+    let hasClassPossibleTarget = document.getElementById(nextBox)
+                                    .classList.value.includes("possible-target");
     // Check selected box id if it contains possible-move class;
     if (!(hasClassPossibleMove | hasClassPossibleTarget )){ return };
 
@@ -53,46 +56,54 @@ export const PossibleMoveSelected = function(thisId, state) {
                 + " " + previousBox + " to "+ nextBox);
 
     // update state.chess_obj
-    
     active_chess_obj[nextBox].piece = active_chess_obj[previousBox].piece;
     active_chess_obj[previousBox].piece = null;
 
-    // Redraw  chess pieces in the map
+    // Redraw the chess pieces in the DOM
     document.getElementById(previousBox).children[0].innerHTML = "";
-    document.getElementById(nextBox).children[0].innerHTML = active_chess_obj[nextBox].piece.htmlcode;
+    document.getElementById(nextBox).
+        children[0].innerHTML = active_chess_obj[nextBox].piece.htmlcode;
 
+    // Below
     let chessPieceMoved = active_chess_obj[nextBox];
     let chessPieceOriginalBox = active_chess_obj[previousBox];
 
-    // fore en passant
-    if (Boolean(pawn_double_step_status) & chessPieceMoved.piece.position == "pawn" ){
-        if (chessPieceMoved.colNumber - pawn_double_step_status.colNumber == 0){
-            if(pawn_double_step_status.rowNumber - chessPieceOriginalBox.rowNumber == 0) {
+    // for En Passant : Check all rules, if all positive, pawn can do en passant
+    if (Boolean(pawn_double_step_status) & 
+        chessPieceMoved.piece.position == "pawn" ){
+
+        if (chessPieceMoved.colNumber - 
+            pawn_double_step_status.colNumber == 0){
+
+            if(pawn_double_step_status.rowNumber - 
+                chessPieceOriginalBox.rowNumber == 0) {
+
                 let pawnEnPassant = pawn_double_step_status.colLetter +
                                     pawn_double_step_status.rowNumber;
                 // update chessObject
                 active_chess_obj[pawnEnPassant].piece = null;
                 // update dom
-                document.getElementById(pawnEnPassant).children[0].innerHTML = "";
-                };
+                document.getElementById(pawnEnPassant)
+                    .children[0].innerHTML = "";
             };
+        };
     };
 
     // Save in History
     chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
     // Change Player
     ToggleActivePlayer(state);
-
-
-    if (document.getElementsByClassName("selected").length > 0) {
-        RemoveClassesOfMovesOrTargetsSquares() ;   
-    };
-    // for enpassat
+    RemoveClassesOfMovesOrTargetsSquares() ;   
+    
+    // for En Passant : Update status
     if (chessPieceMoved.piece.position == "pawn" ){
-        if (Math.abs(chessPieceMoved.rowNumber - chessPieceOriginalBox.rowNumber) == 2){
+        if (Math.abs(chessPieceMoved.rowNumber - 
+                     chessPieceOriginalBox.rowNumber) == 2){
+
             pawn_double_step_status = {
                 ...chessPieceMoved
             };
+
         } else {
             pawn_double_step_status = null;
         };
@@ -134,13 +145,11 @@ export const ToggleActivePiece = function(thisId, state) {
 
     // Toggle On/off current selected chess piece
     if(classes.value.includes("selected")) {
-        // remove other previous styles with class selected, possible moves/targets
+        // remove previous styles with class selected, possible moves/targets
         RemoveClassesOfMovesOrTargetsSquares();
     } else {
-        // remove other previous styles with class selected, possible moves/targets
-        if (document.getElementsByClassName("selected").length > 0) {
-            RemoveClassesOfMovesOrTargetsSquares();
-        }
+        // removeprevious styles with class selected, possible moves/targets
+        RemoveClassesOfMovesOrTargetsSquares();
         // add 'selected' in class
         classes.add("selected");
 
