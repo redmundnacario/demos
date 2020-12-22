@@ -1,3 +1,4 @@
+// creates array of range values
 export const range = function (start, stop, step) {
     if (typeof stop == 'undefined') {
         // one param defined
