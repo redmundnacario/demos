@@ -38,7 +38,7 @@ export const PossibleMoveSelected = function(thisId, state) {
         active_chess_obj,
         pawn_double_step_status,
         chess_obj,
-        active_chess_player
+        castling
         } = state;
 
     let previousBox = active_chess_box_id;
@@ -95,6 +95,14 @@ export const PossibleMoveSelected = function(thisId, state) {
     ToggleActivePlayer(state);
     RemoveClassesOfMovesOrTargetsSquares() ;   
     
+    // For Castling, if king was moved. Set state of castling of kingdom to null
+    if (chessPieceMoved.piece.position == "king" ){
+        castling[chessPieceMoved.piece.kingdom] = null;
+        console.log("King moved ... Castling Rule 1 Violated.")
+        console.log(castling)
+    }
+
+
     // for En Passant : Update status
     if (chessPieceMoved.piece.position == "pawn" ){
         if (Math.abs(chessPieceMoved.rowNumber - 
@@ -117,6 +125,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     state.active_chess_obj = active_chess_obj;
     state.pawn_double_step_status = pawn_double_step_status;
     state.chess_obj = chess_obj;
+    state.castling = castling;
 };
 
 // Bascically put styles to selected piece, and its possible moves and targets
