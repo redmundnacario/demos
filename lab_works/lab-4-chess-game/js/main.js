@@ -6,7 +6,7 @@ import {
 import GetPossibleMoves from "./moves.js";
 import { ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
-import { CheckIfChecked } from './special-rules/check.js';
+import { CheckIfChecked, CheckAreaIfChecked } from './special-rules/check.js';
 
 // Undo the moves in chess
 export const UndoMove = function(state){
@@ -31,19 +31,37 @@ export const UndoMove = function(state){
     // update states
     state.active_chess_obj = active_chess_obj;
     state.chess_obj = chess_obj;
-    
-    CheckIfChecked(state);
-}
 
+    findKing(state);
+    CheckIfChecked(state);
+};
+
+// Finds the king location in chess map
+const findKing = function (state) {
+    let {
+        active_chess_obj,
+        } = state;
+    
+    Object.keys(active_chess_obj).forEach(value => {
+        let result = active_chess_obj[value];
+        if (result.piece){
+            if (result.piece.position == "king"){
+                state.king_location[result.piece.kingdom] = result.colLetter +
+                                                            result.rowNumber;
+            };
+        };
+    });
+};
 // returns bool
 const getClassListIncludes = function(ElementId, className){
     return document.getElementById(ElementId).classList.value.includes(className);
-}
+};
 
 // set innerHTML
 const setInnerHtml = function(ElementId, InputString){
     document.getElementById(ElementId).children[0].innerHTML = InputString;
-}
+};
+
 // Triggers when a move was done and updates all dynamic state values 
 export const PossibleMoveSelected = function(thisId, state) {
     let {
@@ -70,9 +88,12 @@ export const PossibleMoveSelected = function(thisId, state) {
                 + " " + chessPieceOriginalBox.piece.position
                 + " " + previousBox + " to "+ nextBox);
 
-    // Pre-checking if next move is checked of king
-    if (chessPieceMoved.piece.position == "king" ){
-    
+    // Pre-checking if sorrounding area of a king is illegal
+    // console.log(chessPieceMoved)
+    if (chessPieceOriginalBox.piece.position == "king" ){
+        CheckAreaIfChecked(chessPieceOriginalBox,
+                           chessPieceMoved,
+                           state)
         
     }
 

@@ -32,7 +32,7 @@ export const CheckIfChecked = function (state) {
         } = state;
 
     kingdoms.forEach( kingdom => {
-        console.log(kingdom)
+        // console.log(kingdom)
         let chessObjBox = active_chess_obj[king_location[kingdom]];
         // console.log("King Location Details: ", chessObjBox);
 
@@ -92,3 +92,18 @@ export const CheckIfChecked = function (state) {
     
 };
 
+export const CheckAreaIfChecked = function(chessPieceOriginalBox,
+                                             chessPieceMoved,
+                                             state){
+    let {
+        king_location ,
+        active_chess_obj, 
+        letters,
+        } = state;
+
+    let kingMoves = KingMoves(chessPieceOriginalBox,
+                              active_chess_obj, letters);
+
+    console.log(kingMoves);
+
+}
