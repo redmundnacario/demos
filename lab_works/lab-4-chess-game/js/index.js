@@ -17,7 +17,7 @@ let state = {
     active_chess_box_id : null,
     chess_obj : [], // Serves as history in the game
     active_chess_obj: null, // Current chess pieces positions in the map is based on this
-    pawn_double_step_status: null,
+    pawn_double_step_status: null, // Needed for En Passant
     letters : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
     king_location: {// Used in idenfifying check
         white: null,
@@ -42,8 +42,8 @@ let state = {
         }
     },
     checked : { // also considered in castling, preferred false, RULE 2
-        white: false, // white king being checked
-        black: false // black king checked  
+        white: null, // white king being checked
+        black: null // black king checked  
     },
     checkmate: { // if checked = true and , all possible square to move are being attacked
         white: false, // white king being checkmate

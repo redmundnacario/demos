@@ -6,6 +6,7 @@ import {
 import GetPossibleMoves from "./moves.js";
 import { ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
+import { CheckIfChecked } from './special-rules/check.js';
 
 // Undo the moves in chess
 export const UndoMove = function(state){
@@ -47,7 +48,8 @@ export const PossibleMoveSelected = function(thisId, state) {
         active_chess_box_id,
         active_chess_obj,
         chess_obj,
-        castling
+        castling,
+        king_location,
         } = state;
 
     let previousBox = active_chess_box_id;
@@ -77,27 +79,39 @@ export const PossibleMoveSelected = function(thisId, state) {
 
     // for En Passant : Check all rules, if all positive, pawn can do en passant
     EnPassant(state, chessPieceMoved, chessPieceOriginalBox);
-
-    // For Castling, if king was moved. Set state of castling of kingdom to null
-    if (chessPieceMoved.piece.position == "king" ){
-        castling[chessPieceMoved.piece.kingdom] = null;
-        console.log("King moved ... Castling Rule 1 Violated.")
-        console.log(castling)
-    }
-
-    // for En Passant : Update status
+    // for En Passant : Update status, fires if pawn was moved by double step
     UpdateEnPassantState(state, chessPieceMoved, chessPieceOriginalBox);
     
     // Update History
     chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
-    // Toggle Player
+    // Update Player
     ToggleActivePlayer(state);
     // remove styles of possible moves, targets, and selected piece
     RemoveClassesOfMovesOrTargetsSquares() ;   
         
     // update states
     state.chess_obj = chess_obj;
+
+    // For Castling, if king was moved. Set state of castling of kingdom to null
+    // Checker also if next move of a king is being attacked
+    if (chessPieceMoved.piece.position == "king" ){
+        castling[chessPieceMoved.piece.kingdom] = null;
+        console.log("King moved...");
+        console.log(castling);
+
+        // check if next move is checked, of yes fire undo, then return to avoid updating other states
+
+        // update king's location
+        king_location[chessPieceMoved.piece.kingdom] = nextBox;
+    }
+
     state.castling = castling;
+    state.king_location = king_location;
+
+    // console.log(state.king_location)
+    // Post-Check if enemy kingdom's king was checked 
+    // note that toggle active player was called before
+    CheckIfChecked(state)
 };
 
 // Bascically put styles to selected piece, and its possible moves and targets
