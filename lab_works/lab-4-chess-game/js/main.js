@@ -5,6 +5,7 @@ import {
         } from './draw.js';
 import GetPossibleMoves from "./moves.js";
 import { ToggleActivePlayer } from './active-player.js';
+import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
 
 // Undo the moves in chess
 export const UndoMove = function(state){
@@ -69,32 +70,8 @@ export const PossibleMoveSelected = function(thisId, state) {
     let chessPieceOriginalBox = active_chess_obj[previousBox];
 
     // for En Passant : Check all rules, if all positive, pawn can do en passant
-    if (Boolean(pawn_double_step_status) & 
-        chessPieceMoved.piece.position == "pawn" ){
+    EnPassant(state, chessPieceMoved, chessPieceOriginalBox);
 
-        if (chessPieceMoved.colNumber - 
-            pawn_double_step_status.colNumber == 0){
-
-            if(pawn_double_step_status.rowNumber - 
-                chessPieceOriginalBox.rowNumber == 0) {
-
-                let pawnEnPassant = pawn_double_step_status.colLetter +
-                                    pawn_double_step_status.rowNumber;
-                // update chessObject
-                active_chess_obj[pawnEnPassant].piece = null;
-                // update dom
-                document.getElementById(pawnEnPassant)
-                    .children[0].innerHTML = "";
-            };
-        };
-    };
-
-    // Save in History
-    chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
-    // Change Player
-    ToggleActivePlayer(state);
-    RemoveClassesOfMovesOrTargetsSquares() ;   
-    
     // For Castling, if king was moved. Set state of castling of kingdom to null
     if (chessPieceMoved.piece.position == "king" ){
         castling[chessPieceMoved.piece.kingdom] = null;
@@ -102,28 +79,20 @@ export const PossibleMoveSelected = function(thisId, state) {
         console.log(castling)
     }
 
-
     // for En Passant : Update status
-    if (chessPieceMoved.piece.position == "pawn" ){
-        if (Math.abs(chessPieceMoved.rowNumber - 
-                     chessPieceOriginalBox.rowNumber) == 2){
+    UpdateEnPassantState(state, chessPieceMoved, chessPieceOriginalBox);
 
-            pawn_double_step_status = {
-                ...chessPieceMoved
-            };
-
-        } else {
-            pawn_double_step_status = null;
-        };
-    } else {
-        pawn_double_step_status = null;
-    }
     // console.log("En Passant passed the Rule 1 - status: ",
     //             pawn_double_step_status);
     
+    // Update History
+    chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
+    // Toggle Player
+    ToggleActivePlayer(state);
+    // remove styles of possible moves, targets, and selected piece
+    RemoveClassesOfMovesOrTargetsSquares() ;   
+        
     // update states
-    state.active_chess_obj = active_chess_obj;
-    state.pawn_double_step_status = pawn_double_step_status;
     state.chess_obj = chess_obj;
     state.castling = castling;
 };
