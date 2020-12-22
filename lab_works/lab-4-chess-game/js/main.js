@@ -32,12 +32,20 @@ export const UndoMove = function(state){
     state.chess_obj = chess_obj;
 }
 
+// returns bool
+const getClassListIncludes = function(ElementId, className){
+    return document.getElementById(ElementId).classList.value.includes(className);
+}
+
+// set innerHTML
+const setInnerHtml = function(ElementId, InputString){
+    document.getElementById(ElementId).children[0].innerHTML = InputString;
+}
 // Triggers when a move was done and updates all dynamic state values 
 export const PossibleMoveSelected = function(thisId, state) {
     let {
         active_chess_box_id,
         active_chess_obj,
-        pawn_double_step_status,
         chess_obj,
         castling
         } = state;
@@ -45,12 +53,11 @@ export const PossibleMoveSelected = function(thisId, state) {
     let previousBox = active_chess_box_id;
     let nextBox = thisId;
 
-    let hasClassPossibleMove = document.getElementById(nextBox).
-                                    classList.value.includes("possible-move");
-    let hasClassPossibleTarget = document.getElementById(nextBox)
-                                    .classList.value.includes("possible-target");
+    let hasPossibleMove = getClassListIncludes(nextBox, "possible-move");
+    let hasPossibleTarget = getClassListIncludes(nextBox, "possible-target");
+    
     // Check selected box id if it contains possible-move class;
-    if (!(hasClassPossibleMove | hasClassPossibleTarget )){ return };
+    if (!(hasPossibleMove | hasPossibleTarget )){ return };
 
     console.log(active_chess_obj[previousBox].piece.kingdom 
                 + " " + active_chess_obj[previousBox].piece.position
@@ -61,9 +68,8 @@ export const PossibleMoveSelected = function(thisId, state) {
     active_chess_obj[previousBox].piece = null;
 
     // Redraw the chess pieces in the DOM
-    document.getElementById(previousBox).children[0].innerHTML = "";
-    document.getElementById(nextBox).
-        children[0].innerHTML = active_chess_obj[nextBox].piece.htmlcode;
+    setInnerHtml(previousBox, "")
+    setInnerHtml(nextBox, active_chess_obj[nextBox].piece.htmlcode)
 
     // Below
     let chessPieceMoved = active_chess_obj[nextBox];
@@ -81,9 +87,6 @@ export const PossibleMoveSelected = function(thisId, state) {
 
     // for En Passant : Update status
     UpdateEnPassantState(state, chessPieceMoved, chessPieceOriginalBox);
-
-    // console.log("En Passant passed the Rule 1 - status: ",
-    //             pawn_double_step_status);
     
     // Update History
     chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
