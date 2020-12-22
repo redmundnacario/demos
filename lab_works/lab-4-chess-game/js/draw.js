@@ -60,7 +60,7 @@ export const DrawChessTiles = function (letters) {
 };
 
 // insert the initial chess piece
-export const SetChessPieces = (chessObj, piecesInitialPlace) => {
+export const SetChessPieces = (chessObj, piecesInitialPlace, state) => {
     let keys = Object.keys(piecesInitialPlace);
     for (let key in keys){
         // Destructuring object
@@ -77,7 +77,12 @@ export const SetChessPieces = (chessObj, piecesInitialPlace) => {
             chessObj[location].piece = { htmlcode,
                                          kingdom,
                                          position}
+
+            if (position == "king") {
             
+                state.king_location[kingdom] = chessObj[location].colLetter +
+                                               chessObj[location].rowNumber;
+            }   
         }
     };
     return chessObj;

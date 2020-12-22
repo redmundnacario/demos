@@ -19,6 +19,10 @@ let state = {
     active_chess_obj: null, // Current chess pieces positions in the map is based on this
     pawn_double_step_status: null,
     letters : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
+    king_location: {// Used in idenfifying check
+        white: null,
+        black: null
+    },
     castling: {
         white : { // set this to null if king moved RULE 1
             rook_left_moved: false, // rook involve in encastle must not be moved earlier, preferred false, RULE 3 
@@ -53,8 +57,11 @@ let state = {
 SetActivePlayer(state.active_chess_player);
 // Draw chess boxes in the DOM
 let chess_obj_initial = DrawChessTiles(state.letters);
-// Set the chess pieces in the state object
-state.chess_obj.push(SetChessPieces(chess_obj_initial , CHESS_DATA));
+// Set the chess pieces in the state object, and set initial kings' location
+state.chess_obj.push(SetChessPieces(chess_obj_initial , CHESS_DATA, state));
+
+// console.log(state.king_location)
+
 // DEEP COPY of chess_obj to active_chess_obj
 state.active_chess_obj = JSON.parse(JSON.stringify(
                             state.chess_obj[state.chess_obj.length - 1]))
