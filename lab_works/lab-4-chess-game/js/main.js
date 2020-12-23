@@ -98,7 +98,6 @@ export const PossibleMoveSelected = function(thisId, state) {
                            nextBox,
                            state)
         if (state.king_move == "illegal"){
-            UndoMove(state);
             return
         }
         
@@ -151,6 +150,7 @@ export const PossibleMoveSelected = function(thisId, state) {
 
 // Bascically put styles to selected piece, and its possible moves and targets
 export const ToggleActivePiece = function(thisId, state) {
+
     let{ 
         active_chess_obj, 
         active_chess_player, 
