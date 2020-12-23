@@ -12,6 +12,7 @@ import { SetActivePlayer, ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
 import { CheckIfChecked, CheckAreaIfChecked } from './special-rules/check.js';
 import { CheckCastling, Castling } from './special-rules/castling.js';
+import { PawnPromotion } from './special-rules/promotion.js';
 import { getClassListIncludes, setInnerHtml} from './utils.js';
 /*
 Initialize chess map, chess piece in the dom and chess object
@@ -163,15 +164,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     UpdateEnPassantState(state, chessPieceMoved, chessPieceOriginalBox);
 
     // pawn promotion
-    if (chessPieceMoved.piece.position == "pawn"){
-        if(chessPieceMoved.rowNumber == 8 & active_chess_player == "white"){
-
-        }
-        
-        if(chessPieceMoved.rowNumber == 1 & active_chess_player == "black"){
-            
-        }
-    }
+    PawnPromotion(nextBox, chessPieceMoved, active_chess_player)
     
     // Update History, Player, remove styles in chess boxes
     chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
