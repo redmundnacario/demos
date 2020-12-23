@@ -22,7 +22,7 @@ const scanCheckers = function(possibleTargets, active_chess_obj,
     };
 };
 
-const getCheckers = function(locationId, active_chess_obj, state) {
+export const getCheckers = function(locationId, active_chess_obj, state) {
     let {
         pawn_double_step_status,
         letters,

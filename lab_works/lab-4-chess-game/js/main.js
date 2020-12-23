@@ -11,8 +11,8 @@ import GetPossibleMoves from "./chess-pieces/moves.js";
 import { SetActivePlayer, ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
 import { CheckIfChecked, CheckAreaIfChecked } from './special-rules/check.js';
-import { CheckCastling } from './special-rules/castling.js';
-
+import { CheckCastling, Castling } from './special-rules/castling.js';
+import { getClassListIncludes, setInnerHtml} from './utils.js';
 /*
 Initialize chess map, chess piece in the dom and chess object
 Also adds eventlisteners to chess tiles.
@@ -121,6 +121,7 @@ export const ToggleActivePiece = function(thisId, state) {
 export const PossibleMoveSelected = function(thisId, state) {
     let {
         active_chess_box_id,
+        active_chess_player,
         active_chess_obj,
         chess_obj,
         castling,
@@ -135,9 +136,10 @@ export const PossibleMoveSelected = function(thisId, state) {
 
     let hasPossibleMove = getClassListIncludes(nextBox, "possible-move");
     let hasPossibleTarget = getClassListIncludes(nextBox, "possible-target");
+    let hasCastling = getClassListIncludes(nextBox, "castling");
     
     // Check selected box id if it contains possible-move class;
-    if (!(hasPossibleMove | hasPossibleTarget )){ return };
+    if (!(hasPossibleMove | hasPossibleTarget | hasCastling )){ return };
 
     console.log(chessPieceOriginalBox.piece.kingdom 
                 + " " + chessPieceOriginalBox.piece.position
@@ -152,6 +154,9 @@ export const PossibleMoveSelected = function(thisId, state) {
     // Redraw the chess pieces in the DOM
     setInnerHtml(previousBox, "")
     setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode)
+
+    // if king was moved, and encatled, move rook also
+    Castling(chessPieceMoved, hasCastling, state)
 
     // for En Passant : Check all rules, if all positive, pawn can do en passant
     EnPassant(state, chessPieceMoved, chessPieceOriginalBox);
@@ -171,6 +176,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     // For Castling, if king was moved. Set state of castling of kingdom to null
     if (chessPieceMoved.piece.position == "king" ){
         castling[chessPieceMoved.piece.kingdom] = null;
+        // rooks
         // update king's location
         king_location[chessPieceMoved.piece.kingdom] = nextBox;
     }
@@ -214,7 +220,6 @@ export const UndoMove = function(state){
 
 
 
-
 // Finds the king location in chess map
 const findKing = function (state) {
     let {
@@ -230,19 +235,4 @@ const findKing = function (state) {
             };
         };
     });
-};
-
-
-
-
-// returns bool
-const getClassListIncludes = function(ElementId, className){
-    return document.getElementById(ElementId).classList.value.includes(className);
-};
-
-
-
-// set innerHTML
-const setInnerHtml = function(ElementId, InputString){
-    document.getElementById(ElementId).children[0].innerHTML = InputString;
 };
