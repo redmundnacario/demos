@@ -2,6 +2,7 @@ import {
         DrawChessTiles, 
         SetChessPieces, 
         DrawChessPieces,
+        UndrawChessPieces,
         RedrawChessPieces,
         AddClassesOfMovesOrTargetsSquares,
         RemoveClassesOfMovesOrTargetsSquares
@@ -30,38 +31,26 @@ export const InitializeChessMap = function (state, CHESS_DATA) {
     // Draw chess boxes in the DOM
     let chess_obj_initial = DrawChessTiles(letters);
     // Set the chess pieces in the state object, and set initial kings' location
-    chess_obj.push(SetChessPieces(chess_obj_initial , CHESS_DATA, state));
+    chess_obj[0] = SetChessPieces(chess_obj_initial , CHESS_DATA, state);
 
     // DEEP COPY of chess_obj to active_chess_obj
     active_chess_obj = JSON.parse(JSON.stringify(
-                                chess_obj[chess_obj.length - 1]))
+                                chess_obj[0]))
 
     // Set the chess pieces in the DOM
     DrawChessPieces(chess_obj[0]);
 
-    // add event listeners to each chess box
-    let keys = Object.keys(chess_obj[0]);
-
-    for (let key in keys){
-
-        const chessBoxSelected = document.getElementById(keys[key]);
-
-        chessBoxSelected.addEventListener("click", () => {
-            ToggleActivePiece(chessBoxSelected.id, state);
-        });
-
-        chessBoxSelected.addEventListener("click", () =>{
-            PossibleMoveSelected(chessBoxSelected.id, state);
-        });
-    };
-    // Add event listener to undo button
-    document.getElementById("undo").addEventListener("click", () => {
-        UndoMove(state);
-    });
-
     state.chess_obj = chess_obj;
     state.active_chess_obj = active_chess_obj;
+    
+    return state
 };
+
+export const ReInitializeChessMap = function(init_state, state, CHESS_DATA) {
+    state = JSON.parse(JSON.stringify(init_state))
+    UndrawChessPieces(state.chess_obj[0])
+    InitializeChessMap(state, CHESS_DATA)
+}
 
 
 

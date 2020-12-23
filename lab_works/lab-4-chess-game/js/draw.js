@@ -99,6 +99,14 @@ export const DrawChessPieces = (chessObj) => {
         chessBoxSelected.appendChild(chessPieceBox);
     };
 }
+// Rmeove Chess Pieces from HTML DOM
+export const UndrawChessPieces = (chessObj) => {
+    let keys = Object.keys(chessObj);
+    for (let chessBox in keys){
+        const chessBoxSelected = document.getElementById(keys[chessBox]);
+        chessBoxSelected.removeChild(chessBoxSelected.childNodes[0])
+    };
+}
 
 // redraw chess pieces
 export const RedrawChessPieces = (chessObj) => {
