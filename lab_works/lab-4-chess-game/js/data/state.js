@@ -20,31 +20,35 @@ let state = {
                 // rook in encastle must not be moved, preferred false, RULE 3 
                 //  space b/w rook and king must be empty, preferred true, RULE 4
                 // 2 spaces lef/right of king was checked, preferred false, RULE 5
+                king_move: "g1",
+                rook_move: "f1",
                 rook: {
                     status: false,
-                    location: ""
+                    location: "h1"
                 },
                 space_empty: {
                     status: false,
-                    location: []
+                    location: ["f1","g1"]
                 },
                 space_attacked: {
                     status: false,
-                    location: []
+                    location: ["f1","g1"]
                 }
             },
             queen_side : {
+                king_move: "c1",
+                rook_move: "d1",
                 rook: {
                     status: false,
-                    location: ""
+                    location: "a1"
                 },
                 space_empty: {
                     status: false,
-                    location: []
+                    location: ["c1" , "d1"]
                 },
                 space_attacked: {
                     status: false,
-                    location: []
+                    location: ["c1" , "d1"]
                 }
             },
             
@@ -52,31 +56,35 @@ let state = {
         // set this to null if king moved RULE 1
         black : {
             king_side : {
+                king_move: "g8",
+                rook_move: "f8",
                 rook: {
                     status: false,
-                    location: ""
+                    location: "h8"
                 },
                 space_empty: {
                     status: false,
-                    location: []
+                    location: ["f8", "g8"]
                 },
                 space_attacked: {
                     status: false,
-                    location: []
+                    location: ["f8", "g8"]
                 }
             },
             queen_side : {
+                king_move: "c8",
+                rook_move: "d8",
                 rook: {
                     status: false,
-                    location: ""
+                    location: "a8"
                 },
                 space_empty: {
                     status: false,
-                    location: []
+                    location: ["c8", "d8"]
                 },
                 space_attacked: {
                     status: false,
-                    location: []
+                    location: ["c8", "d8"]
                 }
             },
         }

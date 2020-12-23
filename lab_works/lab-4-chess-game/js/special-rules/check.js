@@ -118,7 +118,7 @@ export const CheckIfChecked = function (state , UndoMove) {
             UndoMove(state);
         }
     }
-    
+    // console.log("Checkers!",state.checked);
 };
 
 export const CheckAreaIfChecked = function(previousBoxId,

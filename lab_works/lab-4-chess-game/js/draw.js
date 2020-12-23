@@ -136,6 +136,7 @@ export const RemoveClassesOfMovesOrTargetsSquares = () => {
     let selected = document.getElementsByClassName("selected");
     let possibleMoves = document.getElementsByClassName("possible-move");
     let possibleTargets = document.getElementsByClassName("possible-target");
+    let castles = document.getElementsByClassName("castling");
 
     Object.keys(selected).forEach(value => {
         selected[0].classList.remove("selected");
@@ -147,5 +148,9 @@ export const RemoveClassesOfMovesOrTargetsSquares = () => {
 
     Object.keys(possibleTargets).forEach(value => {
         possibleTargets[0].classList.remove("possible-target");
+    });
+
+    Object.keys(castles).forEach(value => {
+        castles[0].classList.remove("castling");
     });
 };

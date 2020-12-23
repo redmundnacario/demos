@@ -11,7 +11,7 @@ import GetPossibleMoves from "./chess-pieces/moves.js";
 import { SetActivePlayer, ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
 import { CheckIfChecked, CheckAreaIfChecked } from './special-rules/check.js';
-
+import { CheckCastling } from './special-rules/castling.js';
 
 /*
 Initialize chess map, chess piece in the dom and chess object
@@ -110,6 +110,8 @@ export const ToggleActivePiece = function(thisId, state) {
     state.active_chess_box_id = active_chess_box_id;
 
     // Checks if possible to Castling.
+    // For king only
+    CheckCastling(state)
 };
 
 
