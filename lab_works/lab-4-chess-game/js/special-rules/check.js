@@ -87,7 +87,8 @@ export const CheckIfChecked = function (state , UndoMove) {
         });
 
         // console.log(kingdom)
-        let checkers = getCheckers(king_location[kingdom], active_chess_obj, state);
+        let checkers = getCheckers(king_location[kingdom],
+                                   active_chess_obj, state);
         
         if (checkers.length > 0) { 
             state.checked[kingdom] = checkers;
@@ -110,8 +111,10 @@ export const CheckIfChecked = function (state , UndoMove) {
     };
     let currentCheckedKingdom = Boolean(state.checked.white) ? "white" : 
                                 Boolean(state.checked.white) ? "black" : null;
-    if (currentCheckedKingdom != null) {
+
+    if (currentCheckedKingdom != null & UndoMove != null) {
         if (currentCheckedKingdom != active_chess_player) {
+            console.log("Last move was illegal! King is being checked.")
             UndoMove(state);
         }
     }
@@ -126,38 +129,46 @@ export const CheckAreaIfChecked = function(previousBoxId,
         active_chess_obj, 
         letters,
         } = state;
-
-    let kingMoves = KingMoves(active_chess_obj[previousBoxId],
-                              active_chess_obj, letters);
-    let possibleMoves = kingMoves.possibleMoves.
-                            concat(kingMoves.possibleTargets);
-    // Deep copy
-    let chessObjSimulation = JSON.parse(JSON.stringify(active_chess_obj))
-    // console.log(kingMoves);
-
-    let result = {}
-    possibleMoves.forEach(value => {
-        chessObjSimulation[value].piece = active_chess_obj[previousBoxId].piece;
-        result[value] = getCheckers(value, chessObjSimulation, state)
-    });
-
-    // Sort save from dangerous
-    let safe = [];
-    let dangerous = [];
-    Object.keys(result).forEach(key => {
-        result[key].length > 0 ? dangerous.push(key) : safe.push(key)
-    });
     
-    if (safe.length == 0){
-        state.checkmate[active_chess_player] = true;
-        active_chess_player == "white" ? state.winner = "black" : state.winner= "white"
-        console.log("Checkmate", state.checkmate[active_chess_player]);
-        console.log("Winner", state.winner);
-    } else {
-        if (dangerous.includes(nextBoxId)) {
-            //undo an return
-            console.log("Move is illegal!")
-            state.king_move = "illegal";
-        }
-    }
-}
+    if (active_chess_obj[previousBoxId].piece.position == "king" ){
+        let kingMoves = KingMoves(active_chess_obj[previousBoxId],
+                                active_chess_obj, letters);
+        let possibleMoves = kingMoves.possibleMoves.
+                                concat(kingMoves.possibleTargets);
+        // Deep copy
+        let chessObjSimulation = JSON.parse(JSON.stringify(active_chess_obj));
+        // console.log(kingMoves);
+
+        let result = {};
+        possibleMoves.forEach(value => {
+            chessObjSimulation[value].piece = 
+                active_chess_obj[previousBoxId].piece;
+            result[value] = getCheckers(value, chessObjSimulation, state);
+        });
+
+        // Sort save from dangerous
+        let safe = [];
+        let dangerous = [];
+        Object.keys(result).forEach(key => {
+            result[key].length > 0 ? dangerous.push(key) : safe.push(key);
+        });
+        
+        // number of safe moves == 0, checkmate
+        if (safe.length == 0){
+
+            state.checkmate[active_chess_player] = true;
+            active_chess_player == "white" ? state.winner = "black" :
+                                         state.winner = "white";
+            console.log("Checkmate", state.checkmate[active_chess_player]);
+            console.log("Winner", state.winner);
+
+        } else {
+
+            if (dangerous.includes(nextBoxId)) {
+                //undo an return
+                // console.log("King move was illegal! King is still checked.");
+                return
+            };
+        };
+    };
+};
