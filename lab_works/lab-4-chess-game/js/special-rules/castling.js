@@ -64,9 +64,10 @@ export const CheckCastling = function (state) {
         };
     };
     console.log(state.castling)
+    // console.log(active_chess_obj)
 };
 
-// Checks kingside / queenside for Rule 4 and 5
+// Checks kingside / queenside for Rule 3, 4 and 5
 const checkKingQueenSide = function(side, active_chess_obj, state){
     if (side.rook.status == false) {
 
@@ -75,7 +76,7 @@ const checkKingQueenSide = function(side, active_chess_obj, state){
 
         if (side.space_empty.status == true) {
 
-            // getCheckers(locationId, active_chess_obj, state)
+            checkIfBoxesBeingChecked(side, state);
 
             if (side.space_attacked.status == false) {
                 document.getElementById(side.king_move).
@@ -87,24 +88,42 @@ const checkKingQueenSide = function(side, active_chess_obj, state){
 
 // RULE 4 - check the space between the rook and king
 const checkEmptyBoxes = function(space_empty , active_chess_obj) {
-    let result = []
+    let result = [];
     space_empty.location.forEach(value => {
         if (active_chess_obj[value].piece){
-            // empty
-            return true;
+            // occupied
+            result.push(false);
         } else {
-            // occuppied
-            return false;
+            result.push(true);
         };
     });
     // reverse to convert false to true.
-    space_empty.status =!result[0] & !result[1];
+    space_empty.status = result[0] & result[1];
 };
 
+// RULE 5 - Terminal boxes must not be currentyl within range of eme,y
 const checkIfBoxesBeingChecked = function(side, state){
     let {
         active_chess_obj,
+        king_location,
+        active_chess_player
         } = state;
+    let locationIds = side.space_attacked.location;
     
-    let checkers = getCheckers(locationId, active_chess_obj, state)
+    // Deep copy
+    let chessObjSimulation = JSON.parse(JSON.stringify(active_chess_obj));
+
+    let kingPiece = active_chess_obj[king_location[active_chess_player]].piece;
+    console.log(kingPiece)
+    chessObjSimulation[locationIds[0]].piece = kingPiece;
+    chessObjSimulation[locationIds[1]].piece = kingPiece;
+
+    let checkers = [];
+    locationIds.forEach(value => {
+        checkers.push(getCheckers(value, chessObjSimulation, state))
+    })
+
+    checkers = [].concat.apply([], checkers);
+    // console.log(checkers)
+    side.space_attacked.status = checkers.length > 0 ? true : false
 }

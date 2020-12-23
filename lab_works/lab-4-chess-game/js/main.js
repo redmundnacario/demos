@@ -89,6 +89,8 @@ export const ToggleActivePiece = function(thisId, state) {
     if(classes.value.includes("selected")) {
         // remove previous styles with class selected, possible moves/targets
         RemoveClassesOfMovesOrTargetsSquares();
+         // update states
+        state.active_chess_box_id = active_chess_box_id;
     } else {
         // removeprevious styles with class selected, possible moves/targets
         RemoveClassesOfMovesOrTargetsSquares();
@@ -105,15 +107,14 @@ export const ToggleActivePiece = function(thisId, state) {
         
          // Attach some class in the possible moves squares
         AddClassesOfMovesOrTargetsSquares(possibleMoves, possibleTargets)
+        
+        // update states
+        state.active_chess_box_id = active_chess_box_id;
+        // Checks if possible to Castling for a King selected
+        CheckCastling(state)
     };
-    // update states
-    state.active_chess_box_id = active_chess_box_id;
-
-    // Checks if possible to Castling.
-    // For king only
-    CheckCastling(state)
+    
 };
-
 
 
 
@@ -148,26 +149,33 @@ export const PossibleMoveSelected = function(thisId, state) {
     // Pre-checking if kings move is illegal, or checkmate
     CheckAreaIfChecked(previousBox, nextBox, state)
 
-    // update state.chess_obj -Swapping pieces to null and vice versa
+    // update state.chess_obj and HTML DOM
     chessPieceMoved.piece = chessPieceOriginalBox.piece;
     chessPieceOriginalBox.piece = null;
-    // Redraw the chess pieces in the DOM
     setInnerHtml(previousBox, "")
     setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode)
 
-    // if king was moved, and encatled, move rook also
+    // if king was moved, and castled, move rook also
     Castling(chessPieceMoved, hasCastling, state)
 
-    // for En Passant : Check all rules, if all positive, pawn can do en passant
+    // for En Passant : Check all rules, and update status
     EnPassant(state, chessPieceMoved, chessPieceOriginalBox);
-    // for En Passant : Update status, fires if pawn was moved by double step
     UpdateEnPassantState(state, chessPieceMoved, chessPieceOriginalBox);
+
+    // pawn promotion
+    if (chessPieceMoved.piece.position == "pawn"){
+        if(chessPieceMoved.rowNumber == 8 & active_chess_player == "white"){
+
+        }
+        
+        if(chessPieceMoved.rowNumber == 1 & active_chess_player == "black"){
+            
+        }
+    }
     
-    // Update History
+    // Update History, Player, remove styles in chess boxes
     chess_obj.push(JSON.parse(JSON.stringify(active_chess_obj)));
-    // Update Player
     ToggleActivePlayer(state);
-    // remove styles of possible moves, targets, and selected piece
     RemoveClassesOfMovesOrTargetsSquares() ;   
         
     // update states
@@ -176,9 +184,18 @@ export const PossibleMoveSelected = function(thisId, state) {
     // For Castling, if king was moved. Set state of castling of kingdom to null
     if (chessPieceMoved.piece.position == "king" ){
         castling[chessPieceMoved.piece.kingdom] = null;
-        // rooks
         // update king's location
         king_location[chessPieceMoved.piece.kingdom] = nextBox;
+    }
+
+    // For Castling, if rook was moved. Set state what side to nullify
+    if (chessPieceMoved.piece.position == "rook" ){
+        if (castling[chessPieceMoved.piece.kingdom] != null) {
+            let side = chessPieceOriginalBox.colLetter == "h" ? "king_side" : "queen_side";
+            console.log(chessPieceOriginalBox.colLetter)
+            castling[chessPieceMoved.piece.kingdom][side].rook.status = true;
+        // console.log(castling);
+        }
     }
 
     state.castling = castling;
@@ -201,19 +218,20 @@ export const UndoMove = function(state){
     // Deep copy
     active_chess_obj = JSON.parse(JSON.stringify(
                             chess_obj[chess_obj.length - 2]));
+
     // remove last element of chess_obj array
     chess_obj.pop();
-    // remove classes: selected, possible moves, possible target
+
+    // remove classes of boxes, Redraw HTML, change player
     RemoveClassesOfMovesOrTargetsSquares()
-    // Redraw all chess pieces based on history
     RedrawChessPieces(active_chess_obj);
-    // Change the active player
     ToggleActivePlayer(state);
 
     // update states
     state.active_chess_obj = active_chess_obj;
     state.chess_obj = chess_obj;
 
+    // Locate king's location and check if checked
     findKing(state);
     CheckIfChecked(state, null);
 };
