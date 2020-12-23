@@ -33,7 +33,7 @@ export const UndoMove = function(state){
     state.chess_obj = chess_obj;
 
     findKing(state);
-    CheckIfChecked(state);
+    CheckIfChecked(state, null);
     state.king_move = "legal";
 };
 
@@ -100,7 +100,6 @@ export const PossibleMoveSelected = function(thisId, state) {
         if (state.king_move == "illegal"){
             return
         }
-        
     }
 
     // update state.chess_obj -Swapping pieces to null and vice versa
@@ -144,8 +143,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     // console.log(state.king_location)
     // Post-Check if enemy kingdom's king was checked 
     // note that toggle active player was called before
-    CheckIfChecked(state)
-    
+    CheckIfChecked(state,  UndoMove)  
 };
 
 // Bascically put styles to selected piece, and its possible moves and targets

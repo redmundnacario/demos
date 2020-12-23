@@ -69,10 +69,11 @@ const getCheckers = function(locationId, active_chess_obj, state) {
     return checkers
 };
 
-export const CheckIfChecked = function (state) {
+export const CheckIfChecked = function (state , UndoMove) {
     let kingdoms = ["white", "black"];
 
     let {
+        active_chess_player,
         active_chess_obj, 
         king_location
         } = state;
@@ -107,6 +108,13 @@ export const CheckIfChecked = function (state) {
     if (Boolean(state.checked.white) | Boolean(state.checked.black)) {
         console.log("Checkers!",state.checked);
     };
+    let currentCheckedKingdom = Boolean(state.checked.white) ? "white" : 
+                                Boolean(state.checked.white) ? "black" : null;
+    if (currentCheckedKingdom != null) {
+        if (currentCheckedKingdom != active_chess_player) {
+            UndoMove(state);
+        }
+    }
     
 };
 
