@@ -34,6 +34,7 @@ export const UndoMove = function(state){
 
     findKing(state);
     CheckIfChecked(state);
+    state.king_move = "legal";
 };
 
 // Finds the king location in chess map
@@ -67,6 +68,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     let {
         active_chess_box_id,
         active_chess_obj,
+        active_chess_player,
         chess_obj,
         castling,
         king_location,
@@ -91,9 +93,14 @@ export const PossibleMoveSelected = function(thisId, state) {
     // Pre-checking if sorrounding area of a king is illegal
     // console.log(chessPieceMoved)
     if (chessPieceOriginalBox.piece.position == "king" ){
-        CheckAreaIfChecked(chessPieceOriginalBox,
-                           chessPieceMoved,
+        // console.log(chessPieceOriginalBox, chessPieceMoved)
+        CheckAreaIfChecked(previousBox,
+                           nextBox,
                            state)
+        if (state.king_move == "illegal"){
+            UndoMove(state);
+            return
+        }
         
     }
 
@@ -139,6 +146,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     // Post-Check if enemy kingdom's king was checked 
     // note that toggle active player was called before
     CheckIfChecked(state)
+    
 };
 
 // Bascically put styles to selected piece, and its possible moves and targets

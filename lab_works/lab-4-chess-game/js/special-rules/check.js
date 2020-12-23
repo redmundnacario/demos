@@ -22,54 +22,71 @@ const scanCheckers = function(possibleTargets, active_chess_obj,
     };
 };
 
-export const CheckIfChecked = function (state) {
-    let kingdoms = ["white", "black"];
+const getCheckers = function(locationId, active_chess_obj, state) {
     let {
-        king_location ,
-        active_chess_obj, 
         pawn_double_step_status,
         letters,
         } = state;
 
+    let chessObjBox = active_chess_obj[locationId];
+    // console.log("King Location Details: ", chessObjBox);
+
+    let queenMoves = QueenMoves(chessObjBox, active_chess_obj, letters);
+    let rookMoves = RookMoves(chessObjBox, active_chess_obj, letters);
+    let bishopMoves = BishopMoves(chessObjBox, active_chess_obj, letters);
+    let knightMoves = KnightMoves(chessObjBox, active_chess_obj, letters);
+    let kingMoves = KingMoves(chessObjBox, active_chess_obj, letters);
+    let pawnMoves = PawnMoves(chessObjBox, active_chess_obj,
+                                pawn_double_step_status, letters)
+
+    //Search the pressence of enemy piece with its move, if true, check is true,
+    // find multiple check also,
+    // get the possibe checkers
+    let queenCheck = scanCheckers(queenMoves.possibleTargets,
+                                active_chess_obj,'queen')
+    let rookCheck = scanCheckers(rookMoves.possibleTargets,
+                                active_chess_obj,'rook')
+    let bishopCheck = scanCheckers(bishopMoves.possibleTargets,
+                                active_chess_obj,'bishop')
+    let knightCheck = scanCheckers(knightMoves.possibleTargets,
+                                active_chess_obj,'knight')
+    let kingCheck = scanCheckers(kingMoves.possibleTargets,
+                                active_chess_obj,'king')
+    let pawnCheck = scanCheckers(pawnMoves.possibleTargets,
+                                active_chess_obj,'pawn')
+        
+    let checkers = [
+                queenCheck,
+                rookCheck,
+                bishopCheck,
+                knightCheck,
+                kingCheck,
+                pawnCheck,
+            ].filter(Boolean);
+
+    checkers = [].concat.apply([], checkers);
+
+    return checkers
+};
+
+export const CheckIfChecked = function (state) {
+    let kingdoms = ["white", "black"];
+
+    let {
+        active_chess_obj, 
+        king_location
+        } = state;
+
     kingdoms.forEach( kingdom => {
+
+        let kingChecked = document.getElementsByClassName("checked-"+kingdom)
+
+        Object.keys(kingChecked).forEach(value => {
+            kingChecked[0].classList.remove("checked-"+kingdom); 
+        });
+
         // console.log(kingdom)
-        let chessObjBox = active_chess_obj[king_location[kingdom]];
-        // console.log("King Location Details: ", chessObjBox);
-
-        let queenMoves = QueenMoves(chessObjBox, active_chess_obj, letters);
-        let rookMoves = RookMoves(chessObjBox, active_chess_obj, letters);
-        let bishopMoves = BishopMoves(chessObjBox, active_chess_obj, letters);
-        let knightMoves = KnightMoves(chessObjBox, active_chess_obj, letters);
-        let kingMoves = KingMoves(chessObjBox, active_chess_obj, letters);
-        let pawnMoves = PawnMoves(chessObjBox, active_chess_obj,
-                                  pawn_double_step_status, letters)
-
-        //Search the pressence of enemy piece with its move, if true, check is true,
-        // find multiple check also,
-        // get the possibe checkers
-        let queenCheck = scanCheckers(queenMoves.possibleTargets,
-                                    active_chess_obj,'queen')
-        let rookCheck = scanCheckers(rookMoves.possibleTargets,
-                                    active_chess_obj,'rook')
-        let bishopCheck = scanCheckers(bishopMoves.possibleTargets,
-                                    active_chess_obj,'bishop')
-        let knightCheck = scanCheckers(knightMoves.possibleTargets,
-                                    active_chess_obj,'knight')
-        let kingCheck = scanCheckers(kingMoves.possibleTargets,
-                                    active_chess_obj,'king')
-        let pawnCheck = scanCheckers(pawnMoves.possibleTargets,
-                                    active_chess_obj,'pawn')
-            
-        let checkers = [
-                    queenCheck,
-                    rookCheck,
-                    bishopCheck,
-                    knightCheck,
-                    kingCheck,
-                    pawnCheck,
-                ].filter(Boolean);
-
-        checkers = [].concat.apply([], checkers);
+        let checkers = getCheckers(king_location[kingdom], active_chess_obj, state);
         
         if (checkers.length > 0) { 
             state.checked[kingdom] = checkers;
@@ -86,24 +103,53 @@ export const CheckIfChecked = function (state) {
         } 
 
     });
+
     if (Boolean(state.checked.white) | Boolean(state.checked.black)) {
         console.log("Checkers!",state.checked);
     };
     
 };
 
-export const CheckAreaIfChecked = function(chessPieceOriginalBox,
-                                             chessPieceMoved,
-                                             state){
+export const CheckAreaIfChecked = function(previousBoxId,
+                                           nextBoxId,
+                                           state){
     let {
-        king_location ,
+        active_chess_player,
         active_chess_obj, 
         letters,
         } = state;
 
-    let kingMoves = KingMoves(chessPieceOriginalBox,
+    let kingMoves = KingMoves(active_chess_obj[previousBoxId],
                               active_chess_obj, letters);
+    let possibleMoves = kingMoves.possibleMoves.
+                            concat(kingMoves.possibleTargets);
+    // Deep copy
+    let chessObjSimulation = JSON.parse(JSON.stringify(active_chess_obj))
+    // console.log(kingMoves);
 
-    console.log(kingMoves);
+    let result = {}
+    possibleMoves.forEach(value => {
+        chessObjSimulation[value].piece = active_chess_obj[previousBoxId].piece;
+        result[value] = getCheckers(value, chessObjSimulation, state)
+    });
 
+    // Sort save from dangerous
+    let safe = [];
+    let dangerous = [];
+    Object.keys(result).forEach(key => {
+        result[key].length > 0 ? dangerous.push(key) : safe.push(key)
+    });
+    
+    if (safe.length == 0){
+        state.checkmate[active_chess_player] = true;
+        active_chess_player == "white" ? state.winner = "black" : state.winner= "white"
+        console.log("Checkmate", state.checkmate[active_chess_player]);
+        console.log("Winner", state.winner);
+    } else {
+        if (dangerous.includes(nextBoxId)) {
+            //undo an return
+            console.log("Move is illegal!")
+            state.king_move = "illegal";
+        }
+    }
 }

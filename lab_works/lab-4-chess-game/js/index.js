@@ -50,7 +50,8 @@ let state = {
         black: false // black king checkmate
     },
     // if nor null, game stops, winner is declared, action done after checkmate,
-    winner : null, 
+    winner : null,
+    king_move: 'legal'
 }
 
 // set active player in the DOM
