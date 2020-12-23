@@ -110,7 +110,7 @@ export const CheckIfChecked = function (state , UndoMove) {
         console.log("Checkers!",state.checked);
     };
     let currentCheckedKingdom = Boolean(state.checked.white) ? "white" : 
-                                Boolean(state.checked.white) ? "black" : null;
+                                Boolean(state.checked.black) ? "black" : null;
 
     if (currentCheckedKingdom != null & UndoMove != null) {
         if (currentCheckedKingdom != active_chess_player) {

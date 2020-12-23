@@ -7,7 +7,7 @@ import {
         AddClassesOfMovesOrTargetsSquares,
         RemoveClassesOfMovesOrTargetsSquares
         } from './draw.js';
-import GetPossibleMoves from "./moves.js";
+import GetPossibleMoves from "./chess-pieces/moves.js";
 import { SetActivePlayer, ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
 import { CheckIfChecked, CheckAreaIfChecked } from './special-rules/check.js';
@@ -42,10 +42,16 @@ export const InitializeChessMap = function (state, CHESS_DATA) {
 
     state.chess_obj = chess_obj;
     state.active_chess_obj = active_chess_obj;
-    
+
     return state
 };
 
+
+
+/*
+RE-initialize the chess game, refreshes the states from the start.
+Can be used with restart button or new game.
+*/
 export const ReInitializeChessMap = function(init_state, state, CHESS_DATA) {
     state = JSON.parse(JSON.stringify(init_state))
     UndrawChessPieces(state.chess_obj[0])
@@ -102,6 +108,8 @@ export const ToggleActivePiece = function(thisId, state) {
     };
     // update states
     state.active_chess_box_id = active_chess_box_id;
+
+    // Checks if possible to Castling.
 };
 
 
@@ -112,7 +120,6 @@ export const PossibleMoveSelected = function(thisId, state) {
     let {
         active_chess_box_id,
         active_chess_obj,
-        active_chess_player,
         chess_obj,
         castling,
         king_location,
@@ -225,11 +232,11 @@ const findKing = function (state) {
 
 
 
+
 // returns bool
 const getClassListIncludes = function(ElementId, className){
     return document.getElementById(ElementId).classList.value.includes(className);
 };
-
 
 
 

@@ -1,9 +1,9 @@
-import PawnMoves from './chess-pieces/pawn.js';
-import KnightMoves from './chess-pieces/knight.js';
-import RookMoves from './chess-pieces/rook.js';
-import BishopMoves from './chess-pieces/bishop.js';
-import QueenMoves from './chess-pieces/queen.js';
-import KingMoves from './chess-pieces/king.js';
+import PawnMoves from './pawn.js';
+import KnightMoves from './knight.js';
+import RookMoves from './rook.js';
+import BishopMoves from './bishop.js';
+import QueenMoves from './queen.js';
+import KingMoves from './king.js';
 
 const GetPossibleMoves = function (chessObjBox, chessObj, pawnDoubleStepStatus , letters) {
     // console.log(piece.position);
