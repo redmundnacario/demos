@@ -1,7 +1,7 @@
-import RookMoves from './rook.js';
-import BishopMoves from './bishop.js';
+import { RookMoves } from './rook.js';
+import { BishopMoves } from './bishop.js';
 
-const KingMoves= (chessObjBox, chessObj, letters) => {
+export const KingMoves= (chessObjBox, chessObj, letters) => {
     // console.log("king", chessObjBox);
 
     const bishopMoves = BishopMoves(chessObjBox, chessObj, letters,
@@ -16,8 +16,6 @@ const KingMoves= (chessObjBox, chessObj, letters) => {
 
     return { possibleMoves, possibleTargets }
 };
-
-export default KingMoves;
 
 /*
 Conditions for Castling

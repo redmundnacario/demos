@@ -1,7 +1,7 @@
 
 import {removeOutOfBoundsPossibleMoves } from './utils.js'; 
 
-const KnightMoves= (chessObjBox, chessObj, letters) => {
+export const KnightMoves = (chessObjBox, chessObj, letters) => {
     
     let {rowNumber, colNumber, colLetter, piece} = chessObjBox;
     
@@ -30,5 +30,3 @@ const KnightMoves= (chessObjBox, chessObj, letters) => {
 
     return { possibleMoves, possibleTargets}
 };
-
-export default KnightMoves;

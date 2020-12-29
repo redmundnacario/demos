@@ -1,5 +1,5 @@
 
-const PawnMoves = function(chessObjBox, chessObj,
+export const PawnMoves = function(chessObjBox, chessObj,
                            pawnDoubleStepStatus, letters) {
     let rowNumbersPMoves = [];
     let {rowNumber, colNumber, colLetter, piece} = chessObjBox;
@@ -109,5 +109,3 @@ const PawnMoves = function(chessObjBox, chessObj,
 
     return {possibleMoves : rowNumbersPMoves, possibleTargets: rawPossibleTargets}
 }
-
-export default PawnMoves;

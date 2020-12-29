@@ -1,11 +1,11 @@
-import PawnMoves from './pawn.js';
-import KnightMoves from './knight.js';
-import RookMoves from './rook.js';
-import BishopMoves from './bishop.js';
-import QueenMoves from './queen.js';
-import KingMoves from './king.js';
+import { PawnMoves } from './pawn.js';
+import { KnightMoves } from './knight.js';
+import { RookMoves } from './rook.js';
+import { BishopMoves } from './bishop.js';
+import { QueenMoves } from './queen.js';
+import { KingMoves } from './king.js';
 
-const GetPossibleMoves = function (chessObjBox, chessObj, pawnDoubleStepStatus , letters) {
+export const GetPossibleMoves = function (chessObjBox, chessObj, pawnDoubleStepStatus , letters) {
     // console.log(piece.position);
 
     switch (chessObjBox.piece.position) {
@@ -25,5 +25,3 @@ const GetPossibleMoves = function (chessObjBox, chessObj, pawnDoubleStepStatus ,
             return null;
     }
 }
-
-export default GetPossibleMoves;

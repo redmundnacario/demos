@@ -1,5 +1,5 @@
 // state -- initial value
-let state = {
+export let state = {
     active_chess_player : "white",
     active_chess_box_id : null,
      // Serves as history in the game
@@ -106,5 +106,3 @@ let state = {
     // if nor null, game stops, winner is declared, action done after checkmate,
     winner : null
 };
-
-export default state;

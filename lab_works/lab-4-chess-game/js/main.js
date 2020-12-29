@@ -1,13 +1,12 @@
-import { 
-        DrawChessTiles, 
-        SetChessPieces, 
-        DrawChessPieces,
-        UndrawChessPieces,
-        RedrawChessPieces,
-        AddClassesOfMovesOrTargetsSquares,
-        RemoveClassesOfMovesOrTargetsSquares
-        } from './draw.js';
-import GetPossibleMoves from "./chess-pieces/moves.js";
+import { DrawChessTiles } from './draw.js';
+import { SetChessPieces } from './draw.js';
+import { DrawChessPieces } from './draw.js';
+import { UndrawChessPieces } from './draw.js';
+import { RedrawChessPieces } from './draw.js';
+import { AddClassesOfMovesOrTargetsSquares } from './draw.js';
+import { RemoveClassesOfMovesOrTargetsSquares } from './draw.js';
+        
+import { GetPossibleMoves } from "./chess-pieces/moves.js";
 import { SetActivePlayer, ToggleActivePlayer } from './active-player.js';
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
 import { CheckIfChecked, CheckAreaIfChecked } from './special-rules/check.js';

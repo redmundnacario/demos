@@ -1,13 +1,10 @@
 
-import { 
-    range, 
-    removeOutOfBoundsPossibleMoves,
-    filterPossibleMoves,
-    splitPossibleMoves
-   } 
-   from './utils.js'; 
+import { range } from './utils.js'; 
+import { removeOutOfBoundsPossibleMoves } from './utils.js'; 
+import { filterPossibleMoves } from './utils.js'; 
+import { splitPossibleMoves } from './utils.js'; 
 
-const RookMoves= (chessObjBox, chessObj, letters,
+export const RookMoves= (chessObjBox, chessObj, letters,
                   rangeStart = -8, rangeStop = 9, rangeInterval = 1) => {
 
     let {rowNumber, colNumber, colLetter, piece} = chessObjBox;
@@ -68,5 +65,3 @@ const RookMoves= (chessObjBox, chessObj, letters,
     // console.log(possibleTargets)
     return { possibleMoves, possibleTargets}
 };
-
-export default RookMoves;

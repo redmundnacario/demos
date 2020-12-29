@@ -1,11 +1,11 @@
-import { InitializeChessMap,
-         ReInitializeChessMap,
-         ToggleActivePiece, 
-         PossibleMoveSelected, 
-         UndoMove } from './main.js';
+import { InitializeChessMap } from './main.js';
+import { ReInitializeChessMap } from './main.js';
+import { ToggleActivePiece } from './main.js';
+import { PossibleMoveSelected } from './main.js';
+import { UndoMove } from './main.js';
 
 import { CHESS_DATA } from "./data/chess-pieces.js";
-import state from './data/state.js';
+import { state } from './data/state.js';
 
 
 // DEEP COPY of state to initial state

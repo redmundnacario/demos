@@ -1,10 +1,10 @@
 
-import PawnMoves from '../chess-pieces/pawn.js';
-import KnightMoves from '../chess-pieces/knight.js';
-import RookMoves from '../chess-pieces/rook.js';
-import BishopMoves from '../chess-pieces/bishop.js';
-import QueenMoves from '../chess-pieces/queen.js';
-import KingMoves from '../chess-pieces/king.js';
+import { PawnMoves } from '../chess-pieces/pawn.js';
+import { KnightMoves } from '../chess-pieces/knight.js';
+import { RookMoves } from '../chess-pieces/rook.js';
+import { BishopMoves } from '../chess-pieces/bishop.js';
+import { QueenMoves } from '../chess-pieces/queen.js';
+import { KingMoves } from '../chess-pieces/king.js';
 
 
 const scanCheckers = function(possibleTargets, active_chess_obj,
