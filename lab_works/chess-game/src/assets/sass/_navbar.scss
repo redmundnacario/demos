@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #ECB22E;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    /* bottom:0 */
+    height: 60px;
+    width: 100%;
+    z-index: 1;
+
+    .nav-content {
+        display: flex;
+        align-items: center;
+
+        .nav-img {
+            height: 40px;
+            /* border: solid 2px gray */
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        .nav-title {
+            margin-left: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 30px;
+            color: white;
+        }
+    }
+}
