@@ -2,21 +2,24 @@
 
 Go to [Github Page](https://redmundnacario.github.io/batch5-activities/).
 
-## Assignments
-1. [Software Engineering or Web Development Tips](https://redmundnacario.github.io/batch5-activities/html_and_css/Assignment-1-SE-tips/) - 12/--/2020
-2. [Letter](https://redmundnacario.github.io/batch5-activities/html_and_css/Assignment-2-html-elements/) - 12/--/2020
-3. [Flex box-Chess Board](https://redmundnacario.github.io/batch5-activities/html_and_css/Assignment-3-Chessboard) - 12/07/2020
-4. [Grid-Chess Board](https://redmundnacario.github.io/batch5-activities/html_and_css/Assignment-4-Chessboard-grid) - 12/09/2020
-5. [Calculator](https://redmundnacario.github.io/batch5-activities/html_and_css/Assignment-5-Calculator) - 12/14/2020
+## Projects
 
-## Lab Works
-1. [Tribute](https://redmundnacario.github.io/batch5-activities/lab_works/lab-1-tribute/) - 12/05/2020
-2. [Landing Page](https://redmundnacario.github.io/batch5-activities/lab_works/lab-2-landing-page/ ) - 12/12/2020
-3. [Survey Form](https://redmundnacario.github.io/batch5-activities/lab_works/lab-3-survey-form/ ) - 12/12/2020
-4. [Playable Chess](https://redmundnacario.github.io/batch5-activities/lab_works/lab-4-chess-game) - 12/19/2020
+1. [Web Development Tips](https://redmundnacario.github.io/batch5-activities/01-tips-on-web-development) - 12/--/2020
+2. [Tribute Page](https://redmundnacario.github.io/batch5-activities/02-tribute-page) - 12/05/2020
+3. [Adopt-a-doggo Landing Page](https://redmundnacario.github.io/batch5-activities/03-adopt-a-doggo-landing-page) - 12/12/2020
+4. [Adopt-a-doggo Form](https://redmundnacario.github.io/batch5-activities/04-adopt-a-doggo-form) - 12/12/2020
+5. [Calculator](https://redmundnacario.github.io/batch5-activities/05-calculator) - 12/14/2020
+6. [Chess Game](https://redmundnacario.github.io/batch5-activities/06-chess-game/dist) - 12/19/2020
 
 
-## JS Activities:
+## Others
+
+1. [Letter](https://redmundnacario.github.io/batch5-activities/others/web-elements-letter) - 12/--/2020
+2. [Chess Board - Flex](https://redmundnacario.github.io/batch5-activities/others/chessboard-challennge-flex) - 12/07/2020
+3. [Chess Board - Grid](https://redmundnacario.github.io/batch5-activities/others/chessboard-challenge-grid) - 12/09/2020
+
+
+## JS Fiddle Activities:
 1. [BMI computation](https://jsfiddle.net/redmund/c7o3gu6q/40/) - 12/16/2020
 
 ## Author
