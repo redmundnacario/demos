@@ -1,6 +1,6 @@
 # Demos
 
-Go to [Home Page](https://redmundnacario.github.io/batch5-activities/).
+Go to [Home Page](https://redmundnacario.com).
 
 ## Projects
 
