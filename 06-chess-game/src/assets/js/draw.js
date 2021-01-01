@@ -61,7 +61,7 @@ export const DrawChessTiles = function (letters) {
 
 // insert the initial chess piece
 export const SetChessPieces = (chessObj, piecesInitialPlace, state) => {
-    console.log(chessObj)
+    // console.log(chessObj)
     let keys = Object.keys(piecesInitialPlace);
     for (let key in keys){
         // Destructuring object

@@ -69,7 +69,7 @@ export const ToggleActivePiece = function(thisId, state) {
         active_chess_box_id,
         pawn_double_step_status,
         letters } = state;
-
+    console.log(state.players)   
     // this function is only applicable to chess box with chess piece
     if (active_chess_obj[thisId]["piece"] == null) { 
         return };

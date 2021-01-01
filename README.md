@@ -9,7 +9,7 @@ Go to [Home Page](https://redmundnacario.com).
 3. [Adopt-a-doggo Landing Page](https://redmundnacario.com/03-adopt-a-doggo-landing-page) - 12/12/2020
 4. [Adopt-a-doggo Form](https://redmundnacario.com/04-adopt-a-doggo-form) - 12/12/2020
 5. [Calculator](https://redmundnacario.com/05-calculator) - 12/14/2020
-6. [Chess Game](https://redmundnacario.com/06-chess-game/dist) - 12/19/2020
+6. [Chess Game](https://redmundnacario.com/) - 12/19/2020
 
 
 ## Others

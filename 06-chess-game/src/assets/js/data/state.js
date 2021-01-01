@@ -104,5 +104,15 @@ export let state = {
         black: false 
     },
     // if nor null, game stops, winner is declared, action done after checkmate,
-    winner : null
+    winner : null,
+    players : {
+        white : {
+            name : "Player 1",
+            remaining_time : 30,
+        },
+        black: {
+            name : "Player 2",
+            remaining_time : 30,
+        },
+    }
 };

@@ -19,12 +19,12 @@
     <script src='./assets/js/index.min.js' defer></script>
 </head>
 <body>
-    <div class="navbar">
+    <!-- <div class="navbar">
         <div class="nav-content">
             <img class='nav-img' src="./assets/img/Redmundnacario.png"/>
             <h3 class='nav-title'>Redmund Nacario</h3>
         </div>
-    </div>
+    </div> -->
     <div class="chess">
         <div class="headbar">
             <div ><span id="activePlayer"></span></div>
@@ -32,6 +32,42 @@
             <div id="undo">Undo</div>
         </div>
         <div id="app"></div>
+    </div>
+
+    <!-- modal -->
+    <div id="welcomeModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!-- <span class="close">&times;</span> -->
+            <h1>Welcome to Playable Chess</h1>
+            <p>by: Redmund Nacario</p>
+            <!-- put your icon here -->
+            <!-- put some chess logo here -->
+
+            <form  id="playersForm" method="GET" action="">
+                <!-- put some player 1 logo here -->
+                <label>Player1</label>
+                <input 
+                    type="text"
+                    name="p1-name"
+                    id="p1Name" 
+                    maxlength="15" 
+                    autocomplete="off" 
+                required>
+                <!-- put some player 1 logo here -->
+                <label>Player2</label>
+                <input 
+                    type="text"
+                    name="p2-name"
+                    id="p2Name" 
+                    maxlength="15" 
+                    autocomplete="off" 
+                required>
+
+                <input type="button" value="start" id="start">
+            </form>
+        </div>
+      
     </div>
 </body>
 </html>
