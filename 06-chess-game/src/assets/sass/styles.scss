@@ -11,6 +11,20 @@
     margin-left: 15px;
     margin-right: 15px;
 }
+
+.players-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5vh;
+    height: 20vh;
+    width: 70vw;
+}
+
+.player-box {
+    height: 100%;
+    width: 30%;
+}
+
 .headbar {
     display: flex;
     justify-content: space-between;
