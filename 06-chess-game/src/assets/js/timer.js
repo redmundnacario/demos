@@ -14,11 +14,11 @@ export function countDownTimer() {
         // Time calculations for days, hours, minutes and seconds
         // let days = Math.floor(distance / (1000 * 60 * 60 * 24));
         // let hours = Math.floor((countDownHour % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((countDownHour % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((countDownHour % (1000 * 60)) / 1000);
-
+        let minutes = "0" + Math.floor((countDownHour % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = "0" + Math.floor((countDownHour % (1000 * 60)) / 1000);
+        
         // console.log( minutes + "m " + seconds + "s ");
-        document.getElementById("time").innerText = minutes + ":" + seconds;
+        document.getElementById("time").innerText = minutes.slice(-2) + ":" + seconds.slice(-2);
         countDownHour = countDownHour - countDownInterval;
     }, countDownInterval);
 }
