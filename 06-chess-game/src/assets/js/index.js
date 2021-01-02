@@ -6,6 +6,7 @@ import { UndoMove } from './main.js';
 
 //non-chess
 import { welcomeModal } from './modal.js';
+import { countDownTimer } from './timer.js';
 //data
 
 import { CHESS_DATA } from "./data/chess-pieces.js";
@@ -36,4 +37,5 @@ document.getElementById("undo").addEventListener("click", () => {
     // ReInitializeChessMap(init_state, state, CHESS_DATA)
 });
 
-welcomeModal(state)
+welcomeModal(state);
+countDownTimer();
