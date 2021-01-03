@@ -10,7 +10,7 @@ function convertTimerToTime(timeInput) {
 
 function updateGameTime( timeInput , idTimeDiv ){
     let { minutes, seconds } = convertTimerToTime( timeInput ) 
-    document.getElementById(idTimeDiv).innerText = minutes.slice(-2) + ":" + seconds.slice(-2);
+    document.getElementById(idTimeDiv).innerText = minutes.slice(-2) + " min : " + seconds.slice(-2) + " sec" ;
 }
 
 export function countDownTimer(state) {
@@ -42,6 +42,8 @@ export function countDownTimer(state) {
         // console.log(active_time, active_player )
         updateGameTime( active_time , active_player )
         state.players[state.active_chess_player].remaining_time = active_time - countDownInterval;
+
+        // if gamer reaches 0 time, that player lost the game
     
 
     }, countDownInterval);
