@@ -1,4 +1,4 @@
-    
+import { countDownTimer } from './timer.js'
 export function welcomeModal(state){   
     // Get the modal
     var modal = document.getElementById("welcomeModal");
@@ -22,6 +22,12 @@ export function welcomeModal(state){
         // update player names
         state.players.white.name = document.getElementById("p1Name").value;
         state.players.black.name = document.getElementById("p2Name").value;
+
+        document.getElementById("player-1").children[0].innerText = state.players.white.name
+        document.getElementById("player-2").children[0].innerText = state.players.black.name
+
+        // initialize time
+        countDownTimer(state);
     }
 
     // When the user clicks anywhere outside of the modal, close it

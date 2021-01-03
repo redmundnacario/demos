@@ -107,8 +107,8 @@ export let state = {
     winner : null,
     players : {
         white : {
-            name : "Player 1",
-            remaining_time : 30,
+            name : "Player 1",//default name
+            remaining_time : 30,// minutes
         },
         black: {
             name : "Player 2",

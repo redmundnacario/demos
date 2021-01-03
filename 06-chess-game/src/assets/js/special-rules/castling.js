@@ -63,7 +63,7 @@ export const CheckCastling = function (state) {
             };
         };
     };
-    console.log(state.castling)
+    // console.log(state.castling)
     // console.log(active_chess_obj)
 };
 
@@ -114,7 +114,7 @@ const checkIfBoxesBeingChecked = function(side, state){
     let chessObjSimulation = JSON.parse(JSON.stringify(active_chess_obj));
 
     let kingPiece = active_chess_obj[king_location[active_chess_player]].piece;
-    console.log(kingPiece)
+    // console.log(kingPiece)
     chessObjSimulation[locationIds[0]].piece = kingPiece;
     chessObjSimulation[locationIds[1]].piece = kingPiece;
 

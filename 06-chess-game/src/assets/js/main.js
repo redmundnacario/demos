@@ -69,7 +69,7 @@ export const ToggleActivePiece = function(thisId, state) {
         active_chess_box_id,
         pawn_double_step_status,
         letters } = state;
-    console.log(state.players)   
+    // console.log(state.players)   
     // this function is only applicable to chess box with chess piece
     if (active_chess_obj[thisId]["piece"] == null) { 
         return };
@@ -142,9 +142,9 @@ export const PossibleMoveSelected = function(thisId, state) {
     // Check selected box id if it contains possible-move class;
     if (!(hasPossibleMove | hasPossibleTarget | hasCastling )){ return };
 
-    console.log(chessPieceOriginalBox.piece.kingdom 
-                + " " + chessPieceOriginalBox.piece.position
-                + " " + previousBox + " to "+ nextBox);
+    // console.log(chessPieceOriginalBox.piece.kingdom 
+    //             + " " + chessPieceOriginalBox.piece.position
+    //             + " " + previousBox + " to "+ nextBox);
 
     // Pre-checking if kings move is illegal, or checkmate
     CheckAreaIfChecked(previousBox, nextBox, state)
@@ -184,7 +184,7 @@ export const PossibleMoveSelected = function(thisId, state) {
     if (chessPieceMoved.piece.position == "rook" ){
         if (castling[chessPieceMoved.piece.kingdom] != null) {
             let side = chessPieceOriginalBox.colLetter == "h" ? "king_side" : "queen_side";
-            console.log(chessPieceOriginalBox.colLetter)
+            // console.log(chessPieceOriginalBox.colLetter)
             castling[chessPieceMoved.piece.kingdom][side].rook.status = true;
         // console.log(castling);
         }

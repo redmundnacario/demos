@@ -6,7 +6,6 @@ import { UndoMove } from './main.js';
 
 //non-chess
 import { welcomeModal } from './modal.js';
-import { countDownTimer } from './timer.js';
 //data
 
 import { CHESS_DATA } from "./data/chess-pieces.js";
@@ -38,4 +37,3 @@ document.getElementById("undo").addEventListener("click", () => {
 });
 
 welcomeModal(state);
-countDownTimer();
