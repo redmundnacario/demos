@@ -6,7 +6,6 @@
 @import 'modal';
 
 
-
 .chess {
     margin-left: 15px;
     margin-right: 15px;
@@ -102,11 +101,16 @@
 }
 
 .white {
-    @include chessBoxStyles(#fff,1.1);
+    // @include chessBoxStyles(#f0d9b5,1.1);
+    background-color: rgba( 245, 243, 243, 0.4 );
+    background-position: center;
+    background-size: cover;
+    color:black;
 }
 
 .black {
-    @include chessBoxStyles(pink, 1.1);
+    @include chessBoxStyles(#b58863, 1.1);
+    color:rgba( 245, 243, 243, 0.4 );
     // background-color:black;
     /* background-image: url('../../../assets/green-marble.jpg') */
     /* background-image: url('../../../assets/dark-wood.jpg') */
@@ -116,3 +120,7 @@
    
 
  @import 'mediaQuery';
+
+// .hidden{
+//     display: none;
+// }

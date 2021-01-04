@@ -26,14 +26,14 @@
         </div>
     </div> -->
     <div class="chess">
-        <div class="headbar">
+        <div class="headbar hidden">
             <div ><span id="activePlayer"></span></div>
             <div id="time">--:--</div>
             <div id="undo">Undo</div>
         </div>
         <div id="app"></div>
     </div>
-    <div class="players-row">
+    <div class="players-row hidden">
         <div id="player-1" class="player-box">
             <h1>Player 1</h1>
             <p id="p1time">-- min: -- sec</p>
@@ -48,34 +48,46 @@
     <div id="welcomeModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <!-- <span class="close">&times;</span> -->
-            <h1>Welcome to Playable Chess</h1>
-            <p>by: Redmund Nacario</p>
-            <!-- put your icon here -->
-            <!-- put some chess logo here -->
 
-            <form  id="playersForm" method="GET" action="">
-                <!-- put some player 1 logo here -->
-                <label>Player1</label>
-                <input 
-                    type="text"
-                    name="p1-name"
-                    id="p1Name" 
-                    maxlength="15" 
-                    autocomplete="off" 
-                required>
-                <!-- put some player 1 logo here -->
-                <label>Player2</label>
-                <input 
-                    type="text"
-                    name="p2-name"
-                    id="p2Name" 
-                    maxlength="15" 
-                    autocomplete="off" 
-                required>
-
-                <input type="button" value="start" id="start">
-            </form>
+            <!-- carousel or slideshow content -->
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <!-- <span class="close">&times;</span> -->
+                    <h1>Welcome to Playable Chess</h1>
+                    <p>by: Redmund Nacario</p>
+                    <!-- put your icon here -->
+                    <!-- put some chess logo here -->
+                </div>
+                <div class="mySlides fade">
+                    <form  id="playersForm" method="GET" action="">
+                        <!-- put some player 1 logo here -->
+                        <label>Player1</label>
+                        <input 
+                            type="text"
+                            name="p1-name"
+                            id="p1Name" 
+                            maxlength="15" 
+                            autocomplete="off" 
+                        required>
+                        <!-- put some player 1 logo here -->
+                        <label>Player2</label>
+                        <input 
+                            type="text"
+                            name="p2-name"
+                            id="p2Name" 
+                            maxlength="15" 
+                            autocomplete="off" 
+                        required>
+        
+                        <input type="button" value="start" id="start">
+                    </form>
+                </div>
+            </div>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span> 
+            </div>
         </div>
       
     </div>
