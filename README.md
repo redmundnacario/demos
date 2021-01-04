@@ -21,6 +21,7 @@ Go to [Home Page](https://redmundnacario.com).
 
 ## JS Fiddle Activities:
 1. [BMI computation](https://jsfiddle.net/redmund/c7o3gu6q/40/) - 12/16/2020
+2. [Deck of Cards](https://jsfiddle.net/redmund/pxk560b8/171/) - 01/04/2021
 
 ## Author
 

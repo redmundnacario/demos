@@ -35,7 +35,13 @@
     
     /* width:40rem */
     /* height: 50vh */
-    border: solid 3px black;
+    // border: solid 3px black;
+    padding:2vh;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 16px 32px 0 rgba(138, 31, 138, 0.37);
+    backdrop-filter: blur( 10px );
+    border-radius: 3vh;
+    border: 3px solid rgba( 255, 255, 255, 0.25);
 
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -102,7 +108,7 @@
 
 .white {
     // @include chessBoxStyles(#f0d9b5,1.1);
-    background-color: rgba( 245, 243, 243, 0.4 );
+    // background-color: rgba( 245, 243, 243, 0.4 );
     background-position: center;
     background-size: cover;
     color:black;
@@ -110,7 +116,7 @@
 
 .black {
     @include chessBoxStyles(#b58863, 1.1);
-    color:rgba( 245, 243, 243, 0.4 );
+    // color:rgba( 245, 243, 243, 0.4 );
     // background-color:black;
     /* background-image: url('../../../assets/green-marble.jpg') */
     /* background-image: url('../../../assets/dark-wood.jpg') */
@@ -121,6 +127,6 @@
 
  @import 'mediaQuery';
 
-// .hidden{
-//     display: none;
-// }
+.hidden{
+    display: none;
+}

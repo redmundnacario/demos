@@ -1,6 +1,6 @@
 /* X-small */
 @media screen and (max-width: 576px){
-    #app {
+    #app, .modal-content {
         width: 90vw;
         height:90vw;
     }
@@ -19,7 +19,7 @@
 
 /* small */
 @media screen and (min-width: 577px){
-    #app {
+    #app, .modal-content {
         width: 90vw;
         height:90vw;
     }
@@ -40,7 +40,7 @@
 
 /* medium */
 @media screen and (min-width: 768px){
-    #app {
+    #app, .modal-content {
         width: 90vw;
         height:90vw;
     }
@@ -61,7 +61,7 @@
 
 /* large */
 @media screen and (min-width: 992px){
-    #app {
+    #app, .modal-content {
         width: 90vw;
         height:90vw;
     }
@@ -83,8 +83,13 @@
 /* X-large */
 @media screen and (min-width: 1200px){
     #app {
-        width: 50vh;
-        height:50vh;
+        width: 70vh;
+        height:70vh;
+    }
+
+    .modal-content {
+        width: 70vh;
+        height:70vh;
     }
 
     .col-xl-1 {width: 8.33%;}
