@@ -154,6 +154,7 @@ document.getElementById("next").addEventListener("click", () => {
 document.getElementById("reshuflle_button").addEventListener("click", () => {
     deck = shuffleDeckOfCards(deck.concat(history));
     history = [];
+    console.log(deck.length);
 
     // re-initialize 
     updateContents();

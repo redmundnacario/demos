@@ -5,33 +5,33 @@ let suits = ['♣','♠','♡', '♢',];//Global variable in this script
 //Basic Function 1 for special cards
 export function specialCard(num) {
 	switch(num){
-  	case (1):
-    	return "A";
-    case (11):
-    	return "J";
-    case (12):
-    	return "Q";
-    case (13):
-    	return "K";
-    default:
-    	return num;
-  }
+        case (1):
+            return "A";
+        case (11):
+            return "J";
+        case (12):
+            return "Q";
+        case (13):
+            return "K";
+        default:
+            return num;
+    }
 }
 
 //Basic Function 2 for special cards
 export function reverseSpecialCard(letter) {
 	switch(letter){
-  	case ("A"):
-    	return "1";
-    case ("J"):
-    	return "11";
-    case ("Q"):
-    	return "12";
-    case ("K"):
-    	return "13";
-    default:
-    	return letter;
-  }
+        case ("A"):
+            return "1";
+        case ("J"):
+            return "11";
+        case ("Q"):
+            return "12";
+        case ("K"):
+            return "13";
+        default:
+            return letter;
+    }
 }
 
 // console.log(suits)
@@ -138,7 +138,7 @@ export function sortDeckByFaceValue(arrayInput, mode = "asc"){
 
 // Convert suit symbol to words
 export function cardSymbolToWords(symb) {
-        switch(symb){
+    switch(symb){
         case ('♠'):
             return "Spades";
         case ('♡'):
