@@ -197,15 +197,6 @@ function convertHandToString(arrayInput) {
 
 // Deal 5 cards for Poker
 poker.addEventListener("click", () => {
-    // filters
-    if (deck.length < 5){ 
-        poker.disabled = true;
-        setTimeout(() =>{
-            alert("Cannot proceed. Remaing cards are less than 5");
-            poker.disabled = false;
-        }, 500);
-        return;
-    };
 
     //deal 5 cards
     hand = deck.splice(0,5);
@@ -226,6 +217,15 @@ poker.addEventListener("click", () => {
     // next button is always disabled when new card is dealt
     next.disabled = true;
   
+    // filters
+    if (deck.length < 5){ 
+        poker.disabled = true;
+        setTimeout(() =>{
+            alert("Cannot proceed. Remaing cards are less than 5");
+            // poker.disabled = false;
+        }, 500);
+        return;
+    };
 });
 
 // DETERMINE hand
