@@ -8,7 +8,6 @@ import { dealGivenCard } from './functions.js';
 // GLOBAL variables
 let deck = shuffleDeckOfCards(createDeckOfCards());
 // deck = deck.slice(0,4) // for testing
-
 let history = []; // recently dealt cards for display purposes
 let currentIndex; // int index of history array for prev and next button
 
@@ -91,7 +90,7 @@ document.getElementById("deal").addEventListener("click", () => {
         document.getElementById("deal").disabled = true;
         setTimeout(() =>{
             alert("Card will reshuffle.")
-            deck = shuffleDeckOfCards(history);
+            deck = shuffleDeckOfCards(history.flat());
             history = [];
             currentIndex = null;
             // re-initialize 
@@ -100,6 +99,7 @@ document.getElementById("deal").addEventListener("click", () => {
             //Disable prev and next button
             disablePrevAndNextButton()
             document.getElementById("deal").disabled = false;
+            document.getElementById("poker").disabled = false;
 
         },500)
     }
@@ -113,10 +113,14 @@ document.getElementById("prev").addEventListener("click", () => {
     currentIndex--
     let givenCard = history[currentIndex];
 
-    const { givenCardString } = dealGivenCard(givenCard)
+    // if it is objectm, then it is an array
+    let result = typeof givenCard == "object" ? 
+        convertHandToString(givenCard) : 
+        dealGivenCard(givenCard).givenCardString;
 
+    console.log(result)
     // re-initialize 
-    updateContents(givenCardString);
+    updateContents(result);
 
     //Disable prev 
     if (currentIndex <= 0){
@@ -134,10 +138,13 @@ document.getElementById("next").addEventListener("click", () => {
     currentIndex++
     let givenCard = history[currentIndex];
 
-    const { givenCardString } = dealGivenCard(givenCard)
+    let result = typeof givenCard == "object" ? 
+        convertHandToString(givenCard) : 
+        dealGivenCard(givenCard).givenCardString;
 
+    console.log(result)
     // re-initialize 
-    updateContents(givenCardString);
+    updateContents(result);
 
     //Disable next 
     if (currentIndex >= history.length - 1){
@@ -152,7 +159,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // Reshuffle button
 document.getElementById("reshuflle_button").addEventListener("click", () => {
-    deck = shuffleDeckOfCards(deck.concat(history));
+    deck = shuffleDeckOfCards(deck.concat(history.flat()));
     history = [];
     console.log(deck.length);
 
@@ -161,4 +168,73 @@ document.getElementById("reshuflle_button").addEventListener("click", () => {
 
     //Disable prev and next button
     disablePrevAndNextButton();
+    
+    //Enabe deal poker button
+    document.getElementById("poker").disabled = false;
 });
+
+
+/*
+POKER 
+*/ 
+
+// GLOBAL Variables
+let hand = [];
+
+//deal 5 cards
+function dealFiveCards(){
+    hand = deck.splice(0,5);
+    history.push(hand);
+}
+
+function convertHandToString(arrayInput) {
+    let result = ''
+    for (const card of arrayInput){
+        result = result + " " +dealGivenCard(card).givenCard;
+    }
+    return result;
+}
+
+// Create button
+
+let btn4 = document.createElement("button");
+btn4.innerHTML = "Deal 5 Cards for Poker";
+btn4.id = "poker";             
+document.getElementById("deal_poker_card_button").appendChild(btn4);  
+
+
+// Determine hand
+
+
+
+// ATTACH event listeners
+
+// deal_poker_card_button
+document.getElementById('poker').addEventListener("click", () => {
+    // filter
+    if (deck.length < 5){ 
+        document.getElementById("poker").disabled = true;
+        setTimeout(() =>{
+            alert("Cannot proceed. Remaing cards are less than 5")
+        }, 500);
+        return
+    }
+
+    dealFiveCards()
+    
+    let result = convertHandToString(hand)
+    // Determine the hand combination
+
+    // console.log(result)
+    updateContents(result);
+    // console.log(history)
+
+    currentIndex = history.length - 1;
+
+    if (history.length > 1){
+        document.getElementById("prev").disabled = false;
+    }
+    // next button is always disabled when new card is dealt
+    document.getElementById("next").disabled = true;
+  
+})
