@@ -2,7 +2,7 @@
 // Initial variables 
 let suits = ['♣','♠','♡', '♢',];//Global variable in this script
 
-//Basic Function 1 for special cards
+// Basic Function 1 :  Convert special card numbers to A, J, Q, K
 export function specialCard(num) {
 	switch(num){
         case (1):
@@ -18,7 +18,7 @@ export function specialCard(num) {
     }
 }
 
-//Basic Function 2 for special cards
+// Basic Function 2 : Convert A, J, Q, K to card nnumbers
 export function reverseSpecialCard(letter) {
 	switch(letter){
         case ("A"):
@@ -31,6 +31,56 @@ export function reverseSpecialCard(letter) {
             return "13";
         default:
             return letter;
+    }
+}
+
+// Basic Function 3 : Convert suit symbol to words
+export function cardSymbolToWords(symb) {
+    switch(symb){
+        case ('♠'):
+            return "Spades";
+        case ('♡'):
+            return "Hearts";
+        case ('♢'):
+            return "Diamonds";
+        case ('♣'):
+            return "Clubs";
+        default:
+            return symb;
+    }
+}
+
+// Basic Function 4: Convert card value to words
+export function cardNumberToWords(num) {
+	switch(num){
+        case ('A'):
+            return "Ace";
+        case ('2'):
+            return "Two";
+        case ('3'):
+            return "Three";
+        case ('4'):
+            return "Four";
+        case ('5'):
+            return "Five";
+        case ('6'):
+            return "Six";
+        case ('7'):
+            return "Seven";
+        case ('8'):
+            return "Eight";
+        case ('9'):
+            return "Nine";
+        case ('10'):
+            return "Ten";
+        case ('J'):
+            return "Jack";
+        case ('Q'):
+            return "Queen";
+        case ('K'):
+            return "King";
+        default:
+            return num;
     }
 }
 
@@ -83,6 +133,7 @@ export function shuffleDeckOfCards(arrayInput) {
 
 
 // #2: Sort shuffled cards by suit
+
 export function sortDeckBySuit(arrayInput){
     let deck = [];
     for (const suit of suits){
@@ -136,78 +187,20 @@ export function sortDeckByFaceValue(arrayInput, mode = "asc"){
 
 // #4: Deal a card : randomly remove card from deck and declare it
 
-// Convert suit symbol to words
-export function cardSymbolToWords(symb) {
-    switch(symb){
-        case ('♠'):
-            return "Spades";
-        case ('♡'):
-            return "Hearts";
-        case ('♢'):
-            return "Diamonds";
-        case ('♣'):
-            return "Clubs";
-        default:
-            return symb;
-    }
-}
-
-// Convert card value to words
-export function cardNumberToWords(num) {
-	switch(num){
-        case ('A'):
-            return "Ace";
-        case ('2'):
-            return "Two";
-        case ('3'):
-            return "Three";
-        case ('4'):
-            return "Four";
-        case ('5'):
-            return "Five";
-        case ('6'):
-            return "Six";
-        case ('7'):
-            return "Seven";
-        case ('8'):
-            return "Eight";
-        case ('9'):
-            return "Nine";
-        case ('10'):
-            return "Ten";
-        case ('J'):
-            return "Jack";
-        case ('Q'):
-            return "Queen";
-        case ('K'):
-            return "King";
-        default:
-            return num;
-    }
-}
-
-
 // 4th main function
-export function dealCard(arrayInput){
+export function dealRandomCard(arrayInput){
     let randomIndex = getRandomInt(arrayInput.length);
-    let randomCard = arrayInput[randomIndex];
-    
-    let [suit, ...card_value] = randomCard;
-    /* console.log(randomCard) */
-    suit = cardSymbolToWords(suit[0]);
-    
-    if (card_value.length == 2 ) { card_value = [card_value[0]+card_value[1]]}
-    card_value = cardNumberToWords(card_value[0])
-    let randomCardString = card_value + " of "+ suit + " " + randomCard
-    
-    //update deck
-    arrayInput.splice(randomIndex, 1);
-    
-    return { randomCardString, randomCard }
+    // Get random card and update arrayInput
+    let randomCard = arrayInput.splice(randomIndex,1)[0];
+
+    let { givenCardString, givenCard } = dealGivenCard(randomCard)
+    return { givenCardString, givenCard }
 }
 
+// inner function of 4th function
 export function dealGivenCard(givenCard){
-    
+    // Note: this function does not update deck
+
     let [suit, ...card_value] = givenCard;
     /* console.log(givenCard) */
     suit = cardSymbolToWords(suit[0]);
