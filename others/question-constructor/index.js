@@ -138,6 +138,7 @@ function questions() {
             console.log( "Wrong!")
         }
         
+        console.log("Note: Refresh page to get another question.");
     }
 
 }
