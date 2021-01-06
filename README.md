@@ -18,7 +18,7 @@ Go to [Home Page](https://redmundnacario.com).
 1. [Letter](https://redmundnacario.com/others/web-elements-letter) - 12/--/2020
 2. [Chess Board - Flex](https://redmundnacario.com/others/chessboard-challennge-flex) - 12/07/2020
 3. [Chess Board - Grid](https://redmundnacario.com/others/chessboard-challenge-grid) - 12/09/2020
-4. [Questionnaire](https://redmundnacario.com/others/question-constructor) - 01/06/2021
+4. [Question-Constructor](https://redmundnacario.com/others/question-constructor) - 01/06/2021
 
 ## JS Fiddle Activities:
 1. [BMI computation](https://jsfiddle.net/redmund/c7o3gu6q/40/) - 12/16/2020
