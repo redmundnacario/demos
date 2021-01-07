@@ -2,6 +2,7 @@ import { createDeckOfCards } from './functions.js';
 import { shuffleDeckOfCards } from './functions.js';
 import { dealRandomCard } from './functions.js';
 import { dealGivenCard } from './functions.js';
+import { convertHandToString } from './functions.js';
 
 
 
@@ -77,6 +78,23 @@ function updateContents(givenCardString){
         "Draw History: " + history;
 };
 
+// Reshuflle cards and reinitialize contents
+function reshuffleEventFunction () {
+    deck = shuffleDeckOfCards(deck.concat(history.flat()));
+    history = [];
+    // console.log(deck.length);
+
+    // re-initialize 
+    updateContents();
+
+    //Disable prev and next button
+    disablePrevAndNextButton();
+
+    //Enabe deal poker button
+    deal.disabled = false;
+    poker.disabled = false;
+}
+
 /* INITIALIZE displays */
 
 updateContents();
@@ -88,7 +106,7 @@ disablePrevAndNextButton();
 
 //Deal Button
 deal.addEventListener("click", () => {
-    console.log(deck.length);
+    // console.log(deck.length);
 
     const { givenCardString, givenCard  } = dealRandomCard(deck);
     history.push(givenCard);
@@ -107,18 +125,8 @@ deal.addEventListener("click", () => {
     if (deck.length == 0){ 
         document.getElementById("deal").disabled = true;
         setTimeout(() =>{
-            alert("Card will reshuffle.")
-            deck = shuffleDeckOfCards(history.flat());
-            history = [];
-            currentIndex = null;
-            // re-initialize 
-            updateContents();
-
-            //Disable prev and next button
-            disablePrevAndNextButton();
-            deal.disabled = false;
-            poker.disabled = false;
-
+            alert("Cards will reshuffle.")
+            reshuffleEventFunction();
         },500);
     };
 });
@@ -173,34 +181,9 @@ next.addEventListener("click", () => {
 
 // Reshuffle button
 reshuffle.addEventListener("click", () => {
-    deck = shuffleDeckOfCards(deck.concat(history.flat()));
-    history = [];
-    console.log(deck.length);
-
-    // re-initialize 
-    updateContents();
-
-    //Disable prev and next button
-    disablePrevAndNextButton();
-
-    //Enabe deal poker button
-    poker.disabled = false;
+    reshuffleEventFunction ()
 });
 
-
-/* Poker Functions */
-
-// convert hand array to string output
-function convertHandToString(arrayInput) {
-
-    determinePokerHand(arrayInput)
-
-    let result = '';
-    for (const card of arrayInput){
-        result = result + " " +dealGivenCard(card).givenCard;
-    }
-    return result;
-};
 
 // Deal 5 cards for Poker
 poker.addEventListener("click", () => {
@@ -228,41 +211,10 @@ poker.addEventListener("click", () => {
     if (deck.length < 5){ 
         poker.disabled = true;
         setTimeout(() =>{
-            alert("Cannot proceed. Remaing cards are less than 5");
+            alert("Remaing cards are less than 5. Cards will Reshuffle.");
+            reshuffleEventFunction()
             // poker.disabled = false;
         }, 500);
         return;
     };
 });
-
-import { cardSymbolToWords } from './functions.js'
-import { reverseSpecialCard } from './functions.js'
-import { sortDeckByFaceValue } from './functions.js'
-import { separateSuitAndRank } from './functions.js'
-
-// DETERMINE hand
-function determinePokerHand(arrayInput){
-    
-    let card_values = [];
-    let card_suits = [];
-
-    // Arrange hand in descendeing order of card value/rank
-    arrayInput = sortDeckByFaceValue(arrayInput, "dsc", "poker");
-    
-    //  Get card values and suits
-    for (const card of arrayInput) {
-        // console.log(card)
-        let [cardSuit, cardRank] = separateSuitAndRank(card);
-        // card suit
-        card_suits.push(cardSymbolToWords(cardSuit));
-
-        // card value
-        card_values.push(parseInt(reverseSpecialCard(cardRank, "poker" )));
-    }
-
-    console.log(arrayInput);
-    console.log(card_values);
-    console.log(card_suits);
-
-
-}

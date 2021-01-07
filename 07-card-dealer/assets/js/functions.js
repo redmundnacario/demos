@@ -160,26 +160,25 @@ export function sortDeckByFaceValue(arrayInput, mode = "asc" , game = "normal"){
     let cardsRank = [];
     for ( const card of arrayInput) {
         let [cardSuit, cardRank] = separateSuitAndRank(card);
-        console.log(game)
+    
         cardsRank.push(parseInt(reverseSpecialCard(cardRank, game)))
     }
-    console.log(cardsRank);
     let max_value = Math.max(...cardsRank);
-    console.log(max_value);
-
+    
+    // parameters in looping
     let condition;
     let indicator;
     let basis;
     if ( mode == "asc" ){
         indicator = 1;
         basis = max_value + 1;
-        condition = "indicator < basis" //
+        condition = "indicator < basis" // condition as string
     } else if ( mode == "dsc") {
         indicator = max_value;
         basis = 0;
-        condition = "indicator > basis" //
+        condition = "indicator > basis" // condition as string
     } else {
-        return "wrong input";
+        return "Wrong mode input in sortDeckByFaceValue()";
     }
 
     let deck = []
@@ -230,3 +229,137 @@ export function dealGivenCard(givenCard){
     return { givenCardString, givenCard }
 }
 
+
+
+/* POKER */
+
+
+function checkIfArrayIsUnique(myArray) {
+    return myArray.length === new Set(myArray).size;
+}
+
+function increasingSequence(myArray){
+    return !myArray.some((val, idx) => val != myArray[0] + idx);
+}
+
+function decreasingSequence(myArray){
+    return !myArray.some((val, idx) => val != myArray[0] - idx);
+} 
+
+function getDuplicatesFrequency(myArray) {
+    let result = myArray.reduce((accum,value) => {
+            return Object.assign(accum,{[value]: (accum[value] || 0) + 1})
+        }
+        ,{}
+    );
+    return result;
+}
+
+
+// DETERMINE hand
+export function determinePokerHand(arrayInput){
+    
+    let card_values = [];
+    let card_suits = [];
+
+    // Arrange hand in descendeing order of card value/rank
+    // in poker mode, A is the highest with 14 value
+    arrayInput = sortDeckByFaceValue(arrayInput, "dsc", "poker");
+    
+    //  Get card values and suits
+    for (const card of arrayInput) {
+        // console.log(card)
+        let [cardSuit, cardRank] = separateSuitAndRank(card);
+
+        // card suit
+        card_suits.push(cardSymbolToWords(cardSuit));
+
+        // card value
+        card_values.push(parseInt(reverseSpecialCard(cardRank, "poker" )));
+    }
+
+    // console.log(arrayInput);
+    // console.log(card_values);
+    // console.log(card_suits);
+
+    // Determine the following Boolean variables
+    let hasSameRank; // if cards on hand have the same rank /value
+    let areSequential; // if cards on hand rank/value are in sequence;
+    let areSameSuit;// if all cards on hand are the same suit
+
+    hasSameRank = !checkIfArrayIsUnique(card_values) // inverse of unique
+    areSequential = decreasingSequence(card_values)
+    areSameSuit = card_suits.every(val => val === card_suits[0]);
+
+    let combination;
+    if (hasSameRank) {
+        let duplicatesFreq = Object.values(getDuplicatesFrequency(card_values));
+
+        if (duplicatesFreq.includes(4)) {
+
+            combination = "Four-of-a-Kind";
+
+        } else if (duplicatesFreq.includes(3) && (duplicatesFreq.includes(2))) {
+
+            combination = "Full House";
+
+        } else if (duplicatesFreq.includes(3)) {
+
+            combination = "Three-of-a-Kind";
+
+        } else if (duplicatesFreq.includes(2)) {
+
+            let twoValueFreq = getDuplicatesFrequency(duplicatesFreq)
+
+            if (twoValueFreq > 1) {
+                combination = "Two Pair";
+            } else {
+                combination = "Pair";
+            }
+
+        } else {
+            console.log("Something wrong in hasSameRank")
+        }
+    } else if (areSequential) {
+        console.log("Sequential", areSequential);
+        if (areSameSuit){
+            if ( card_values.includes(14) && card_values.includes(13) &&
+                 card_values.includes(12) && card_values.includes(11)) {
+
+                combination = "Royal Flush";
+
+            } else {
+
+                combination = "Straight Flush";
+
+            }
+        } else {
+
+            combination = "Straight";
+
+        }
+    } else if (areSameSuit) {
+        console.log("Same suit", areSameSuit);
+
+        combination = "Flush";
+
+    } else {
+
+        combination = "No Pair";
+
+    }
+
+    return [ arrayInput, combination ]
+}
+
+// convert hand array to string output
+export function convertHandToString(arrayInput) {
+
+    let [arrayInput1, combination] = determinePokerHand(arrayInput)
+
+    let result = '';
+    for (const card of arrayInput1){
+        result = result + " " +dealGivenCard(card).givenCard;
+    }
+    return combination + " - " +result;
+};
