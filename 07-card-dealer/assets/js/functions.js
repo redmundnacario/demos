@@ -19,10 +19,10 @@ export function specialCard(num) {
 }
 
 // Basic Function 2 : Convert A, J, Q, K to card nnumbers
-export function reverseSpecialCard(letter) {
+export function reverseSpecialCard(letter, game = "normal") {
 	switch(letter){
         case ("A"):
-            return "1";
+            return game === "normal"? "1" : game === "poker" ? "14" : "1" ;
         case ("J"):
             return "11";
         case ("Q"):
@@ -51,7 +51,7 @@ export function cardSymbolToWords(symb) {
 }
 
 // Basic Function 4: Convert card value to words
-export function cardNumberToWords(num) {
+export function cardNumberOrLetterToWords(num) {
 	switch(num){
         case ('A'):
             return "Ace";
@@ -146,43 +146,62 @@ export function sortDeckBySuit(arrayInput){
 
 // #3: Sort cards by ascending and descending
 
-export function sortDeckByFaceValue(arrayInput, mode = "asc"){
-    let deck = []
-    if (mode == "asc"){
-    
-        let indicator = 1;
-        while (indicator < 14){
-            for (const card of arrayInput) {
-                let [one, ...two] = card; // Destructure string
-                if (two.length === 2) { two = [two[0] + two[1]] }
-                if (parseInt(reverseSpecialCard(two[0])) === indicator){
-                deck.push(card);
-                }
-            }
-            indicator++
-        }
-        return deck;
-        
-    } else if (mode == "dsc") {
-    
-        let indicator = 13;
-        while (indicator > 0){
-            for (const card of arrayInput) {
-                let [one, ...two] = card; // Destructure string
-                if (two.length === 2) { two = [two[0] + two[1]] }
-                if (parseInt(reverseSpecialCard(two[0])) === indicator){
-                deck.push(card);
-                }
-            }
-            indicator--
-        }
-        return deck;
-        
-    } else {
-    
-        return "wrong input";
-        
+export function separateSuitAndRank(cardString){
+    let [one, ...two] = cardString; // Destructure string
+    if (two.length === 2) { two = [two[0] + two[1]] }
+    return [one, two].flat()
+}
+
+export function sortDeckByFaceValue(arrayInput, mode = "asc" , game = "normal"){
+    // mode : "asc" or "dsc"
+    // game : "normal" or "poker"
+
+    // Get maximum value in the deck
+    let cardsRank = [];
+    for ( const card of arrayInput) {
+        let [cardSuit, cardRank] = separateSuitAndRank(card);
+        console.log(game)
+        cardsRank.push(parseInt(reverseSpecialCard(cardRank, game)))
     }
+    console.log(cardsRank);
+    let max_value = Math.max(...cardsRank);
+    console.log(max_value);
+
+    let condition;
+    let indicator;
+    let basis;
+    if ( mode == "asc" ){
+        indicator = 1;
+        basis = max_value + 1;
+        condition = "indicator < basis" //
+    } else if ( mode == "dsc") {
+        indicator = max_value;
+        basis = 0;
+        condition = "indicator > basis" //
+    } else {
+        return "wrong input";
+    }
+
+    let deck = []
+    
+    while (eval(condition)){
+        for (const card of arrayInput) {
+
+            let [cardSuit, cardRank] = separateSuitAndRank(card);
+
+            if (parseInt(reverseSpecialCard(cardRank, game)) === indicator){
+            deck.push(card);
+            }
+        }
+        if (mode == "asc") {
+            indicator++;
+        } else if (mode == "dsc") {
+            indicator--;
+        } else{
+            break;
+        }
+    }
+    return deck;
 }
 
 // #4: Deal a card : randomly remove card from deck and declare it
@@ -200,14 +219,13 @@ export function dealRandomCard(arrayInput){
 // inner function of 4th function
 export function dealGivenCard(givenCard){
     // Note: this function does not update deck
-
-    let [suit, ...card_value] = givenCard;
-    /* console.log(givenCard) */
-    suit = cardSymbolToWords(suit[0]);
+    let [cardSuit, cardRank] = separateSuitAndRank(givenCard);
     
-    if (card_value.length == 2 ) { card_value = [card_value[0]+card_value[1]]}
-    card_value = cardNumberToWords(card_value[0])
-    let givenCardString = card_value + " of "+ suit + " " + givenCard
+    /* console.log(givenCard) */
+    cardSuit = cardSymbolToWords(cardSuit);
+
+    cardRank = cardNumberOrLetterToWords(cardRank)
+    let givenCardString = cardRank + " of "+ cardSuit + " " + givenCard
     
     return { givenCardString, givenCard }
 }

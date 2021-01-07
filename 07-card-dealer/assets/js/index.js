@@ -6,11 +6,13 @@ import { dealGivenCard } from './functions.js';
 
 
 // GLOBAL variables
+
 let deck = shuffleDeckOfCards(createDeckOfCards());
 // deck = deck.slice(0,4) // for testing
 let history = []; // recently dealt cards for display purposes
 let currentIndex; // int index of history array for prev and next button
 let hand = []; // For Poker
+
 // end of GLOBAL variables
 
 
@@ -46,6 +48,8 @@ let prev = document.getElementById("prev");
 let next = document.getElementById("next");
 let reshuffle = document.getElementById("reshuffle");
 let poker = document.getElementById("poker");// For Poker
+
+// end of ELEMENTS in DOM
 
 
 /* INITIALIZE display functions */
@@ -188,6 +192,9 @@ reshuffle.addEventListener("click", () => {
 
 // convert hand array to string output
 function convertHandToString(arrayInput) {
+
+    determinePokerHand(arrayInput)
+
     let result = '';
     for (const card of arrayInput){
         result = result + " " +dealGivenCard(card).givenCard;
@@ -228,4 +235,34 @@ poker.addEventListener("click", () => {
     };
 });
 
+import { cardSymbolToWords } from './functions.js'
+import { reverseSpecialCard } from './functions.js'
+import { sortDeckByFaceValue } from './functions.js'
+import { separateSuitAndRank } from './functions.js'
+
 // DETERMINE hand
+function determinePokerHand(arrayInput){
+    
+    let card_values = [];
+    let card_suits = [];
+
+    // Arrange hand in descendeing order of card value/rank
+    arrayInput = sortDeckByFaceValue(arrayInput, "dsc", "poker");
+    
+    //  Get card values and suits
+    for (const card of arrayInput) {
+        // console.log(card)
+        let [cardSuit, cardRank] = separateSuitAndRank(card);
+        // card suit
+        card_suits.push(cardSymbolToWords(cardSuit));
+
+        // card value
+        card_values.push(parseInt(reverseSpecialCard(cardRank, "poker" )));
+    }
+
+    console.log(arrayInput);
+    console.log(card_values);
+    console.log(card_suits);
+
+
+}
