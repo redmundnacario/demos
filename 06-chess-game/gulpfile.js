@@ -116,6 +116,7 @@ sourceJS = ["./src/assets/js/chess-pieces/bishop.js",
 "./src/assets/js/main.js",
 "./src/assets/js/modal.js",
 "./src/assets/js/timer.js",
+"./src/assets/js/slideshow.js",
 "./src/assets/js/index.js"]
 
 gulp.task("javascript", function(done) {

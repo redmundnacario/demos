@@ -1,3 +1,16 @@
+// @font-face {
+//     font-family: 'Pacifico', cursive;
+//     // font-weight: regular;
+//     src: url('../fonts/Pacifico/Pacifico-Regular.ttf') format('truetype');
+// }
+
+// @font-face {
+//     font-family: 'Open Sans', sans-serif;
+//     font-weight: regular;
+//     src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+// }
+
+
 body {
     margin: 0;
     box-sizing: border-box;
@@ -22,4 +35,51 @@ body {
 
     // background-image:radial-gradient(circle,#b43ab3 40%,#427bd5 52%,#37dbff 68%);
     flex-flow:column;
+    font-family: 'Open Sans', sans-serif;
 }
+
+h1{
+    font: 700 48px/1.2 "Pacifico" , cursive;
+    
+}
+
+h2 {
+    font: 700 32px/1.2 "Pacifico", cursive;
+}
+
+h3 {
+    font: 700 24px/1.2 "Pacifico", cursive;
+}
+
+h4 {
+    font: 700 20px/1.2 "Pacifico", cursive;
+}
+
+h1, h2, h3, h4 {
+    margin:0;
+    margin-bottom:10px
+}
+h5 {
+    font: 500 18px/1.2 "Pacifico", cursive;
+    margin-bottom: 10px;
+}
+h6 {
+    font: 500 16px/1.2 "Pacifico", cursive;
+    text-transform: uppercase;
+}
+ 
+// .bold-paragraph, 
+// .italicized-paragraph 
+p {
+    font: 400 18px 'Open Sans', sans-serif;
+    margin-bottom: 0;
+}
+
+// .bold-paragraph {
+//     font: 500 18px "Pacifico", cursive;
+// }
+
+// .italicized-paragraph {
+//     font: 400 18px "Pacifico", cursive;
+//     font-style: italic;
+// }
