@@ -112,11 +112,11 @@ sourceJS = ["./src/assets/js/chess-pieces/bishop.js",
 "./src/assets/js/special-rules/promotion.js",
 "./src/assets/js/active-player.js",
 "./src/assets/js/utils.js",
-"./src/assets/js/draw.js",
+"./src/assets/js/draw2.js",
 "./src/assets/js/main.js",
-"./src/assets/js/modal.js",
-"./src/assets/js/timer.js",
-"./src/assets/js/slideshow.js",
+"./src/assets/js/components/modal.js",
+"./src/assets/js/components/timer.js",
+"./src/assets/js/components/slideshow.js",
 "./src/assets/js/index.js"]
 
 gulp.task("javascript", function(done) {

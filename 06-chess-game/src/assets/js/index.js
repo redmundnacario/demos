@@ -1,42 +1,38 @@
-import { InitializeChessMap } from './main.js';
-import { ReInitializeChessMap } from './main.js';
-import { ToggleActivePiece } from './main.js';
-import { PossibleMoveSelected } from './main.js';
-import { UndoMove } from './main.js';
 
 //non-chess
-import { welcomeModal } from './modal.js';
-import { showSlides } from './slideshow.js';
+// import { welcomeModal } from './components/modal.js';
+// import { showSlides } from './components/slideshow.js';
 //data
 
-import { CHESS_DATA } from "./data/chess-pieces.js";
-import { state } from './data/state.js';
+// import { CHESS_DATA } from "./data/chess-pieces.js";
+// import { state } from './data/state.js';
 
+import { Application } from './main.js';
 
+let App = new Application();
 // DEEP COPY of state to initial state
-let init_state = JSON.parse(JSON.stringify(InitializeChessMap(state, CHESS_DATA)));
+App.InitializeChessMap();
 
 // add event listeners to each chess box
-let keys = Object.keys(state.chess_obj[0]);
+let keys = Object.keys(App.state.chess_obj[0]);
 
 for (let key in keys){
-
     const chessBoxSelected = document.getElementById(keys[key]);
-
     chessBoxSelected.addEventListener("click", () => {
-        ToggleActivePiece(chessBoxSelected.id, state);
+        App.ToggleActivePiece(chessBoxSelected.id);
     });
 
     chessBoxSelected.addEventListener("click", () =>{
-        PossibleMoveSelected(chessBoxSelected.id, state);
+        App.PossibleMoveSelected(chessBoxSelected.id);
     });
 };
+
 // Add event listener to undo button
 document.getElementById("undo").addEventListener("click", () => {
-    UndoMove(state);
-    // ReInitializeChessMap(init_state, state, CHESS_DATA)
+    App.UndoMove();
+    // App.ReInitializeChessMap()
 });
 
-welcomeModal(state);
-let slideIndex = 1;
-showSlides(slideIndex);
+// welcomeModal(state);
+// let slideIndex = 1;
+// showSlides(slideIndex);

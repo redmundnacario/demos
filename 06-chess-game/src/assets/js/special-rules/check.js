@@ -115,7 +115,7 @@ export const CheckIfChecked = function (state , UndoMove) {
     if (currentCheckedKingdom != null & UndoMove != null) {
         if (currentCheckedKingdom != active_chess_player) {
             console.log("Last move was illegal! King is being checked.")
-            UndoMove(state);
+            UndoMove();
         }
     }
     // console.log("Checkers!",state.checked);
