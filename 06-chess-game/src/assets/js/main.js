@@ -1,7 +1,9 @@
+// Constructor Functions
 import { ChessGamePlayState } from './data/state.js';
 import { InitialChessPieceData } from "./data/chess-pieces.js";
-import { ChessGame }  from './draw2.js';
-        
+import { ChessGame }  from './draw.js';
+
+// Functions
 import { GetPossibleMoves } from "./chess-pieces/moves.js";
 import { SetActivePlayer, ToggleActivePlayer } from './active-player.js';//
 import { EnPassant, UpdateEnPassantState } from './special-rules/en-passant.js';
@@ -10,11 +12,12 @@ import { CheckCastling, Castling } from './special-rules/castling.js';
 import { PawnPromotion } from './special-rules/promotion.js';
 import { getClassListIncludes, setInnerImg} from './utils.js';
 
+
+// Main Constructor function
 export const Application = function() {
     
     this.chessGame = new ChessGame();
     this.chessData = new InitialChessPieceData();
-    
 
 
     // Initialize States 
@@ -24,9 +27,8 @@ export const Application = function() {
     }
 
 
-
     /*
-    Initialize chess map, chess piece in the dom and chess object
+    Initialize the chess boxes, the chess piece in the dom and chess object
     Also adds eventlisteners to chess tiles.
     */
 
@@ -54,7 +56,6 @@ export const Application = function() {
     };
 
 
-
     /*
     RE-initialize the chess game, refreshes the states from the start.
     Can be used with restart button or new game.
@@ -67,8 +68,11 @@ export const Application = function() {
     }
 
 
+    /*
+    Bascically generates moves and put styles to selected chess piece,
+    and its possible moves and targets
+    */
 
-    // Bascically put styles to selected piece, and its possible moves and targets
     this.ToggleActivePiece = function(thisId) {
 
         let { 
@@ -125,7 +129,11 @@ export const Application = function() {
         
     };
 
-    // Triggers when a move was done and updates all dynamic state values 
+    
+    /*
+    Triggers when a move was done and updates all dynamic state values
+    */
+
     this.PossibleMoveSelected = function(thisId) {
         let {
             active_chess_box_id,
@@ -205,7 +213,11 @@ export const Application = function() {
         CheckIfChecked(this.state,  this.UndoMove)  
     };
 
-    // Undo the moves in chess
+
+    /*
+    Undo the moves in chess
+    */
+
     this.UndoMove = function(){
         let {
             active_chess_obj,
@@ -234,7 +246,11 @@ export const Application = function() {
         CheckIfChecked(this.state, null);
     };
 
-    // Finds the king location in chess map
+
+    /*
+    Finds the king location in chess map
+    */
+
     this.findKing = function () {
         let {
             active_chess_obj,

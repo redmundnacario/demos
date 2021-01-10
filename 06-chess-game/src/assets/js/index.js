@@ -33,6 +33,5 @@ document.getElementById("undo").addEventListener("click", () => {
     // App.ReInitializeChessMap()
 });
 
-// welcomeModal(state);
-// let slideIndex = 1;
-// showSlides(slideIndex);
+welcomeModal(App.state);
+showSlides();
