@@ -11,6 +11,7 @@ Go to [Home Page](https://redmundnacario.com).
 5. [Calculator](https://redmundnacario.com/05-calculator) - 12/14/2020
 6. [Chess Game](https://redmundnacario.com/) - 12/19/2020 - Development Status
 7. [Card Dealer](https://redmundnacario.com/07-card-dealer) - 01/05/2021
+8. [Pig Game (Collaboration with JC Ferrer)](https://redmundnacario.com/08-pig-game) - [Repository](https://github.com/Buuloooy0318/batch5-pig-game) - 01/09/2021
 
 
 ## Others
