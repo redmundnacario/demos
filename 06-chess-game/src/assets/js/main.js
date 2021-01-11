@@ -19,6 +19,14 @@ export const Application = function() {
     this.chessGame = new ChessGame();
     this.chessData = new InitialChessPieceData();
 
+    /* HTML elements */
+    // undo button
+    this.btnUndo = document.getElementById("undo");
+    // chess boxes
+    this.chessBoxIds;
+    // dots in slideshow
+    this.dotSlide = Array.from(document.querySelectorAll(".dot"))
+
 
     // Initialize States 
     this.initializeState = function() {
@@ -53,6 +61,11 @@ export const Application = function() {
         this.state.chess_obj = [JSON.parse(JSON.stringify(this.chessGame.chessObj))];
         this.state.active_chess_obj = this.chessGame.chessObj;
         // console.log(this.state)
+
+        let tiles = Object.keys(this.state.chess_obj[0]);
+        this.chessBoxIds = tiles.map((value , index) => {
+            return document.getElementById(value);
+        })
     };
 
 
@@ -210,19 +223,22 @@ export const Application = function() {
 
         // console.log(this.state.chess_obj.length)
         // Post-Check if enemy kingdom's king was checked 
-        CheckIfChecked(this.state,  this.UndoMove)  
+        CheckIfChecked(this.state,  () => {this.UndoMove(this.state)})  
     };
 
 
     /*
     Undo the moves in chess
+    Note: UndoMove has an state argument because when used in PossibleMoveSelected,
+          it breaks.
     */
 
-    this.UndoMove = function(){
+    this.UndoMove = function(state){
         let {
             active_chess_obj,
             chess_obj
-            } = this.state;
+            } = state;
+        
         // Disables undo button if game history length is 1 or less
         if (chess_obj.length <=1) {return}
         // Deep copy
@@ -235,15 +251,15 @@ export const Application = function() {
         // remove classes of boxes, Redraw HTML, change player
         this.chessGame.RemoveClassesOfMovesOrTargetsSquares()
         this.chessGame.DrawChessPieces(active_chess_obj, false);
-        ToggleActivePlayer(this.state);
+        ToggleActivePlayer(state);
 
         // update states
-        this.state.active_chess_obj = active_chess_obj;
-        this.state.chess_obj = chess_obj;
+        state.active_chess_obj = active_chess_obj;
+        state.chess_obj = chess_obj;
 
         // Locate king's location and check if checked
         this.findKing();
-        CheckIfChecked(this.state, null);
+        CheckIfChecked(state, null);
     };
 
 

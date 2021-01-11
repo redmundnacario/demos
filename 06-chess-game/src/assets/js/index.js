@@ -1,12 +1,8 @@
 
 //non-chess
-// import { welcomeModal } from './components/modal.js';
-// import { showSlides } from './components/slideshow.js';
-//data
-
-// import { CHESS_DATA } from "./data/chess-pieces.js";
-// import { state } from './data/state.js';
-
+import { welcomeModal } from './components/modal.js';
+import { showSlides , currentSlide } from './components/slideshow.js';
+// Application
 import { Application } from './main.js';
 
 let App = new Application();
@@ -14,24 +10,24 @@ let App = new Application();
 App.InitializeChessMap();
 
 // add event listeners to each chess box
-let keys = Object.keys(App.state.chess_obj[0]);
-
-for (let key in keys){
-    const chessBoxSelected = document.getElementById(keys[key]);
-    chessBoxSelected.addEventListener("click", () => {
-        App.ToggleActivePiece(chessBoxSelected.id);
-    });
-
-    chessBoxSelected.addEventListener("click", () =>{
-        App.PossibleMoveSelected(chessBoxSelected.id);
-    });
-};
-
-// Add event listener to undo button
-document.getElementById("undo").addEventListener("click", () => {
-    App.UndoMove();
-    // App.ReInitializeChessMap()
+App.chessBoxIds.forEach((tile) => {
+    tile.onclick = () => [
+                          App.ToggleActivePiece(tile.id), 
+                          App.PossibleMoveSelected(tile.id)
+                         ];
 });
 
+// Add event listener to undo button
+App.btnUndo.onclick = () => App.UndoMove(App.state);
+
+// ReInitialize Button
+// App.btnUndo.onclick = () => App.ReInitializeChessMap();
+
+//Modal
 welcomeModal(App.state);
+
+// Slidedhow
+App.dotSlide.forEach((dot, index) => {
+    dot.onclick = () => currentSlide(index +1)
+})
 showSlides();
