@@ -178,7 +178,7 @@ export default function Application() {
             this.activePanel = document.querySelector(".active");
             this.activePanel.classList.add("winner")
 
-            this.winnerDiv.innerText = this.state.winner + " Wins!"
+            this.winnerDiv.innerText = players[this.state.winner].name + " Wins!"
             this.winnerDiv.style.visibility = "visible"
             
         } else {
