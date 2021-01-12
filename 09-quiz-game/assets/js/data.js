@@ -91,6 +91,6 @@ export const choices_array = [
     ]
 ]
 
-export const answers_array = [ 1, 1, 2, 2, 1,
+export const answers_array = [ 1, 1, 2, 1, 1,
                                2, 2, 3, 2, 1,
                                1, 1, 1, 2, 2 ]
