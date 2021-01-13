@@ -8,6 +8,6 @@ document.body.onload = (event) => {
     App.createButtonSubmit();
     // Add event on submit button
     App.submitBtn.onclick = () => App.submitAnswer();
-
+    // Add event on exit button
     App.exitBtn.onclick = () => App.exitApp();
 };

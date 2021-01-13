@@ -5,6 +5,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-family: 'Roboto Slab', serif;
 }
 
 .card {
@@ -27,6 +29,7 @@ body {
 
 #options div{
     margin-bottom: 3vh;
+    font-family: 'Montserrat', sans-serif;
 } 
 
 input[type="button"] {
@@ -36,8 +39,8 @@ input[type="button"] {
     opacity: 0.7;
     color:#fff;
 
-    height:4vh;
-    width:25%;
+    height:6vh;
+    width:30%;
     /* padding:1vh 2vh 1vh 2vh; */
     border-radius:0.5vh;
     cursor: pointer;
@@ -46,19 +49,24 @@ input[type="button"] {
 input[type="button"]:active {
     background-color: #fff;
     color: #003cff;
-    border: #003cff solid 0.1vh;
-    height:3.9vh;
+    border: #003cff solid 0.2vh;
+    height:5.6vh;
 }
 
 h1 {
     color:maroon;
+    font: 600 48px/1.2 'Roboto Slab', serif;
     /* margin-top: 0; */
+}
+h2{
+    font: 400 32px/1.2 'Roboto Slab', serif;
 }
 
 #exit, #newGame {
     all: unset;
-    height: 3vh;
-    width: 3vh;
+    font-size: 1vh;
+    min-height: 3vh;
+    min-width: 3vh;
     text-align: center;
 
     border-radius: 50%;
@@ -74,14 +82,13 @@ h1 {
 }
 
 #newGame {
-    height:4vh;
-    width:20%;
-    /* padding:1vh 2vh 1vh 2vh; */
+    font-size: 2vh;
     border-radius:0.5vh;
     position: relative;
     top:0;
     right: 0;
-    width: 20%;
+    
+    padding:2vh;
 }
 
 #exit:active ,#newGame:active {
@@ -120,6 +127,7 @@ h1 {
     padding: 1rem 1rem;
     margin-bottom: 1rem;
     border-radius: 0.5vh;
+    opacity: 0.5;
 }
 
 .hidden {
@@ -131,22 +139,26 @@ h1 {
     height:100vh;
     width: 100vw;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    text-align:center;
+    flex-flow:column;
 
 }
-
+#exitMessage {
+    margin-left:3vw;
+    margin-right:3vw;
+}
 .card-bottom {
     display: flex;
     flex-flow: row-reverse;
     justify-content: space-between;
+    align-items: center;
 }
 
 #scoreH1 {
     margin:0;
-}
-
-#exitPage {
-    display: flex;
-    flex-flow:column;
+    font-size: 4vh;
+    /* display:table-cell;  */
+    /* vertical-align:middle; */
 }

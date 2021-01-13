@@ -30,6 +30,7 @@ export function Questions() {
     this.score_int = 0; // for acc
     this.performance_array = []; // for detecting streak
     this.round_int = 1;// no of rounds, for detecting streak
+    this.last_index = null;// used for not repeating question consecutively
     
     // Create element
     this.createButtonSubmit = function () {
@@ -48,7 +49,11 @@ export function Questions() {
         this.alertDiv.style.visibility = 'hidden';
         let optionsChild = Array.from(this.choicesInputRadio.children)
         optionsChild.forEach(child => child.remove());
-        this.getRandomQuestion()
+        this.getRandomQuestion();
+        
+        if(this.submitBtn){
+            this.submitBtn.disabled = false;
+        }
     }
 
     this.exitApp = function() {
@@ -97,6 +102,10 @@ export function Questions() {
         };
 
         // this.answer  = prompt("Choose the number of correct answer.");
+
+        if (this.last_index == this.question_index) {
+            this.InitializeApp();
+        }
     },
 
     this.displayScore = function(){
@@ -157,20 +166,24 @@ export function Questions() {
         this.round_int++
         this.displayScore();
         this.scoreH1.innerText = "Score: "+ this.score_int
-
+        this.last_index = this.question_index;
         // Reinitialize after 3 second
         setTimeout(() => {
             this.InitializeApp()
-        }, 3000);
+        }, 2000);
     }
 
     this.submitAnswer = function(){
+        this.submitBtn.disabled = true;
         
         const form_data = new FormData(this.choicesInputRadio)
         const form_array_data = Array.from(form_data.entries())
         
         if (form_array_data.length === 0) {
             // Set alert that there is no answer given
+            console.log("No Answer Submitted.")
+            alert("No Answer Submitted. Please choose from the choices and then submit")
+            this.submitBtn.disabled = false;
         } else {
             //display answer and tell if right or wrong
             // console.log(form_array_data[0])
