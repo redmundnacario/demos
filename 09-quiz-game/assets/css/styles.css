@@ -1,5 +1,7 @@
 body {
     background-color: #f3f3fa;
+    margin:0;
+    box-sizing: border-box;
 
     height:100vh;
     display: flex;
