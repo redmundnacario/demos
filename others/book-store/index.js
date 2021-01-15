@@ -5,7 +5,8 @@ const App = new Application();
 // Add Book
 console.log("Add Book")
 App.Addbook("Javascript Fundamentals", 2, 500)
-// App.listInventory() 
+App.Addbook("Advanced Javascript", 2, 600)
+App.Addbook("Ruby on Rails Part 1", 5, 1000)
 
 // Restock Book
 console.log("Restock Book")

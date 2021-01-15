@@ -1,3 +1,13 @@
+// Book Constructor
+function Book() {
+    // Book Object
+    this.Book = {
+        title : null,
+        quantity: null,
+        value: null
+    }
+}
+
 export function Application() {
     // Store Object
     this.Store = {
@@ -22,14 +32,10 @@ export function Application() {
         earnings : 0
     }
 
-    // Book Object
-    this.Book = {
-        title : null,
-        quantity: null,
-        value: null
-    }
-
     this.Addbook = function(title, quantity, value) {
+        this.Book = new Book();
+        this.Book = this.Book.Book
+        
         this.Book.title = title;
         this.Book.quantity = quantity;
         this.Book.value = value;
