@@ -23,18 +23,16 @@
     <script src='./assets/js/index.min.js' defer></script>
 </head>
 <body>
-    <!-- <div class="navbar">
+    <div class="navbar">
         <div class="nav-content">
-            <img class='nav-img' src="./assets/img/Redmundnacario.png"/>
-            <h3 class='nav-title'>Redmund Nacario</h3>
+            <div class="headbar ">
+                <div ><span id="activePlayer"></span></div>
+                <div id="time">--:--</div>
+                <div id="undo">Undo</div>
+            </div>
         </div>
-    </div> -->
+    </div>
     <div class="chess">
-        <div class="headbar ">
-            <div ><span id="activePlayer"></span></div>
-            <div id="time">--:--</div>
-            <div id="undo">Undo</div>
-        </div>
         <div id="app"></div>
     </div>
     <div class="players-row hidden">
@@ -57,35 +55,63 @@
             <div class="slideshow-container">
                 <div class="mySlides fade">
                     <!-- <span class="close">&times;</span> -->
-                    <p>Welcome to </p>
-                    <h1>Playable Chess</h1>
-                    <p>by: Redmund Nacario</p>
-                    <!-- put your icon here -->
-                    <!-- put some chess logo here -->
+                    <div class="slideHome">
+                        <img id="chessImg" src="./assets/img/chess_game_pic.png" alt="chess image">
+                        <div>
+                            <h3>Welcome to </h3>
+                            <h1>Chess</h1>
+                        </div>
+                        <div>
+                            <img id="creatorImg" src="./assets/img/Redmundnacario.png" alt="">
+                            <p>Developed by:</p><h5>Redmund Nacario</h5>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="mySlides fade">
-                    <form  id="playersForm" method="GET" action="">
-                        <!-- put some player 1 logo here -->
-                        <label>Player1</label>
-                        <input 
-                            type="text"
-                            name="p1-name"
-                            id="p1Name" 
-                            maxlength="15" 
-                            autocomplete="off" 
-                        required>
-                        <!-- put some player 1 logo here -->
-                        <label>Player2</label>
-                        <input 
-                            type="text"
-                            name="p2-name"
-                            id="p2Name" 
-                            maxlength="15" 
-                            autocomplete="off" 
-                        required>
-        
-                        <input type="button" value="start" id="start">
-                    </form>
+                    <div class="slideHome over-flow-scroll">
+                        <h4>⚡Basic Features :</h4>
+                        <h5>✅ Basic chess piece moves</h5>
+                        <h5>✅ En Passant</h5>
+                        <h5>✅ Castling</h5>
+                        <h5>✅ Check</h5>
+                        <h5>✅ Checkmate</h5>
+                        <h5>✅ Pawn promotion to Queen by default</h5>
+                        <h5>✅ Timer</h5>
+                        <br>
+                        <h4>🚀Advance Features :</h4>
+                        <h5>✅ Game history</h5>
+                        <h5>✅ Undo button</h5>
+                        <h5>✅ Automatic undo of illegal moves</h5>
+                        <h5>✅ Selected chess piece possible moves display</h5>
+                    </div>
+                </div>
+                <div class="mySlides fade">
+                    <div class="slideHome">
+                        <form  id="playersForm" method="GET" action="">
+                            <!-- put some player 1 logo here -->
+                            <label>Player1</label>
+                            <input 
+                                type="text"
+                                name="p1-name"
+                                id="p1Name" 
+                                maxlength="15" 
+                                autocomplete="off" 
+                            required>
+                            <!-- put some player 1 logo here -->
+                            <label>Player2</label>
+                            <input 
+                                type="text"
+                                name="p2-name"
+                                id="p2Name" 
+                                maxlength="15" 
+                                autocomplete="off" 
+                            required>
+            
+                            <input type="button" value="start" id="start">
+                        </form>
+
+                    </div>
                 </div>
             </div>
             <div class="dot-container">

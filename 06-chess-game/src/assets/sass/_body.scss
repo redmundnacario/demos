@@ -18,6 +18,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    // padding:2vh;
     //
     background-image: linear-gradient(to right, 
                                     rgba(198, 255, 221, 0.7),
@@ -39,39 +40,39 @@ body {
 }
 
 h1{
-    font: 700 48px/1.2 "Pacifico" , cursive;
+    font: 700 6vh/1.2 "Pacifico" , cursive;
     
 }
 
 h2 {
-    font: 700 32px/1.2 "Pacifico", cursive;
+    font: 700 5vh/1.2 'Open Sans', sans-serif;
 }
 
 h3 {
-    font: 700 24px/1.2 "Pacifico", cursive;
+    font: 700 4vh/1.2 'Open Sans', sans-serif;
 }
 
 h4 {
-    font: 700 20px/1.2 "Pacifico", cursive;
+    font: 700 3vh/1.2 'Open Sans', sans-serif;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
     margin:0;
     margin-bottom:10px
 }
 h5 {
-    font: 500 18px/1.2 "Pacifico", cursive;
+    font: 500 2vh/1.2 'Open Sans', sans-serif;
     margin-bottom: 10px;
 }
 h6 {
-    font: 500 16px/1.2 "Pacifico", cursive;
+    font: 500 16px/1.2 'Open Sans', sans-serif;
     text-transform: uppercase;
 }
  
 // .bold-paragraph, 
 // .italicized-paragraph 
 p {
-    font: 400 18px 'Open Sans', sans-serif;
+    font: 400 16px 'Open Sans', sans-serif;
     margin-bottom: 0;
 }
 

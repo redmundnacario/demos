@@ -10,6 +10,10 @@
             font-size: 5vh;
         }
     }
+
+    .over-flow-scroll{
+        overflow-y: scroll;
+    }
     
 
     [class*="col-"] {
@@ -22,6 +26,10 @@
     #app, .modal-content {
         width: 90vw;
         height:90vw;
+    }
+
+    .over-flow-scroll{
+        overflow-y: scroll;
     }
     
     .col-sm-1 {width: 8.33%;}
@@ -43,6 +51,10 @@
     #app, .modal-content {
         width: 90vw;
         height:90vw;
+    }
+
+    .over-flow-scroll{
+        overflow-y: scroll;
     }
 
     .col-md-1 {width: 8.33%;}
