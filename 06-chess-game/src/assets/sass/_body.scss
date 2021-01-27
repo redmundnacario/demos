@@ -37,6 +37,7 @@ body {
     // background-image:radial-gradient(circle,#b43ab3 40%,#427bd5 52%,#37dbff 68%);
     flex-flow:column;
     font-family: 'Open Sans', sans-serif;
+    position: relative;
 }
 
 h1{
@@ -52,7 +53,7 @@ h3 {
     font: 700 4vh/1.2 'Open Sans', sans-serif;
 }
 
-h4 {
+h4{
     font: 700 3vh/1.2 'Open Sans', sans-serif;
 }
 
@@ -60,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
     margin:0;
     margin-bottom:10px
 }
-h5 {
+h5, label{
     font: 500 2vh/1.2 'Open Sans', sans-serif;
     margin-bottom: 10px;
 }
@@ -71,7 +72,7 @@ h6 {
  
 // .bold-paragraph, 
 // .italicized-paragraph 
-p {
+p, input {
     font: 400 16px 'Open Sans', sans-serif;
     margin-bottom: 0;
 }

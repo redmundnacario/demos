@@ -54,7 +54,7 @@
     }
 
     .over-flow-scroll{
-        overflow-y: scroll;
+        overflow-y: unset;
     }
 
     .col-md-1 {width: 8.33%;}
@@ -76,6 +76,10 @@
     #app, .modal-content {
         width: 90vw;
         height:90vw;
+    }
+
+    .over-flow-scroll{
+        overflow-y: unset;
     }
 
     .col-lg-1 {width: 8.33%;}

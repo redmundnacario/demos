@@ -63,9 +63,6 @@
     // overflow: scroll;
 }
 
-.over-flow-scroll{
-    overflow-y: none;
-}
 
 #chessImg{
     width: 70%;
@@ -81,4 +78,72 @@
     border: 0.2vh solid #fff;
     border-radius: 50%;
     background-color: transparent;
+}
+
+
+.slideHomeForm {
+    display: flex !important;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    height:100%;
+}
+
+#playersForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    width:40%;
+
+    padding:4vh;
+    
+    border-radius: 1vh;
+    border:0.3vh solid rgba(138, 31, 138, 0.37);
+
+    h4{
+        margin-bottom: 4vh;
+    }
+    input,
+    label {
+        display: block;
+        height: 3vh;
+    }
+    input{
+        width:100%;
+        border-radius: 0.5vh;
+        outline: none;
+        margin-bottom: 2vh;
+        border:0.2vh solid rgba(138, 31, 138, 0.37);
+
+        padding: 0.5vh;
+        background-color: transparent;
+    }
+    label{
+        margin-bottom: 1vh !important;
+    }
+    input[type=submit]{
+        all:unset;
+        margin-top:2vh;
+        height: 4vh;
+        background-color: rgba(2, 191, 2, 0.3);
+        width: 100%;
+        border-radius: 0.5vh;
+        padding: 0.5vh;
+        border:0.2vh solid rgb(2, 191, 2);
+        font: 400 2vh 'Open Sans', sans-serif;
+        color: white;
+        // border:0.1vh solid black;
+        cursor: pointer;
+
+        &:focus,
+        &:hover {
+            background-color: transparent;
+            color: rgb(2, 191, 2);
+        }
+    }
+
+    
 }

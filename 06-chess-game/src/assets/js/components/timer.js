@@ -10,7 +10,7 @@ function convertTimerToTime(timeInput) {
 
 function updateGameTime( timeInput , idTimeDiv ){
     let { minutes, seconds } = convertTimerToTime( timeInput ) 
-    document.getElementById(idTimeDiv).innerText = minutes.slice(-2) + " min : " + seconds.slice(-2) + " sec" ;
+    document.getElementById(idTimeDiv).innerText = minutes.slice(-2) + " : " + seconds.slice(-2)  ;
 }
 
 export function countDownTimer(state) {

@@ -23,28 +23,26 @@
     <script src='./assets/js/index.min.js' defer></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="nav-content">
-            <div class="headbar ">
-                <div ><span id="activePlayer"></span></div>
-                <div id="time">--:--</div>
-                <div id="undo">Undo</div>
-            </div>
-        </div>
-    </div>
     <div class="chess">
+        <button id="undo">Undo</button>
         <div id="app"></div>
     </div>
-    <div class="players-row hidden">
+
+    <div class="players-row">
         <div id="player-1" class="player-box">
-            <h1>Player 1</h1>
+            <h3>Player 1</h3>
             <p id="p1time">-- min: -- sec</p>
         </div>
         <div id="player-2" class="player-box">
-            <h1>Player 2</h1>
+            <h3>Player 2</h3>
             <p id="p2time">-- min: -- sec</p>
         </div>
     </div>
+
+    <div class="game-timer">
+        <h2 id="time">--:--</h2>
+    </div>
+    <div class="playerTurn"><h2 id="activePlayer"></h2></div>
 
     <!-- modal -->
     <div id="welcomeModal" class="modal">
@@ -58,8 +56,9 @@
                     <div class="slideHome">
                         <img id="chessImg" src="./assets/img/chess_game_pic.png" alt="chess image">
                         <div>
-                            <h3>Welcome to </h3>
-                            <h1>Chess</h1>
+                            <h5>Welcome to </h5>
+                            <br>
+                            <h1>Online Chess</h1>
                         </div>
                         <div>
                             <img id="creatorImg" src="./assets/img/Redmundnacario.png" alt="">
@@ -87,10 +86,11 @@
                     </div>
                 </div>
                 <div class="mySlides fade">
-                    <div class="slideHome">
+                    <div class="slideHomeForm">
                         <form  id="playersForm" method="GET" action="">
                             <!-- put some player 1 logo here -->
-                            <label>Player1</label>
+                            <h4>♟️ Ready?! </h4>
+                            <label>Player 1 Name - White Piece</label>
                             <input 
                                 type="text"
                                 name="p1-name"
@@ -99,7 +99,7 @@
                                 autocomplete="off" 
                             required>
                             <!-- put some player 1 logo here -->
-                            <label>Player2</label>
+                            <label>Player 2 Name - Black Piece</label>
                             <input 
                                 type="text"
                                 name="p2-name"
@@ -108,7 +108,7 @@
                                 autocomplete="off" 
                             required>
             
-                            <input type="button" value="start" id="start">
+                            <input type="submit" value="🚀 Launch Game" id="start">
                         </form>
 
                     </div>
