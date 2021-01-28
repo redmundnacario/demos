@@ -12,6 +12,9 @@ import { CheckCastling, Castling } from './special-rules/castling.js';
 import { PawnPromotion } from './special-rules/promotion.js';
 import { getClassListIncludes, setInnerImg} from './utils.js';
 
+//components
+import { toggleAlert } from './components/alert.js';
+
 
 // Main Constructor function
 export const Application = function() {

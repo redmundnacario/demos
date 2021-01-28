@@ -2,6 +2,7 @@
 //non-chess
 import { welcomeModal } from './components/modal.js';
 import { showSlides , currentSlide } from './components/slideshow.js';
+import { toggleAlert } from './components/alert.js'
 // Application
 import { Application } from './main.js';
 
@@ -18,7 +19,9 @@ App.chessBoxIds.forEach((tile) => {
 });
 
 // Add event listener to undo button
-App.btnUndo.onclick = () => App.UndoMove(App.state);
+App.btnUndo.onclick = () => [toggleAlert("Undo!"),
+                             rotateUndo() , 
+                             App.UndoMove(App.state)];
 
 // ReInitialize Button
 // App.btnUndo.onclick = () => App.ReInitializeChessMap();
@@ -31,3 +34,13 @@ App.dotSlide.forEach((dot, index) => {
     dot.onclick = () => currentSlide(index +1)
 })
 showSlides();
+
+
+// Animations
+
+let rotateUndo = function(){
+    document.getElementById("undo").classList.toggle("syncRotate");
+    setTimeout(function() {
+        document.getElementById("undo").classList.toggle('syncRotate');
+    }, 1500)
+}

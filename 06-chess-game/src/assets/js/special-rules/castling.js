@@ -1,6 +1,9 @@
 import { CheckIfChecked, getCheckers } from './check.js';
 import { getClassListIncludes, setInnerImg} from '../utils.js';
 
+//components
+import { toggleAlert } from '../components/alert.js';
+
 /*
 Perform castling when king is moved and hasCastling class exist;
 */ 
@@ -31,6 +34,7 @@ export const Castling = function(chessPieceMoved, hasCastling, state) {
             setInnerImg(rookId, "");
             setInnerImg("d"+rowRook, active_chess_obj["d"+rowRook].piece.img);
         };
+        toggleAlert("Castling!")
     };
 };
 

@@ -24,25 +24,28 @@
 </head>
 <body>
     <div class="chess">
-        <button id="undo">Undo</button>
+        <button id="undo" class="hidden"><img src="./assets/img/undo.png" alt=""></button>
         <div id="app"></div>
     </div>
 
-    <div class="players-row">
+    <div id ="playerRowId" class="players-row hidden">
         <div id="player-1" class="player-box">
-            <h3>Player 1</h3>
+            <h4>Player 1</h4>
             <p id="p1time">-- min: -- sec</p>
         </div>
+        <div class="game-timer player-box">
+            <h3 id="time">--:--</h3>
+            <p>Timer</p>
+        </div>
+         
         <div id="player-2" class="player-box">
-            <h3>Player 2</h3>
+            <h4>Player 2</h4>
             <p id="p2time">-- min: -- sec</p>
         </div>
     </div>
 
-    <div class="game-timer">
-        <h2 id="time">--:--</h2>
-    </div>
-    <div class="playerTurn"><h2 id="activePlayer"></h2></div>
+   
+    <div id="playerTurnId" class="playerTurn hidden"><h3 id="activePlayer"></h3></div>
 
     <!-- modal -->
     <div id="welcomeModal" class="modal">
@@ -121,6 +124,12 @@
             </div>
         </div>
       
+    </div>
+
+    <div id="alertModal" class="alert-modal">
+        <div id="alertModalContent" class="alert-modal-content">
+            <h1>Sample Message!</h1>
+        </div>
     </div>
 </body>
 </html>

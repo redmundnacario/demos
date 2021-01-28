@@ -6,6 +6,8 @@ import { BishopMoves } from '../chess-pieces/bishop.js';
 import { QueenMoves } from '../chess-pieces/queen.js';
 import { KingMoves } from '../chess-pieces/king.js';
 
+//components
+import { toggleAlert } from '../components/alert.js';
 
 const scanCheckers = function(possibleTargets, active_chess_obj,
                               positionString ) {
@@ -77,7 +79,7 @@ export const CheckIfChecked = function (state , UndoMove) {
         active_chess_obj, 
         king_location
         } = state;
-
+    let checkers;
     kingdoms.forEach( kingdom => {
 
         let kingChecked = document.getElementsByClassName("checked-"+kingdom)
@@ -87,7 +89,7 @@ export const CheckIfChecked = function (state , UndoMove) {
         });
 
         // console.log(kingdom)
-        let checkers = getCheckers(king_location[kingdom],
+        checkers = getCheckers(king_location[kingdom],
                                    active_chess_obj, state);
         
         if (checkers.length > 0) { 
@@ -107,7 +109,12 @@ export const CheckIfChecked = function (state , UndoMove) {
     });
 
     if (Boolean(state.checked.white) | Boolean(state.checked.black)) {
+        toggleAlert("Checked!")
         console.log("Checkers!",state.checked);
+        console.log("Checkers",checkers)
+        console.log("being checked",state.checked, state.active_chess_player)
+
+        // add verification if checkmate
     };
     let currentCheckedKingdom = Boolean(state.checked.white) ? "white" : 
                                 Boolean(state.checked.black) ? "black" : null;
@@ -115,6 +122,7 @@ export const CheckIfChecked = function (state , UndoMove) {
     if (currentCheckedKingdom != null & UndoMove != null) {
         if (currentCheckedKingdom != active_chess_player) {
             console.log("Last move was illegal! King is being checked.")
+            toggleAlert("Move was Illegal!")
             UndoMove();
         }
     }

@@ -1,6 +1,7 @@
 // set the active player in dom
 export const SetActivePlayer = function (ACTIVE_CHESS_PLAYER) {
-    document.getElementById("activePlayer").innerHTML = ACTIVE_CHESS_PLAYER.toUpperCase(); 
+    document.getElementById("activePlayer").innerHTML = ACTIVE_CHESS_PLAYER[0].toUpperCase() +
+        ACTIVE_CHESS_PLAYER.slice(1)+"'s Turn"; 
 }
 
 // Update active player

@@ -3,12 +3,14 @@ export function welcomeModal(state){
 
     
     // Get the modal
-    var modal = document.getElementById("welcomeModal");
+    let modal = document.getElementById("welcomeModal");
 
     // Get the button that opens the modal
-
-    var closeButton = document.getElementById("start");
-
+    let closeButton = document.getElementById("start");
+    
+    let playerRow = document.getElementById("playerRowId")
+    let playerTurn = document.getElementById("playerTurnId")
+    let undo = document.getElementById("undo")
     
 
     // When the user clicks on <span> (x), close the modal
@@ -32,6 +34,10 @@ export function welcomeModal(state){
 
             player1.innerText = state.players.white.name
             player2.innerText = state.players.black.name
+
+            playerRow.classList.toggle("hidden")
+            playerTurn.classList.toggle("hidden")
+            undo.classList.toggle("hidden")
 
         // initialize time
         countDownTimer(state);

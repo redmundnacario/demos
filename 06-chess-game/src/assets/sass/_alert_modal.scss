@@ -1,0 +1,21 @@
+.alert-modal {
+    display: none; /* block by default */
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    // padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+
+    // backdrop-filter: blur( 2px );
+    #alertModalContent {
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.9);
+        // font: italic bold 100px Georgia, Serif;
+        text-shadow: -4px 3px 0 #242424;
+    }
+}

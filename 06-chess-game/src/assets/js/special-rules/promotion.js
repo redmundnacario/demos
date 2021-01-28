@@ -1,4 +1,8 @@
 import { setInnerHtml } from '../utils.js';
+
+//components
+import { toggleAlert } from '../components/alert.js';
+
 /*
 Promotes Pawn when it reaches the last row
 */ 
@@ -13,6 +17,7 @@ export const PawnPromotion = function(nextBox, chessPieceMoved,
                                         position: 'queen'
                                     };
             setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode);
+            toggleAlert("Pawn Promoted!")
         };
 
         if(chessPieceMoved.rowNumber == 1 & active_chess_player == "black"){
@@ -22,6 +27,7 @@ export const PawnPromotion = function(nextBox, chessPieceMoved,
                                         position: 'queen'
                                     };
             setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode);
+            toggleAlert("Pawn Promoted!")
         };
     };
 };

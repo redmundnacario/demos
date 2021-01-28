@@ -6,6 +6,8 @@
 @import 'modal';
 // SlideShow
 @import 'slideshow';
+// AlertModal
+@import 'alert_modal';
 
 
 .chess {
@@ -17,6 +19,7 @@
 .players-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 5vh;
     // height: 20vh;
     width: 70vh;
@@ -29,19 +32,30 @@
     width: 30%;
     text-align: center;
 }
-
-.game-timer{
-    position: absolute;
-    bottom : 2vh;
+#player-1,
+#player-2{
+    color:rgb(153, 153, 153);
 }
+
 .playerTurn {
     position: absolute;
     top:2vh;
 }
 #undo{
     position:absolute;
-    top:-4vh;
+    top:-5vh;
     right:1vh;
+
+    background-color: transparent;
+    border: none ;
+    cursor: pointer;
+    outline: none;
+
+    &.syncRotate{
+        transition: 500ms ease all;
+        transform: rotate(-360deg);
+        // animation: rotation 500ms ease-in-out forwards;
+    }
 }
 
 .headbar {

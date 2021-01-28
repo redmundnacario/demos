@@ -1,4 +1,6 @@
 import { setInnerImg } from './utils.js';
+//components
+import { toggleAlert } from '../components/alert.js';
 
 export const EnPassant = function (state, chessPieceMoved, chessPieceOriginalBox) {
     let {
@@ -13,7 +15,7 @@ export const EnPassant = function (state, chessPieceMoved, chessPieceOriginalBox
 
             if(pawn_double_step_status.rowNumber - 
                 chessPieceOriginalBox.rowNumber == 0) {
-
+                
                 let pawnEnPassant = pawn_double_step_status.colLetter +
                                     pawn_double_step_status.rowNumber;
                 // update chessObject
@@ -21,7 +23,7 @@ export const EnPassant = function (state, chessPieceMoved, chessPieceOriginalBox
                 // update dom
                 
                 setInnerImg(pawnEnPassant, "")
-                
+                toggleAlert("En Passant!")
                 console.log("En Passant!");
             };
         };
