@@ -10,7 +10,7 @@ export function welcomeModal(state){
     
     let playerRow = document.getElementById("playerRowId")
     let playerTurn = document.getElementById("playerTurnId")
-    let undo = document.getElementById("undo")
+    let gameButton = document.getElementById("gameButton")
     
 
     // When the user clicks on <span> (x), close the modal
@@ -37,7 +37,7 @@ export function welcomeModal(state){
 
             playerRow.classList.toggle("hidden")
             playerTurn.classList.toggle("hidden")
-            undo.classList.toggle("hidden")
+            gameButton.classList.toggle("hidden")
 
         // initialize time
         countDownTimer(state);

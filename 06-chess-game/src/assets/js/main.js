@@ -25,6 +25,7 @@ export const Application = function() {
     /* HTML elements */
     // undo button
     this.btnUndo = document.getElementById("undo");
+    this.btnRestart = document.getElementById("restart");
     // chess boxes
     this.chessBoxIds;
     // dots in slideshow
@@ -169,7 +170,7 @@ export const Application = function() {
         let hasPossibleMove = getClassListIncludes(nextBox, "possible-move");
         let hasPossibleTarget = getClassListIncludes(nextBox, "possible-target");
         let hasCastling = getClassListIncludes(nextBox, "castling");
-        
+
         // Check selected box id if it contains possible-move class;
         if (!(hasPossibleMove | hasPossibleTarget | hasCastling )){ return };
 
@@ -177,8 +178,6 @@ export const Application = function() {
         //             + " " + chessPieceOriginalBox.piece.position
         //             + " " + previousBox + " to "+ nextBox);
 
-        // Pre-checking if kings move is illegal, or checkmate
-        CheckAreaIfChecked(previousBox, nextBox, this.state)
 
         // update this.state.chess_obj and HTML DOM
         chessPieceMoved.piece = chessPieceOriginalBox.piece;
@@ -227,6 +226,7 @@ export const Application = function() {
         // console.log(this.state.chess_obj.length)
         // Post-Check if enemy kingdom's king was checked 
         CheckIfChecked(this.state,  () => {this.UndoMove(this.state)})  
+
     };
 
 
@@ -262,7 +262,7 @@ export const Application = function() {
 
         // Locate king's location and check if checked
         this.findKing();
-        CheckIfChecked(state, null);
+        CheckIfChecked(state, null, null);
     };
 
 

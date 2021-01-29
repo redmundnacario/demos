@@ -41,10 +41,15 @@
     position: absolute;
     top:2vh;
 }
-#undo{
+
+#gameButton{
     position:absolute;
     top:-5vh;
     right:1vh;
+}
+#undo,
+#restart{
+    
 
     background-color: transparent;
     border: none ;

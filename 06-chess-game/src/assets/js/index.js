@@ -19,12 +19,19 @@ App.chessBoxIds.forEach((tile) => {
 });
 
 // Add event listener to undo button
-App.btnUndo.onclick = () => [toggleAlert("Undo!"),
-                             rotateUndo() , 
-                             App.UndoMove(App.state)];
+App.btnUndo.onclick = () => {
+    toggleAlert("Undo!"),
+    rotateUndo("undo") , 
+    App.UndoMove(App.state)
+};
 
 // ReInitialize Button
-// App.btnUndo.onclick = () => App.ReInitializeChessMap();
+App.btnRestart.onclick = () => {
+    toggleAlert("Restart!"),
+    rotateUndo("restart") , 
+    App.ReInitializeChessMap();
+    //Modal 
+}
 
 //Modal
 welcomeModal(App.state);
@@ -38,9 +45,9 @@ showSlides();
 
 // Animations
 
-let rotateUndo = function(){
-    document.getElementById("undo").classList.toggle("syncRotate");
+let rotateUndo = function(stringIn){
+    document.getElementById(stringIn).classList.toggle("syncRotate");
     setTimeout(function() {
-        document.getElementById("undo").classList.toggle('syncRotate');
+        document.getElementById(stringIn).classList.toggle('syncRotate');
     }, 1500)
 }

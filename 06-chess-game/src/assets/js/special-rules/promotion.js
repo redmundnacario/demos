@@ -14,9 +14,10 @@ export const PawnPromotion = function(nextBox, chessPieceMoved,
             chessPieceMoved.piece =  {  
                                         htmlcode: '&#9813;',
                                         kingdom: 'white',
-                                        position: 'queen'
+                                        position: 'queen',
+                                        img: "./assets/img/wQ.png"
                                     };
-            setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode);
+            document.getElementById(nextBox).innerHTML = `<img class="chess-piece" src="${chessPieceMoved.piece.img}"/>`
             toggleAlert("Pawn Promoted!")
         };
 
@@ -24,9 +25,11 @@ export const PawnPromotion = function(nextBox, chessPieceMoved,
             chessPieceMoved.piece =  {  
                                         htmlcode: '&#9819;',
                                         kingdom: 'black',
-                                        position: 'queen'
+                                        position: 'queen',
+                                        img: "./assets/img/bQ.png"
                                     };
-            setInnerHtml(nextBox, chessPieceMoved.piece.htmlcode);
+            document.getElementById(nextBox).innerHTML = `<img class="chess-piece" src="${chessPieceMoved.piece.img}"/>`
+           
             toggleAlert("Pawn Promoted!")
         };
     };

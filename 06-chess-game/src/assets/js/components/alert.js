@@ -19,6 +19,8 @@ export const toggleAlert = function(message) {
     alertModal.style.display = "flex";
     setTimeout(function() {
         alertModal.style.display = "none";
-    }, 1000)
+    }, 2000)
 
 }
+
+// export const toggleAlertwithCoundown

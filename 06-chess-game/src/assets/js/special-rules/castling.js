@@ -53,7 +53,7 @@ export const CheckCastling = function (state) {
         // console.log("king")
         if(castling[active_chess_player] != null){
             // Rule 2 check if king is being checked in its location.
-            CheckIfChecked(state,  null)
+            CheckIfChecked(state,  null , "castling")
             
             if (checked[active_chess_player] == null){
                 // Passed rule 2

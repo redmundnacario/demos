@@ -97,6 +97,8 @@ export const ChessGamePlayState = function () {
             // black king checked 
             black: null  
         },
+        currently_checked: null,
+        previous_move:null,
         // if checked = true and , all possible square to move are being attacked
         checkmate: {
             // white king being checkmate
