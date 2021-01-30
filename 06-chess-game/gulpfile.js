@@ -24,7 +24,7 @@ notifier.defaults({
   messages: {
     sass: "CSS was successfully compiled!",
     js: "Javascript is ready!",
-    kit: "HTML was delivered!"
+    kit: "HTML was delivered!",
   },
 //   prefix: "=====",
 //   suffix: "=====",
@@ -36,6 +36,9 @@ filesPath = {
     sass: "./src/assets/sass/**/*.scss",
     image: "./src/assets/img/**/*.+(png|jpg|gif|svg)",
     js: "./src/assets/js/**/*.js",
+    // gif: "./src/assets/img/**/*.gif",
+    // font: "./src/assets/fonts/**/*",
+    audio: "./src/assets/audios/**/*"
     // html: "./html/**/*.kit",
 }
 
@@ -44,6 +47,9 @@ filesDestpath = {
     sass : "./dist/assets/css",
     image: "./dist/assets/img",
     js : "./dist/assets/js",
+    // gif: "./dist/assets/img",
+    // font: "./dist/assets/fonts",
+    audio: "./dist/assets/audios"
 }
 
 
@@ -151,6 +157,33 @@ gulp.task("imagemin", function(done) {
     done();
 });
 
+// Copyt the iamge gifs , audio files and fonts ) 
+
+gulp.task("copyGifs", function(done){
+    return(
+        gulp.src(filesPath.gif)
+        .pipe(plumber())
+        .pipe(gulp.dest(filesDestpath.gif))
+    )
+})
+
+gulp.task("copyFonts", function(done){
+    return(
+        gulp.src(filesPath.font)
+        .pipe(plumber())
+        .pipe(gulp.dest(filesDestpath.font))
+    )
+})
+
+gulp.task("copyAudios", function(done){
+    return(
+        gulp.src(filesPath.audio)
+        .pipe(plumber())
+        .pipe(gulp.dest(filesDestpath.audio))
+    )
+})
+
+
 
 //  HTML kit templating
 
@@ -205,19 +238,23 @@ gulp.task("watch", function() {
                 filesPath.sass,
                 filesPath.image,
                 filesPath.js,
+                // filesPath.gif,
+                filesPath.audio,
+                // filesPath.font,
             ], 
             gulp.parallel([
                             "html",
                             "sass",
                             "imagemin",
                             "javascript", 
+                            // "copyGifs",
+                            "copyAudios",
+                            // "copyFonts"
                             //  "kit"
                             ])
         )
         .on("change", browserSync.reload);
 });
-
-
 
 // Clear cache
 
@@ -229,11 +266,14 @@ gulp.task("clear-cache", function(done) {
 // Serve
 
 gulp.task("serve", gulp.parallel([
-                                    "html",
-                                    "sass",
-                                    "imagemin",
-                                    "javascript", 
-                                ]));
+    "html",
+    "sass",
+    "imagemin",
+    "javascript", 
+    // "copyGifs",
+    "copyAudios",
+    // "copyFonts"
+]));
 
 
 // Gulp default command
