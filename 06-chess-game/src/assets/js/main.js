@@ -14,6 +14,7 @@ import { getClassListIncludes, setInnerImg} from './utils.js';
 
 //components
 import { toggleAlert } from './components/alert.js';
+import { Sound } from './audios/sound.js';
 
 
 // Main Constructor function
@@ -174,6 +175,11 @@ export const Application = function() {
         // Check selected box id if it contains possible-move class;
         if (!(hasPossibleMove | hasPossibleTarget | hasCastling )){ return };
 
+
+        // chess Sound
+        let chess_sound = new Sound("./assets/audios/chess_move.mp3")
+        
+
         // console.log(chessPieceOriginalBox.piece.kingdom 
         //             + " " + chessPieceOriginalBox.piece.position
         //             + " " + previousBox + " to "+ nextBox);
@@ -184,6 +190,7 @@ export const Application = function() {
         chessPieceOriginalBox.piece = null;
         setInnerImg(previousBox, "")
         setInnerImg(nextBox, chessPieceMoved.piece.img)
+        chess_sound.play()
 
         // if king was moved, and castled, move rook also
         Castling(chessPieceMoved, hasCastling, this.state)

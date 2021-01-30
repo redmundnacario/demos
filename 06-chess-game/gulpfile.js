@@ -34,7 +34,7 @@ notifier.defaults({
 filesPath = {
     html: "./src/**/*.html",
     sass: "./src/assets/sass/**/*.scss",
-    image: "./src/assets/img/**/*.+(png|jpg|gif|svg)",
+    image: "./src/assets/img/**/*.+(png|jpg|svg)",
     js: "./src/assets/js/**/*.js",
     // gif: "./src/assets/img/**/*.gif",
     // font: "./src/assets/fonts/**/*",
@@ -102,29 +102,32 @@ gulp.task("sass", function(done) {
 });
 
 
-sourceJS = ["./src/assets/js/chess-pieces/bishop.js",
-"./src/assets/js/chess-pieces/utils.js",
-"./src/assets/js/chess-pieces/king.js",
-"./src/assets/js/data/chess-pieces.js",
-"./src/assets/js/chess-pieces/knight.js",
-"./src/assets/js/data/state.js",
-"./src/assets/js/chess-pieces/moves.js",
-"./src/assets/js/special-rules/castling.js",
-"./src/assets/js/chess-pieces/pawn.js",
-"./src/assets/js/special-rules/check.js",
-"./src/assets/js/chess-pieces/queen.js",
-"./src/assets/js/special-rules/en-passant.js",
-"./src/assets/js/chess-pieces/rook.js",
-"./src/assets/js/special-rules/promotion.js",
-"./src/assets/js/active-player.js",
-"./src/assets/js/utils.js",
-"./src/assets/js/draw.js",
-"./src/assets/js/main.js",
-"./src/assets/js/components/alert.js",
-"./src/assets/js/components/modal.js",
-"./src/assets/js/components/timer.js",
-"./src/assets/js/components/slideshow.js",
-"./src/assets/js/index.js"]
+sourceJS = [
+    "./src/assets/js/audios/sound.js",
+    "./src/assets/js/chess-pieces/bishop.js",
+    "./src/assets/js/chess-pieces/utils.js",
+    "./src/assets/js/chess-pieces/king.js",
+    "./src/assets/js/data/chess-pieces.js",
+    "./src/assets/js/chess-pieces/knight.js",
+    "./src/assets/js/data/state.js",
+    "./src/assets/js/chess-pieces/moves.js",
+    "./src/assets/js/special-rules/castling.js",
+    "./src/assets/js/chess-pieces/pawn.js",
+    "./src/assets/js/special-rules/check.js",
+    "./src/assets/js/chess-pieces/queen.js",
+    "./src/assets/js/special-rules/en-passant.js",
+    "./src/assets/js/chess-pieces/rook.js",
+    "./src/assets/js/special-rules/promotion.js",
+    "./src/assets/js/active-player.js",
+    "./src/assets/js/utils.js",
+    "./src/assets/js/draw.js",
+    "./src/assets/js/main.js",
+    "./src/assets/js/components/alert.js",
+    "./src/assets/js/components/modal.js",
+    "./src/assets/js/components/timer.js",
+    "./src/assets/js/components/slideshow.js",
+    "./src/assets/js/index.js"
+]
 
 gulp.task("javascript", function(done) {
     return (

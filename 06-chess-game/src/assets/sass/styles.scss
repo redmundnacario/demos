@@ -48,6 +48,7 @@
     right:1vh;
 }
 #undo,
+#pause,
 #restart{
     
 
@@ -56,9 +57,13 @@
     cursor: pointer;
     outline: none;
 
+    img{
+        height: 2vh;
+    }
+
     &.syncRotate{
         transition: 500ms ease all;
-        transform: rotate(-360deg);
+        transform: rotate(360deg);
         // animation: rotation 500ms ease-in-out forwards;
     }
 }
