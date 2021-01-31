@@ -13,11 +13,12 @@ const cache = require("gulp-cache");//caching minified images
 const kit = require("gulp-kit"); //combining partials in html
 const htmlmin = require("gulp-htmlmin");//minify html
 const autoprefixer = require("gulp-autoprefixer");//css compatibility with diff. browsers
-const babel = require("gulp-babel");//convert all js to ES5 for compatibility with diff. browsers
 const zip = require("gulp-zip");//zipping whole project
 const del = require("del");//delete dist files
 const plumber = require("gulp-plumber");// for debugging
 const notifier = require("gulp-notifier");//notifies when tasks were done successfully
+
+const babel = require("gulp-babel");//convert all js to ES5 for compatibility with diff. browsers
 
 
 notifier.defaults({
@@ -126,7 +127,8 @@ sourceJS = [
     "./src/assets/js/components/modal.js",
     "./src/assets/js/components/timer.js",
     "./src/assets/js/components/slideshow.js",
-    "./src/assets/js/index.js"
+    "./src/assets/js/index.js",
+    "./src/assets/js/polyfill.min.js"
 ]
 
 gulp.task("javascript", function(done) {
@@ -138,7 +140,12 @@ gulp.task("javascript", function(done) {
         .pipe(concat("index.min.js"))
         .pipe(
             babel({
-                presets: ['@babel/preset-env']
+                presets: [
+                    '@babel/preset-env',
+                ],
+                plugins:[
+                    "@babel/plugin-transform-regenerator"
+                ]
             })
         )
         .pipe(terser())

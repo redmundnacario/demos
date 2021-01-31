@@ -7,7 +7,7 @@
     5. Illegal moves
 */ 
 
-export const toggleAlert = function(message) {
+export const toggleAlert = function(message, mode=true) {
     // selector
     let alertModal = document.getElementById("alertModal")
     let alertContent = document.getElementById("alertModalContent")
@@ -17,10 +17,18 @@ export const toggleAlert = function(message) {
 
     // set display flex within 1 sec then go back to displa none
     alertModal.style.display = "flex";
-    setTimeout(function() {
-        alertModal.style.display = "none";
-    }, 2000)
-
+    if (mode===true){
+        setTimeout(function() {
+            alertModal.style.display = "none";
+        }, 2000)
+    }
 }
 
-// export const toggleAlertwithCoundown
+export const toggleAlertOff = function() {
+    let alertModal = document.getElementById("alertModal")
+    let alertContent = document.getElementById("alertModalContent")
+
+    // Set inner html
+    alertContent.innerHTML =  ""
+    alertModal.style.display = "none";
+}

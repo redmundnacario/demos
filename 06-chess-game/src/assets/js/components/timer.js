@@ -1,3 +1,7 @@
+import regeneratorRuntime from "regenerator-runtime";
+
+import { toggleAlert } from './alert.js'
+// import "regenerator-runtime/runtime.js";
 function convertTimerToTime(timeInput) {
     //timeInput must be in milliseconds format
     let days = Math.floor(timeInput / (1000 * 60 * 60 * 24));
@@ -28,71 +32,56 @@ export function countDownTimer(state) {
     updateGameTime( state.players.white.remaining_time , "p1time" )
     updateGameTime( state.players.black.remaining_time , "p2time" )
 
-    // pause button
-    let pauseBtn = document.getElementById("pause")
+    let timer = new Timer(countDownHour, countDownInterval ,state)
+    timer.forLoop()
+}
 
-    // Update the count down every 1 second
-    var x = setInterval(() => {
+function Timer(wholeTimePeriod, Interval, state) {
+    this.wholeTimePeriod = wholeTimePeriod
+    this.interval = Interval
+    this.pause = false
+
+    this.pauseBtn = document.getElementById("pause")
+    this.pauseBtn.onclick = () => this.pauseMethod();
+
+    this.timer = function(interval) {
+        return new Promise(resolved => {
+            setTimeout(resolved, interval)
+        })
+    }
+    this.action = async function(){
+        await this.timer(this.interval)
         
+        // let { minutes, seconds } = convertTimerToTime( this.wholeTimePeriod )
+        // console.log( minutes.slice(-2) + " : " + seconds.slice(-2))
 
-        // display game time;
-        updateGameTime( countDownHour , "time" )
-        countDownHour = countDownHour - countDownInterval;
+        updateGameTime( this.wholeTimePeriod , "time" )
+        this.wholeTimePeriod -= this.interval;
 
         // display player time;
         let active_time = state.players[state.active_chess_player].remaining_time;
         let active_player = state.active_chess_player == "white" ? "p1time" : "p2time";
         // console.log(active_time, active_player )
         updateGameTime( active_time , active_player )
-        state.players[state.active_chess_player].remaining_time = active_time - countDownInterval;
+        state.players[state.active_chess_player].remaining_time = active_time - this.interval;    
+    }
 
-        // if gamer reaches 0 time, that player lost the game
-    
+    this.pauseMethod = function () {
+        this.pause = this.pause === true ? false : true
 
-    }, countDownInterval);
-    // try {
-    //     let timer = new Timer(countDownHour, countDownInterval ,state)
-    //     timer.forLoop()
-    // } catch (error) { 
-    //     console.log(error.message)
-    // }
+        if(this.pause === false){
+            toggleAlert("Resumed!")
+            this.forLoop()
+        }
+    }
+
+    this.forLoop = async function(){
+        while (this.wholeTimePeriod > 0) {
+            await this.action()
+            if(this.pause === true)  {
+                toggleAlert("Paused!", false)
+                break
+            }
+        }
+    }
 }
-
-// function Timer(wholeTimePeriod, Interval, state) {
-//     this.wholeTimePeriod = wholeTimePeriod
-//     this.interval = Interval
-//     this.pause = false
-
-//     this.action = function(){
-//         return new Promise(resolve => {
-//             setTimeout(() => {
-//                 updateGameTime( this.wholeTimePeriod , "time" )
-//                 this.wholeTimePeriod -= this.interval;
-
-//                 // display player time;
-//                 let active_time = state.players[state.active_chess_player].remaining_time;
-//                 let active_player = state.active_chess_player == "white" ? "p1time" : "p2time";
-//                 // console.log(active_time, active_player )
-//                 updateGameTime( active_time , active_player )
-//                 state.players[state.active_chess_player].remaining_time = active_time - this.interval;
-
-//                 console.log(this.wholeTimePeriod)
-//                 resolve
-//             }, this.Interval);
-//         }
-
-//         )     
-//     }
-
-//     this.pauseMethod = function () {
-//         this.pause = this.pause === true ? false : true
-//     }
-
-//     this.forLoop = async function(){
-//         if(this.pause === false){
-//             while (this.wholeTimePeriod > 0) {
-//                 await this.action()     
-//             }
-//         }
-//     }
-// }

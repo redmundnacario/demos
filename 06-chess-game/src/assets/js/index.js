@@ -1,4 +1,6 @@
 
+// import "regenerator-runtime/runtime.js";
+// import regeneratorRuntime from "regenerator-runtime";
 //non-chess
 import { welcomeModal } from './components/modal.js';
 import { showSlides , currentSlide } from './components/slideshow.js';
@@ -21,10 +23,9 @@ App.chessBoxIds.forEach((tile) => {
 // Add event listener to undo button
 App.btnUndo.onclick = () => {
     toggleAlert("Undo!"),
-    rotateUndo("undo") , 
     App.UndoMove(App.state)
 };
-
+//  babel + async plugins + babel-polyfill
 // ReInitialize Button
 App.btnRestart.onclick = () => {
     toggleAlert("Restart!"),

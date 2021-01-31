@@ -20,15 +20,11 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.min.css"/>
     <!-- JS -->
+    <!-- <script src="./assets/js/polyfill.min.js"></script> -->
     <script src='./assets/js/index.min.js' defer></script>
 </head>
 <body>
     <div class="chess">
-        <div id="gameButton" class="hidden">
-            <button id="undo" title='Undo Last Move'><img src="./assets/img/undo.png" alt=""></button>
-            <button id="pause" title='Pause Timer'><img src="./assets/img/pause.png" alt=""></button>
-            <button id="restart" title='Restart Game'><img src="./assets/img/restart.png" alt=""></button>
-        </div>
         <div id="app"></div>
     </div>
 
@@ -39,7 +35,11 @@
         </div>
         <div class="game-timer player-box">
             <h3 id="time">--:--</h3>
-            <p>Timer</p>
+            <div id="gameButton" class="hidden">
+                <button id="undo" title='Undo Last Move'><img src="./assets/img/undo.png" alt=""></button>
+                <button id="pause" title='Pause Timer'><img src="./assets/img/pause.png" alt=""></button>
+                <button id="restart" title='Restart Game'><img src="./assets/img/restart.png" alt=""></button>
+            </div>
         </div>
          
         <div id="player-2" class="player-box">
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-   
+    <!-- Header -->
     <div id="playerTurnId" class="playerTurn hidden"><h3 id="activePlayer"></h3></div>
 
     <!-- modal -->

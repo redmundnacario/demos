@@ -24,7 +24,7 @@
     // height: 20vh;
     width: 70vh;
     position: absolute;
-    bottom : 2vh;
+    bottom : 3vh;
 }
 
 .player-box {
@@ -39,13 +39,17 @@
 
 .playerTurn {
     position: absolute;
-    top:2vh;
+    top:4vh;
 }
 
-#gameButton{
-    position:absolute;
-    top:-5vh;
-    right:1vh;
+.game-timer {
+    display:flex;
+    flex-flow: column;
+}
+#gameButton {
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 4;
 }
 #undo,
 #pause,
