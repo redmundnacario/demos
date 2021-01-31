@@ -1,27 +1,29 @@
-import regeneratorRuntime from "regenerator-runtime";
+// import regeneratorRuntime from "regenerator-runtime";
 
 import { toggleAlert } from './alert.js'
 // import "regenerator-runtime/runtime.js";
 function convertTimerToTime(timeInput) {
     //timeInput must be in milliseconds format
-    let days = Math.floor(timeInput / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((timeInput % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = "0" + Math.floor((timeInput % (1000 * 60 * 60)) / (1000 * 60));
+    // let days = Math.floor(timeInput / (1000 * 60 * 60 * 24));
+    // let hours = Math.floor((timeInput % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    // let minutes = "0" + Math.floor((timeInput % (1000 * 60 * 60)) / (1000 * 60));
+    let minutes = Math.floor(timeInput / (1000 * 60 ));
+    if (String(minutes).length < 2)  { minutes = `0${String(minutes)}` }
     let seconds = "0" + Math.floor((timeInput % (1000 * 60)) / 1000);
 
-    return { days, hours, minutes, seconds}
+    return { minutes, seconds}
 }
 
 function updateGameTime( timeInput , idTimeDiv ){
     let { minutes, seconds } = convertTimerToTime( timeInput ) 
-    document.getElementById(idTimeDiv).innerText = minutes.slice(-2) + " : " + seconds.slice(-2)  ;
+    document.getElementById(idTimeDiv).innerText = minutes + " : " + seconds.slice(-2)  ;
 }
 
 export function countDownTimer(state) {
     // let { active_chess_player } = state;
 
     // Set the date we're counting down to
-    let countDownHour   = 3600000 ; // 60 minutes * 60 seconds * 1000 -> 
+    let countDownHour   = 1800000 ; // 60 minutes * 60 seconds * 1000 -> 
     let countDownInterval = 1000; // 1 second * 1000 -> 1000 milliseconds or 1 second
     let multiplier = 1000;
 

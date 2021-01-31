@@ -128,7 +128,7 @@ sourceJS = [
     "./src/assets/js/components/timer.js",
     "./src/assets/js/components/slideshow.js",
     "./src/assets/js/index.js",
-    "./src/assets/js/polyfill.min.js"
+    "./src/assets/js/polyfill.min.js"// needed if JS needs ASYNC AWAIT
 ]
 
 gulp.task("javascript", function(done) {
@@ -143,9 +143,9 @@ gulp.task("javascript", function(done) {
                 presets: [
                     '@babel/preset-env',
                 ],
-                plugins:[
-                    "@babel/plugin-transform-regenerator"
-                ]
+                // plugins:[
+                //     "@babel/plugin-transform-regenerator"
+                // ]
             })
         )
         .pipe(terser())
