@@ -105,7 +105,7 @@ const pawnMovesCheckers = function(moves, active_chess_obj,
 
     if (moves.possibleMoves.length > 0){
         let result = [];
-        console.log(moves)
+        // console.log(moves)
         moves.possibleMoves.forEach( value => {
             if (active_chess_obj[value].piece){
                 if (active_chess_obj[value].piece.position === positionString){
@@ -229,8 +229,8 @@ export const getCheckers = function(locationId, active_chess_obj, state,
             }
         }).filter(Boolean)
         
-        console.log(possiblePawns)
-        console.log(pawnMoves1)
+        // console.log(possiblePawns)
+        // console.log(pawnMoves1)
         // let pawnCheck = scanContesters(pawnMoves,
         //             active_chess_obj,'pawn')
         checkers = [
@@ -267,7 +267,7 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
         // console.log(kingdom)
         checkers = getCheckers(king_location[kingdom],
                                    active_chess_obj, state, "normal");
-        console.log(checkers)
+        // console.log(checkers)
         if (checkers.length > 0) { 
             state.checked[kingdom] = checkers;
             
@@ -306,11 +306,11 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
                 let checkers = getCheckers(king_location[currentCheckedKingdom],
                                             active_chess_obj, 
                                             state);
-                console.log(checkers)
+                // console.log(checkers)
 
                 let contestTheChecker =[]
                 checkers[0].checkerRange.forEach(value => {
-                    console.log("checker",value)
+                    // console.log("checker",value)
                     let chessObjSimulation = JSON.parse(JSON.stringify(active_chess_obj));
                     chessObjSimulation[value].piece = checkers[0].value.piece;
                     let result = getCheckers(value,
@@ -318,7 +318,7 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
                                             state , 
                                             "contestChecker",
                                             active_chess_obj)
-                    console.log(result)
+                    // console.log(result)
 
                     if(result.length > 0){
                         contestTheChecker.push(result)
@@ -332,8 +332,8 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
                     }
                 }).filter(Boolean)
 
-                console.log(contestTheChecker)
-                console.log(kingChecksafePMoves)
+                // console.log(contestTheChecker)
+                // console.log(kingChecksafePMoves)
 
                 if (kingChecksafePMoves.length === 0 && contestTheChecker.length === 0){
                     let winner = active_chess_player == "white"? "black": "white";
