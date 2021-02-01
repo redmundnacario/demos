@@ -43,8 +43,62 @@ const scanCheckers = function(moves, active_chess_obj,
 };
 
 const scanPawn = function(chessObjBox, active_chess_obj) {
-        console.log(chessObjBox, active_chess_obj)
+    // chessObjbox - simulated,
+    // active_chess_obj - current map
+    let col = chessObjBox.colLetter
+    let row = chessObjBox.rowNumber
+    let color = chessObjBox.piece.kingdom
+    let target_color = color === "white"  ? "black" : "white"
+    
+
+    let possiblePawn = []
+
+    if (color === "white"){
+        if (active_chess_obj[col + String(row+1)]){
+            if (active_chess_obj[col + String(row+1)].piece){
+                if (active_chess_obj[col + String(row+1)].piece.kingdom == target_color){
+                    if(active_chess_obj[col + String(row+1)].piece.position == "pawn"){
+                        possiblePawn.push(col + String(row+1))
+                    }
+                }
+            }
+        }
+        if (row == 5){
+            if (active_chess_obj[col + String(row+2)]){
+                if (active_chess_obj[col + String(row+2)].piece){
+                    if (active_chess_obj[col + String(row+2)].piece.kingdom == target_color){
+                        if(active_chess_obj[col + String(row+2)].piece.position == "pawn"){
+                            possiblePawn.push(col + String(row+2))
+                        }
+                    }
+                }
+            }
+
+        }
+    } else { //black
+        if (active_chess_obj[col + String(row-1)]){
+            if (active_chess_obj[col + String(row-1)].piece){
+                if (active_chess_obj[col + String(row-1)].piece.kingdom == target_color){
+                    if(active_chess_obj[col + String(row-1)].piece.position == "pawn"){
+                        possiblePawn.push(col + String(row-1))
+                    }
+                }
+            }
+        }
+        if (row == 4){
+            if (active_chess_obj[col + String(row-2)]){
+                if (active_chess_obj[col + String(row-2)].piece){
+                    if (active_chess_obj[col + String(row-2)].piece.kingdom == target_color){
+                        if(active_chess_obj[col + String(row-2)].piece.position == "pawn"){
+                            possiblePawn.push(col + String(row-2))
+                        }
+                    }
+                }
+            }
+        }
     }
+    return possiblePawn
+}
 
 const pawnMovesCheckers = function(moves, active_chess_obj,
                               positionString) {
@@ -98,7 +152,8 @@ const scanContesters= function(moves, active_chess_obj,
     };
 };
 
-export const getCheckers = function(locationId, active_chess_obj, state, mode = "normal") {
+export const getCheckers = function(locationId, active_chess_obj, state,
+                                     mode = "normal", active_chess_obj1) {
     let {
         pawn_double_step_status,
         letters,
@@ -112,7 +167,8 @@ export const getCheckers = function(locationId, active_chess_obj, state, mode = 
     let bishopMoves = BishopMoves(chessObjBox, active_chess_obj, letters);
     let knightMoves = KnightMoves(chessObjBox, active_chess_obj, letters);
     let pawnMoves = PawnMoves(chessObjBox, active_chess_obj,
-                                pawn_double_step_status, letters)
+        pawn_double_step_status, letters)
+   
 
     //Search the pressence of enemy piece with its move, if true, check is true,
     // find multiple check also,
@@ -153,10 +209,28 @@ export const getCheckers = function(locationId, active_chess_obj, state, mode = 
         let knightCheck = scanContesters(knightMoves,
                     active_chess_obj,'knight')
 
-        // let pawnMovesSample = scanPawn(chessObjBox, active_chess_obj)
-        let pawnCheck = pawnMovesCheckers(pawnMoves,
-                        active_chess_obj,'pawn')
+        let possiblePawns = scanPawn(chessObjBox, active_chess_obj1)
 
+        let chessObjPawns = possiblePawns.map(value =>{
+            return active_chess_obj1[value]
+        })
+
+        let pawnMoves1 = chessObjPawns.map(value =>{
+          
+            let pawnres = PawnMoves(value, active_chess_obj1,
+                             pawn_double_step_status, letters)
+            if(pawnres.possibleMoves.includes(chessObjBox.colLetter + chessObjBox.rowNumber)){
+                return {
+                    value : value,
+                    checkerRange : [
+                        pawnres.possibleMoves
+                    ].flat()
+                }
+            }
+        }).filter(Boolean)
+        
+        console.log(possiblePawns)
+        console.log(pawnMoves1)
         // let pawnCheck = scanContesters(pawnMoves,
         //             active_chess_obj,'pawn')
         checkers = [
@@ -164,7 +238,7 @@ export const getCheckers = function(locationId, active_chess_obj, state, mode = 
                     rookCheck,
                     bishopCheck,
                     knightCheck,
-                    pawnCheck,
+                    pawnMoves1,
                 ].filter(Boolean);
 
     }
@@ -199,9 +273,9 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
             
             document.getElementById(king_location[kingdom]).
                 classList.add("checked-"+kingdom)
-            checkers[0].checkerRange.forEach(value =>{
-                document.getElementById(value).classList.add("checked-"+kingdom)
-            })
+            // checkers[0].checkerRange.forEach(value =>{
+            //     document.getElementById(value).classList.add("checked-"+kingdom)
+            // })
             
 
         } else {
@@ -242,7 +316,8 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
                     let result = getCheckers(value,
                                             chessObjSimulation,
                                             state , 
-                                            "contestChecker")
+                                            "contestChecker",
+                                            active_chess_obj)
                     console.log(result)
 
                     if(result.length > 0){
@@ -263,10 +338,11 @@ export const CheckIfChecked = function (state , UndoMove, mode = "normal") {
                 if (kingChecksafePMoves.length === 0 && contestTheChecker.length === 0){
                     let winner = active_chess_player == "white"? "black": "white";
                     // #CHECKMATE
+                    winner = winner[0].toUpperCase() + winner.slice(1)
                     toggleAlert(`Checkmate! ${winner} wins!`)
                     setTimeout(()=>{
                         location.reload()
-                    },2500)
+                    },5000)
                 } else {
                     // console.log(active_chess_obj[active_chess_box_id])
                     toggleAlert("Checked!")

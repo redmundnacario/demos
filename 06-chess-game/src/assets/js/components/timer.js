@@ -23,7 +23,9 @@ export function countDownTimer(state) {
     // let { active_chess_player } = state;
 
     // Set the date we're counting down to
+    // let countDownHour   = 3600000 ; // 60 minutes * 60 seconds * 1000 -> 
     let countDownHour   = 1800000 ; // 60 minutes * 60 seconds * 1000 -> 
+    // let countDownHour   = 60000 ; // 60 minutes * 60 seconds * 1000 -> 
     let countDownInterval = 1000; // 1 second * 1000 -> 1000 milliseconds or 1 second
     let multiplier = 1000;
 
@@ -78,12 +80,38 @@ function Timer(wholeTimePeriod, Interval, state) {
     }
 
     this.forLoop = async function(){
-        while (this.wholeTimePeriod > 0) {
+        while (this.wholeTimePeriod > -1) {
             await this.action()
+
             if(this.pause === true)  {
                 toggleAlert("Paused!", false)
                 break
             }
+
+            if(this.wholeTimePeriod <= 0){
+                toggleAlert(`Out of Time! Draw.`)
+                // break
+                setTimeout(()=>{
+                    location.reload()
+                },5000)
+            }
+
+            if(state.players.white.remaining_time  <= 0){
+                toggleAlert(`Time's Up! Black wins!`)
+                // break
+                setTimeout(()=>{
+                    location.reload()
+                },5000)
+            }
+
+            if(state.players.black.remaining_time  <= 0){
+                toggleAlert(`Time's Up! White wins!`)
+                // break
+                setTimeout(()=>{
+                    location.reload()
+                },5000)
+            }
+
         }
     }
 }
