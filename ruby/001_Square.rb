@@ -29,17 +29,12 @@ module Square
     def isSquare
         create_range.each{|item|
             # puts item
-            if item == 0
-                puts "false"
-                return
-            end
-
             if number == item * item
-                puts "true"
+                puts "#{number} => true"
                 return
             end
         }
-        puts "false"
+        puts "#{number} => false"
         return
     end
 end
@@ -53,26 +48,21 @@ class Number
     end
 end
 
-number1 = Number.new(20)
-puts number1.number
-number1.isSquare
 
 number2 = Number.new(-1)
-puts number2.number
 number2.isSquare
 
 number3 = Number.new(0)
-puts number3.number
 number3.isSquare
 
+number4 = Number.new(3)
+number4.isSquare
+
 number4 = Number.new(4)
-puts number4.number
 number4.isSquare
 
-number4 = Number.new(9)
-puts number4.number
-number4.isSquare
-
-number5 = Number.new(-4)
-puts number5.number
+number5 = Number.new(25)
 number5.isSquare
+
+number6 = Number.new(26)
+number6.isSquare
