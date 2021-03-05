@@ -13,16 +13,9 @@ arr2 = [34, -345, -1, 100]
 
 
 def find_min(arr)
-    min = nil
-    arr.each_with_index{|x, index|
-
-        if index==0 
-            min = x
-        else
-            if min > x
-                min = x    
-            end
-        end
+    min = arr[0]
+    arr.each{|x|
+        min = min < x ? min : x
     }
     return min
 end
