@@ -15,7 +15,7 @@ arr2 = [34, -345, -1, 100]
 def find_min(arr)
     min = nil
     arr.each_with_index{|x, index|
-    
+
         if index==0 
             min = x
         else
@@ -23,11 +23,8 @@ def find_min(arr)
                 min = x    
             end
         end
-
-        if index + 1 == arr.length
-            return min
-        end
     }
+    return min
 end
 
 puts find_min(arr1)
