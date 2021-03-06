@@ -40,6 +40,18 @@ def find_duplicate_first(arr)
     end
 end
 
-puts find_duplicate_first(a)
-puts find_duplicate_first(b)
-puts find_duplicate_first(c)
+def find_duplicate(arr)
+    new_arr = []
+    arr.each{ | value |
+        if new_arr.include?(value) 
+            return value
+        end
+        new_arr.append(value)
+    }
+    return -1
+end
+
+
+puts find_duplicate(a)
+puts find_duplicate(b)
+puts find_duplicate(c)
