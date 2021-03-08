@@ -26,7 +26,14 @@ def find_non_repeating(str_input)
     return "_"
 end
 
-a= "abacabad"
+def first_not_repeating_character(string)
+    string.each_char do |char|
+        return char if string.downcase.count(char.downcase) < 2
+    end
+    return "_"
+end
+
+a = "abacabad"
 b = "abacabaabacaba"
 puts find_non_repeating(a)
 puts find_non_repeating(b)
