@@ -24,8 +24,7 @@ select
     count(i.inventory_id) as total_rented
 from inventory  as i
 left join rental  as r
-on i.inventory_id = r.inventory_id
-where r.rental_date < r.return_date;
+on i.inventory_id = r.inventory_id;
 
 
 -- Problem 1
@@ -41,14 +40,14 @@ on a.actor_id = fa.actor_id
 left join film as f
 on fa.film_id  = f.film_id
 where (first_name = 'Dan' and last_name = 'Torn') 
-or (first_name = 'Dan' and last_name = 'Streep') ;
+or (first_name = 'Dan' and last_name = 'Streep')
+order by title asc
 
 
 -- Problem 2
 
-
 select 
-	concat(a.first_name, ' ', a.last_name),
+	concat(a.first_name, ' ', a.last_name) as fullname,
 	f.title,
 	c.name
 from actor as a
@@ -61,4 +60,5 @@ on fa.film_id  = fc.film_id
 left join category as c
 on fc.category_id = c.category_id 
 where a.last_name ilike 'D%'
-and c.name = 'Comedy';
+and c.name = 'Comedy'
+order by fullname asc
